@@ -7,9 +7,8 @@ glass                    Glass Identification Database
 mars                     Multivariate Additive Regression Splines
 mda-internal             Internal mda Functions
 mda                      Mixture Discriminant Analysis
-mda.start                Initialization for Mixture Discriminant
-                         Analysis.
-model.matrix.mars        Produce a Design Matrix from a `mars' Object.
+mda.start                Initialization for Mixture Discriminant Analysis
+model.matrix.mars        Produce a Design Matrix from a `mars' Object
 polyreg                  Polynomial Regression
 predict.bruto            Predict method for BRUTO Objects
 predict.fda              Classify by Flexible Discriminant Analysis

@@ -1,6 +1,6 @@
 \name{model.matrix.mars}
 \alias{model.matrix.mars}
-\title{Produce a Design Matrix from a `mars' Object.}
+\title{Produce a Design Matrix from a `mars' Object}
 \description{Produce a design matrix from a `mars' object.}
 \usage{
 model.matrix.mars(object, x, which, full = FALSE, \dots)

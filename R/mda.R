@@ -387,12 +387,12 @@ function (x, g, subclasses)
     for (j in seq(J)) {
         nc <- subclasses[j]
         which <- cl == j
-        if (nc <= 1) {
-            cx[which, ] <- apply(x[g == j, , drop = FALSE], 2, mean)
+        xx <- x[g == j, , drop = FALSE]
+        if ((nc <= 1) || (nrow(xx) <= nc)) {
+            cx[which, ] <- apply(xx, 2, mean)
             wmj <- matrix(1, sum(g == j), 1)
         }
         else {
-            xx <- x[g == j, , drop = FALSE]
             start <- xx[sample(1:nrow(xx), size = nc), ]
             TT <- kmeans(xx, start)
             cx[which, ] <- TT$centers

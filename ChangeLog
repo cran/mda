@@ -1,3 +1,9 @@
+2001-11-27  Kurt Hornik  <Kurt.Hornik@ci.tuwien.ac.at>
+
+	* DESCRIPTION (Version): New version is 0.2-14.
+
+	* R/mda.R: kmeans.start needed an improved case handling.
+
 2001-10-27  Kurt Hornik  <Kurt.Hornik@ci.tuwien.ac.at>
 
 	* DESCRIPTION (Version): New version is 0.2-13.
