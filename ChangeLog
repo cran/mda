@@ -1,3 +1,13 @@
+2001-07-22  Kurt Hornik  <Kurt.Hornik@ci.tuwien.ac.at>
+
+	* DESCRIPTION (Version): New version is 0.2-11.
+
+	* src/dmarss.f:
+	* src/dqrreg.f:
+	* src/splsm.f:
+	Ensure ANSI FORTRAN 77 compliant continuation lines (fixes
+	provided by Tim Hoar <thoar@ucar.edu>).
+
 2001-07-14  Kurt Hornik  <Kurt.Hornik@ci.tuwien.ac.at>
 
 	* DESCRIPTION (Version): New version is 0.2-10.

@@ -1,20 +1,21 @@
       subroutine splsm(x,y,w,n,match,nef,spar,dof,smo,s0,cov,ifcov,work,
-&     lenw)
+     &      lenw)
       implicit double precision(a-h,o-z)
       integer n,match(n),nef,lenw
       double precision x(n),y(n),w(n),spar,dof,smo(n),s0,cov(n),work(
-&     lenw)
+     &      lenw)
       logical ifcov
-      call splsm1(x,y,w,n,match,nef,spar,dof,smo,s0,cov,ifcov,work(1), 
-&     work(nef+2),work(2*nef+3),work(3*nef+4),work(3*nef+n+10),lenw)
+      call splsm1(x, y, w, n, match, nef, spar, dof, smo, s0, cov, 
+     &      ifcov, work(1), work(nef+2), work(2*nef+3), work(3*nef+4), 
+     &      work(3*nef+n+10), lenw)
       return
       end
       subroutine splsm1(x,y,w,n,match,nef,spar,dof,smo,s0,lev,ifcov,xin,
-&     yin,win,knot,work,lenw)
+     &      yin,win,knot,work,lenw)
       implicit double precision(a-h,o-z)
       integer n,match(n),nef,lenw
       double precision x(n),y(n),w(n),spar,dof,smo(n),s0,lev(n),work(
-&     lenw)
+     &      lenw)
       logical ifcov
       double precision xin(nef+1),yin(nef+1),win(nef+1),knot(nef+4)
       integer nk,ldnk,ld4,k
@@ -29,29 +30,32 @@
       nk=k-4
       ld4=4
       ldnk=1
-      call splsm2(x,y,w,n,match,nef,spar,dof,smo,s0,lev,ifcov,xin,yin,
-&     win,knot,work(1), work(nk+1), work(nk+nef+2),work(nk+2*nef+3),
-&     work(2*nk+2*nef+3),work(3*nk+2*nef+3),work(4*nk+2*nef+3),work(5*
-&     nk+2*nef+3),work(6*nk+2*nef+3),work(7*nk+2*nef+3),work(8*nk+2*nef+
-&     3),work(9*nk+2*nef+3),work(10*nk+2*nef+3),work((10+ld4)*nk+2*nef+
-&     3),work((10+2*ld4)*nk+2*nef+3),ld4,ldnk,nk)
+      call splsm2(x, y, w, n, match, nef, spar, dof, smo, s0, lev, 
+     &    ifcov, xin, yin,  win, knot, work(1),  work(nk+1),  
+     &    work(nk+nef+2), work(nk+2*nef+3),  work(2*nk+2*nef+3), 
+     &    work(3*nk+2*nef+3), work(4*nk+2*nef+3), work(5* nk+2*nef+3), 
+     &    work(6*nk+2*nef+3), work(7*nk+2*nef+3), work(8*nk+2*nef+ 3), 
+     &    work(9*nk+2*nef+3), work(10*nk+2*nef+3), 
+     &    work((10+ld4)*nk+2*nef+ 3), work((10+2*ld4)*nk+2*nef+3), 
+     &    ld4, ldnk, nk)
       return
       end
-      subroutine splsm2(x,y,w,n,match,nef,spar,dof,smo,s0,lev,ifcov,xin,
-&     yin,win,knot,coef,sout,levout,xwy,hs0,hs1,hs2,hs3,sg0,sg1,sg2,sg3,
-&     abd,p1ip,p2ip,ld4,ldnk,nk)
+      subroutine splsm2(x, y, w, n, match, nef, spar, dof, smo, s0, 
+     &    lev, ifcov, xin, yin, win, knot, coef, sout, levout, xwy, 
+     &    hs0, hs1, hs2, hs3, sg0, sg1, sg2, sg3, abd, p1ip, p2ip, 
+     &    ld4, ldnk, nk)
       implicit double precision(a-h,o-z)
       integer n,match(n),nef
       double precision x(n),y(n),w(n),spar,dof,smo(n),s0,lev(n)
       integer nk,ldnk,ld4
       logical ifcov
       double precision xin(nef+1),yin(nef+1),win(nef+1),knot(nk+4)
-      double precision coef(nk),sout(nef+1),levout(nef+1),xwy(nk),hs0(
-&     nk),hs1(nk),hs2(nk),hs3(nk), sg0(nk),sg1(nk),sg2(nk),sg3(nk),abd(
-&     ld4,nk),p1ip(ld4,nk),p2ip(ldnk,1)
+      double precision coef(nk), sout(nef+1), levout(nef+1), xwy(nk), 
+     &   hs0(nk), hs1(nk), hs2(nk), hs3(nk), sg0(nk), sg1(nk), 
+     &   sg2(nk), sg3(nk), abd(ld4, nk), p1ip(ld4, nk), p2ip(ldnk, 1)
       integer ispar,icrit,isetup,ier
       double precision lspar,uspar,tol,penalt,sumwin,dofoff,crit,xbar,
-&     dsum
+     &      dsum
       double precision wmean
       crit=0e0
       if(.not.(spar.eq.0e0))goto 23002
@@ -76,9 +80,10 @@
       lspar=1e-10
       uspar=1.5
       tol=1e-3
-      call sbart(penalt,dofoff,xin,yin,win,nef,knot,nk,coef,sout,levout,
-&     crit,icrit,spar,ispar,lspar,uspar,tol,isetup,xwy,hs0,hs1,hs2,hs3, 
-&     sg0,sg1,sg2,sg3,abd,p1ip,p2ip,ld4,ldnk,ier)
+      call sbart(penalt, dofoff, xin, yin, win, nef, knot, nk, coef, 
+     &   sout, levout, crit, icrit, spar, ispar, lspar, uspar, tol, 
+     &   isetup, xwy, hs0, hs1, hs2, hs3, sg0, sg1, sg2, sg3, abd, 
+     &   p1ip, p2ip, ld4, ldnk, ier)
       nit=0
 23006 if(.not.((ier .ne. 0) .and. (nit .lt.7)))goto 23007
       crit=0e0
@@ -106,9 +111,10 @@
       tol=1e-3
       nit=nit+1
       uspar=.9+(uspar-.9)*.5
-      call sbart(penalt,dofoff,xin,yin,win,nef,knot,nk,coef,sout,levout,
-&     crit,icrit,spar,ispar,lspar,uspar,tol,isetup,xwy,hs0,hs1,hs2,hs3, 
-&     sg0,sg1,sg2,sg3,abd,p1ip,p2ip,ld4,ldnk,ier)
+      call sbart(penalt, dofoff, xin, yin, win, nef, knot, nk, coef, 
+     &     sout, levout, crit, icrit, spar, ispar, lspar, uspar, 
+     &     tol, isetup, xwy, hs0, hs1, hs2, hs3, sg0, sg1, sg2, 
+     &     sg3, abd, p1ip, p2ip, ld4, ldnk, ier)
       goto 23006
 23007 continue
       dof=0e0

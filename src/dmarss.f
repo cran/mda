@@ -1,11 +1,12 @@
       subroutine marss(nx,n,p,nclass,y,x,w,tagx,maxorder,mmax,penalty,
-&     thresh,forwstep,interms,prune,bx,fullin,lenb, bestgcv, bestin, 
-&     flag, cut,dir, res,alpha,beta,scrat,iscrat,trace)
+     &   thresh,forwstep,interms,prune,bx,fullin,lenb, bestgcv, bestin, 
+     &   flag,cut,dir,res,alpha,beta,scrat,iscrat,trace)
       implicit double precision (a-h,o-z)
-      integer nx, n,p,nclass,tagx(nx,p),maxorder,mmax,bestin(mmax),flag(
-&     mmax,p),fullin(mmax)
-      double precision y(n,nclass),x(nx,p),w(n),bx(nx,mmax),bestgcv,cut(
-&     mmax,p),dir(mmax,p),res(nx,nclass),alpha(nclass),beta(mmax,nclass)
+      integer nx, n,p,nclass,tagx(nx,p),maxorder,mmax,bestin(mmax),
+     &     flag(mmax,p),fullin(mmax)
+      double precision y(n,nclass),x(nx,p),w(n),bx(nx,mmax),bestgcv,
+     &      cut(mmax,p),dir(mmax,p),res(nx,nclass),alpha(nclass),
+     &      beta(mmax,nclass)
       double precision scrat(*)
       integer iscrat(*)
       logical forwstep, prune, trace, tracec
@@ -40,29 +41,32 @@
       n13=n12+len12
       n14=n13+len13
       n15=n14+len14
-      call marsnew1(nx,n,p,nclass,y,x,w,tagx,maxorder,mmax,bx,bestgcv, 
-&     bestin,fullin,lenb,flag, cut,dir,res,alpha,beta,penalty,thresh,
-&     forwstep,interms,prune,scrat,scrat(n2),scrat(n3),scrat(n4),scrat(
-&     n5),scrat(n6),scrat(n7),scrat(n8),scrat(n9),scrat(n10),scrat(n11),
-&     scrat(n12),scrat(n13),scrat(n14),scrat(n15),iscrat,iscrat(1+mmax),
-&     iscrat(1+2*mmax),iscrat(1+3*mmax))
+      call marsnew1(nx, n, p, nclass, y, x, w, tagx, maxorder, mmax, 
+     &   bx, bestgcv, bestin, fullin, lenb, flag, cut, dir, res, 
+     &   alpha, beta, penalty, thresh, forwstep, interms, prune, 
+     &   scrat, scrat(n2), scrat(n3), scrat(n4), scrat(n5), scrat(n6), 
+     &   scrat(n7), scrat(n8), scrat(n9), scrat(n10), scrat(n11), 
+     &   scrat(n12), scrat(n13), scrat(n14), scrat(n15), iscrat, 
+     &   iscrat(1+mmax), iscrat(1+2*mmax), iscrat(1+3*mmax))
       return
       end
-      subroutine marsnew1(nx,n,p,nclass,y,x,w,tagx,maxorder,mmax,bx,
-&     bestgcv, bestin,fullin,lenb,flag, cut,dir,res,alpha,beta,penalty,
-&     thresh,forwstep,interms,prune,bxorth,bxorthm,cov,covsy,ybar,scr1,
-&     scr5,scr6, temp, bxsc, r, betasc,varsc,var,work,termlen,in, 
-&     tempin, qpivot)
+
+      subroutine marsnew1(nx, n, p, nclass, y, x, w, tagx, maxorder, 
+     &   mmax, bx, bestgcv, bestin, fullin, lenb, flag, cut, dir, 
+     &   res, alpha, beta, penalty,  thresh, forwstep, interms, 
+     &   prune, bxorth, bxorthm, cov, covsy, ybar, scr1, scr5, scr6,  
+     &   temp, bxsc, r, betasc, varsc, var, work, termlen, in,  
+     &   tempin, qpivot)
       implicit double precision (a-h,o-z)
       integer n,nterms2,p,mmax,flag(mmax,p),tagx(nx,p),termlen(mmax), 
-&     nclass,fullin(mmax)
-      double precision cov(mmax,mmax),covsy(mmax,nclass),critmax,x(nx,p)
-&     ,bx(nx,mmax),bxorth(n,mmax),bxorthm(mmax),y(n,nclass),ybar(nclass)
-&     ,scr1(mmax),scr5(mmax),scr6(nclass)
-      double precision temp(n),w(n), cut(mmax,p),dir(mmax,p),alpha(
-&     nclass),beta(mmax,nclass), bxsc(n,mmax), r(mmax,mmax), dofit, res(
-&     nx,nclass),betasc(mmax,nclass), varsc(mmax,mmax), var(mmax,mmax), 
-&     stopfac,work(*)
+     &   nclass,fullin(mmax)
+      double precision cov(mmax,mmax),covsy(mmax,nclass),critmax,
+     &    x(nx,p),bx(nx,mmax),bxorth(n,mmax),bxorthm(mmax),
+     &    y(n,nclass),ybar(nclass),scr1(mmax),scr5(mmax),scr6(nclass)
+      double precision temp(n),w(n), cut(mmax,p),dir(mmax,p),
+     &    alpha(nclass),beta(mmax,nclass), bxsc(n,mmax), r(mmax,mmax), 
+     &    dofit, res(nx,nclass),betasc(mmax,nclass), varsc(mmax,mmax), 
+     &    var(mmax,mmax), stopfac, work(*)
       integer tempin(mmax), bestin(mmax),qrank, qpivot(mmax)
       logical forwstep,go, prune, newform, cvar, trace
       common trace
@@ -146,7 +150,7 @@
       ii=interms-1
       go=.true.
 23040 if(.not.( (ii.lt.(mmax-1)).and.((rss/rssnull).gt.thresh).and.go))
-&     goto 23041
+     &     goto 23041
       ii=ii+2
       do 23042 i1=1, nterms
       do 23044 i2=1, nterms
@@ -156,8 +160,8 @@
       do 23046 j=1, nterms
       cov(j,j)=0.0
       do 23048 i=1,n 
-      cov(j,j)=cov(j,j)+(bxorth(i,j)-bxorthm(j))*(bxorth(i,j)-bxorthm(j)
-&     )
+      cov(j,j) = cov(j,j) + 
+     %           (bxorth(i,j)-bxorthm(j)) * (bxorth(i,j)-bxorthm(j))
 23048 continue
 23046 continue
       do 23050 k=1,nclass
@@ -172,9 +176,9 @@
       tempin(ik)=fullin(ik)
 23056 continue
       call addtrm(nx,bx,tempin,bxorth,bxorthm,p,n,nclass,rss,prevcrit, 
-&     cov,covsy,y,ybar,x,tagx,w,termlen,mmax,tolbx, nterms,flag,
-&     maxorder,scr1,scr5,scr6,imax,jmax,kmax,critmax, newform,bxsc, r, 
-&     betasc, temp)
+     &     cov,covsy,y,ybar,x,tagx,w,termlen,mmax,tolbx, nterms,flag,
+     &     maxorder,scr1,scr5,scr6,imax,jmax,kmax,critmax, newform,
+     &     bxsc, r, betasc, temp)
       doftemp=dofit
       doftemp=doftemp+1
       if(.not.((imax.gt.1).and.(newform)))goto 23058
@@ -184,15 +188,15 @@
       cmm= (1+doftemp) + penalty*(.5*doftemp)
       gcv=(temprss/n)/(1.0-cmm/n)**2
       go=.false.
-      if(.not.(((critmax/rss).gt.thresh).and.((gcv/gcvnull).lt.stopfac))
-&     )goto 23060
+      if (.not.(((critmax/rss).gt.thresh).and.
+     &          ((gcv/gcvnull).lt.stopfac))) goto 23060
       go=.true.
       dofit=doftemp
       rss=rss-critmax
       kk=tagx(imax,jmax)
 256   format(" ","adding term"," jmax=",i3, "  imax=",i3 ,"  kmax=",i3, 
-&     "  critmax= ",f8.2,"  cutp=", f9.5," rss=",f8.2, " gcv=",f8.2, 
-&     " dofit=",f9.3)
+     &  "  critmax= ",f8.2,"  cutp=", f9.5," rss=",f8.2, " gcv=",f8.2, 
+     &  " dofit=",f9.3)
       itemp(1)=jmax
       itemp(2)=imax
       itemp(3)=kmax
@@ -258,8 +262,8 @@
       call orthreg(n,n,nterms,bxorth,fullin, bx(1,ii),bxorth(1,nterms2))
 23083 continue
       if(.not.(fullin(ii+1).eq.1))goto 23088
-      call orthreg(n,n,nterms+1,bxorth,fullin, bx(1,ii+1),bxorth(1,
-&     nterms2+1))
+      call orthreg(n,n,nterms+1,bxorth,fullin, bx(1,ii+1),
+     &       bxorth(1,nterms2+1))
       goto 23089
 23088 continue
       do 23090 i=1,n 
@@ -299,7 +303,7 @@
       rtemp(3)=gcv/gcvnull
       if(.not.(trace))goto 23104
       call dblepr("stopping forw step; rss crit and gcv ratios",43,
-&     rtemp,3)
+     &     rtemp,3)
 23104 continue
       if(.not.(trace))goto 23106
       if(.not.((rss/rssnull).le.thresh))goto 23108
@@ -324,7 +328,7 @@
       call intpr("aft forw step",13,nterms,1)
 23116 continue
       call qrreg(nx,n,mmax,lenb,nclass,bx,bxsc,bestin,y,qpivot,qrank,
-&     beta,res,rss,cvar,var,varsc,scr1, work)
+     &     beta,res,rss,cvar,var,varsc,scr1, work)
       nt=dofit+1
       if(.not.(qrank.lt. nt))goto 23118
       do 23120 i=qrank+1,nt
@@ -350,7 +354,7 @@
 c Need var calculated to do drop-one calculations from t values.
       cvar=.true.
       call qrreg(nx,n,mmax,lenb,nclass,bx,bxsc,tempin,y,qpivot,qrank,
-&     beta,res,rss,cvar,var,varsc,scr1,work)
+     &     beta,res,rss,cvar,var,varsc,scr1,work)
       do 23128 i=1,mmax
       tempin(i)=bestin(i)
 23128 continue
@@ -377,7 +381,7 @@ c Need var calculated to do drop-one calculations from t values.
       gcv=(rss/n)/(1.0-cmm/n)**2
       tempin(minterm)=0
 100   format(" ","pruning, minterm= ",i4, " gcv=",f9.3,2x, " rss=",f9.3,
-&     2x," dof=",f9.3," model= ",60(i1,1x))
+     &     2x," dof=",f9.3," model= ",60(i1,1x))
       if(.not.(gcv.lt. bestgcv))goto 23140
       bestgcv=gcv
       do 23142 i=1,mmax 
@@ -387,14 +391,14 @@ c Need var calculated to do drop-one calculations from t values.
       if(.not.(dofit .gt. 0))goto 23144
       cvar=.true.
       call qrreg(nx,n,mmax,lenb,nclass,bx,bxsc,tempin,y,qpivot,qrank,
-&     beta,res,rss,cvar,var,varsc,scr1,work)
+     &     beta,res,rss,cvar,var,varsc,scr1,work)
 23144 continue
       goto 23130
 23131 continue
       call qrreg(nx,n,mmax,lenb,nclass,bx,bxsc,bestin,y,qpivot,qrank,
-&     beta,res,rss,cvar,var,varsc,scr1, work)
-101   format(" ","best model gcv=",f9.3," rss=",f9.3,2x,"model= ",60(i1,
-&     1x))
+     &     beta,res,rss,cvar,var,varsc,scr1, work)
+101   format(" ","best model gcv=",f9.3," rss=",f9.3,2x,"model= ",
+     &             60(i1,1x))
       if(.not.(trace))goto 23146
       call intpr("best model",10,bestin,lenb)
 23146 continue
@@ -405,16 +409,17 @@ c Need var calculated to do drop-one calculations from t values.
       return
       end
       subroutine addtrm(nx,bx,tempin,bxorth,bxorthm,p,n,nclass,rss,
-&     prevcrit,cov,covsy,y,ybar,x,tagx,w,termlen,mmax,tolbx,nterms,flag,
-&     maxorder,scr1,scr5,scr6,imax,jmax,kmax,critmax, newform,bxsc,r,
-&     betasc, scrat)
+     &     prevcrit,cov,covsy,y,ybar,x,tagx,w,termlen,mmax,tolbx,
+     &     nterms,flag, maxorder,scr1,scr5,scr6,imax,jmax,kmax,
+     &     critmax, newform,bxsc,r, betasc, scrat)
       implicit double precision (a-h,o-z)
-      integer n,nterms,nterms2,p,mmax,flag(mmax,p),v,tagx(nx,p),termlen(
-&     mmax), nclass, tempin(mmax), minspan, iendspan
-      double precision cov(mmax,mmax),covsy(mmax,nclass),critmax,x(nx,p)
-&     ,bx(nx,mmax),bxorth(n,mmax),bxorthm(mmax),y(n,nclass),ybar(nclass)
-&     ,scr1(mmax),scr5(mmax),scr6(nclass), bxsc(n,mmax), r(mmax,mmax), 
-&     betasc(mmax,nclass), scrat(n),w(n)
+      integer n,nterms,nterms2,p,mmax,flag(mmax,p),v,tagx(nx,p),
+     &        termlen(mmax), nclass, tempin(mmax), minspan, iendspan
+      double precision cov(mmax,mmax),covsy(mmax,nclass),critmax,
+     &     x(nx,p),bx(nx,mmax),bxorth(n,mmax),bxorthm(mmax),
+     &     y(n,nclass),ybar(nclass),scr1(mmax),scr5(mmax),scr6(nclass), 
+     &     bxsc(n,mmax), r(mmax,mmax),betasc(mmax,nclass), scrat(n),
+     &     w(n)
       double precision temp1, temp2, scr2,sumb, sumbx, su, st, tem
       logical newform, tnewform, trace
       common trace
@@ -502,8 +507,8 @@ c Need var calculated to do drop-one calculations from t values.
       do 23196 kc=1,nclass
       covsy(nterms2,kc)=0.0
       do 23198 i=1,n 
-      covsy(nterms2,kc)=covsy(nterms2,kc)+(y(i,kc)-ybar(kc))*bxorth(i,
-&     nterms2)
+      covsy(nterms2,kc) = covsy(nterms2,kc)+(y(i,kc)-ybar(kc)) * 
+     &                                               bxorth(i,nterms2)
 23198 continue
 23196 continue
       critnew=0.0
@@ -565,7 +570,7 @@ c Need var calculated to do drop-one calculations from t values.
       su=st
       st=sumbx-sumb*x(kk,v)
       cov(nterms21,nterms21)= cov(nterms21,nterms21)+ (x(kk1,v)-x(kk,v))
-&     *(2*scr2-sumbx2*(x(kk,v)+x(kk1,v)))+ ( (su*su)-(st*st) )/n
+     &     *(2*scr2-sumbx2*(x(kk,v)+x(kk1,v)))+ ( (su*su)-(st*st) )/n
       crittemp=critnew
       do 23221 kc=1, nclass
       scr6(kc)=scr6(kc)+(y(kk1,kc)-ybar(kc))*bx(kk1,m)
@@ -598,9 +603,12 @@ c Need var calculated to do drop-one calculations from t values.
       if(.not.(k.gt.1))goto 23233
       k0=tagx(k-1,v)
 23233 continue
-      if(.not.((crittemp.gt.critmax).and.(mod(k,minspan).eq.0).and.(k.
-&     ge.iendspan).and.(k.le.(n-iendspan)).and.(bx(kk1,m).gt.0).and.(.
-&     not.((k.gt.1).and.(x(kk,v).eq.x(k0,v))) )))goto 23235
+      if(.not.((crittemp.gt.critmax) .and. 
+     &         (mod(k,minspan).eq.0) .and.
+     &               (k.ge.iendspan) .and.
+     &           (k.le.(n-iendspan)) .and.
+     &              (bx(kk1,m).gt.0) .and. 
+     & (.not.( (k.gt.1) .and. (x(kk,v).eq.x(k0,v)))   ))) goto 23235
       jmax=v
       critmax=crittemp
       imax=k

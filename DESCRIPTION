@@ -1,5 +1,5 @@
 Package: mda
-Version: 0.2-10
+Version: 0.2-11
 Author: S original by Trevor Hastie & Robert Tibshirani.  R port by
  Friedrich Leisch, Kurt Hornik and Brian D. Ripley.
 Maintainer: Kurt Hornik <Kurt.Hornik@ci.tuwien.ac.at>
