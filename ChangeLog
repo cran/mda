@@ -1,3 +1,9 @@
+2001-07-14  Kurt Hornik  <Kurt.Hornik@ci.tuwien.ac.at>
+
+	* DESCRIPTION (Version): New version is 0.2-10.
+
+	* man/mars.Rd: Fix unbalanced braces.
+
 2001-06-18  Kurt Hornik  <Kurt.Hornik@ci.tuwien.ac.at>
 
 	* DESCRIPTION (Version): New version is 0.2-9.

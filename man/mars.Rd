@@ -33,7 +33,7 @@ mars(x, y, w, wp, degree, nk, penalty, thresh, prune, trace.mars,
     \code{TRUE}).}
   \item{prevfit}{optional data structure from previous fit.  To see the
     effect of changing the penalty paramater, one can use prevfit with
-    \code{forward.step = FALSE}.
+    \code{forward.step = FALSE}.}
   \item{\dots}{further arguments to be passed to or from methods.}
 }
 \value{
