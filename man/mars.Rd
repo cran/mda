@@ -5,8 +5,8 @@
   Multivariate additive regression splines.
 }
 \usage{
-mars(x, y, w, wp, degree, nk, penalty, thresh, prune, trace,
-     forward.step, prevfit)
+mars(x, y, w, wp, degree, nk, penalty, thresh, prune, trace.mars,
+     forward.step, prevfit, \dots)
 }
 \arguments{
   \item{x}{a matrix containing the independent variables.}
@@ -26,14 +26,15 @@ mars(x, y, w, wp, degree, nk, penalty, thresh, prune, trace,
   \item{prune}{an optional logical value specifying whether the model
     should be pruned in a backward stepwise fashion (default is
     \code{TRUE}).}
-  \item{trace}{an optional logical value specifying whether info should
-    be printed along the way (default is \code{FALSE}).}
+  \item{trace.mars}{an optional logical value specifying whether info
+    should be printed along the way (default is \code{FALSE}).}
   \item{forward.step}{an optional logical value specifying whether
     forward stepwise process should be carried out (default is
     \code{TRUE}).}
   \item{prevfit}{optional data structure from previous fit.  To see the
     effect of changing the penalty paramater, one can use prevfit with
-    \code{forward.step = FALSE}.}
+    \code{forward.step = FALSE}.
+  \item{\dots}{further arguments to be passed to or from methods.}
 }
 \value{
   An object of class \code{"mars"}, which is a list with the following

@@ -5,7 +5,7 @@
   Classify observations in conjunction with \code{mda}.
 }
 \usage{
-predict.mda(object, x, type, prior, dimension, \dots)
+predict.mda(object, x, type, prior, dimension, g, \dots)
 }
 \arguments{
   \item{object}{a fitted mda object.}
@@ -25,6 +25,8 @@ predict.mda(object, x, type, prior, dimension, \dots)
     than the dimension component of \code{object}, and in general less
     than the number of subclasses.  \code{dimension} can be a vector for
     use with \code{type = "hierarchical"}.}
+  \item{g}{???}
+  \item{\dots}{further arguments to be passed to or from methods.}
 }
 \value{
   An appropriate object depending on \code{type}.  \code{object} has a

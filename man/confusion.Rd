@@ -3,22 +3,27 @@
 \alias{confusion.default}
 \alias{confusion.list}
 \title{Confusion Matrices}
-}
 \description{
   Compute the confusion matrix between two factors, or for an fda or
   mda object.
 }
 \usage{
-confusion(predict, true)
+\method{confusion}{default}(predict, true, \dots)
+\method{confusion}{fda}(object, data, \dots)
 }
 \arguments{
-  \item{predict}{the predicted factor, or an fda or mda model}
-  \item{true}{the true factor, or else (in the case where predict is a
-    model object) a data frame (list) containing the test data.}
+  \item{predict}{the predicted factor.}
+  \item{true}{the true factor.}
+  \item{object}{an fda or mda model object.}
+  \item{data}{a data frame (list) containing the test data.}
+  \item{\dots}{further arguments to be passed to or from methods.}
+}
+\details{
+  This is a generic function.
 }
 \value{
-  Essentially \code{table(predict, true)}, but with some useful
-  attribute(s).
+  For the default method essentially \code{table(predict, true)}, but
+  with some useful attribute(s).
 }
 \seealso{
   \code{\link{fda}},

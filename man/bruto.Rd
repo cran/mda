@@ -8,7 +8,7 @@
 }
 \usage{
 bruto(x, y, w, wp, dfmax, cost, maxit.select, maxit.backfit, 
-      thresh = 0.0001, trace = TRUE, start.linear = TRUE,
+      thresh = 0.0001, trace.bruto = TRUE, start.linear = TRUE,
       fit.object, \dots)
 }
 \arguments{
@@ -27,12 +27,13 @@ bruto(x, y, w, wp, dfmax, cost, maxit.select, maxit.backfit,
     backfit stage (with fixed lambda).} 
   \item{thresh}{convergence threshold (default is 0.0001); iterations
     cease when the relative change in GCV is below this threshold.} 
-  \item{trace}{logical flag.  If \code{TRUE} (default) a progress report
-    is printed during the fitting.}
+  \item{trace.bruto}{logical flag.  If \code{TRUE} (default) a progress
+    report is printed during the fitting.}
   \item{start.linear}{logical flag.  If \code{TRUE} (default), the model
     starts with the linear fit.}
   \item{fit.object}{This the object returned by \code{bruto()}; if
     supplied, the same model is fit to the presumeably new \code{y}.}
+  \item{\dots}{further arguments to be passed to or from methods.}
 }
 \value{
   A multiresponse additive model fit object of class \code{"bruto"} is
