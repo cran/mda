@@ -1,8 +1,17 @@
+2003-11-09  Kurt Hornik  <Kurt.Hornik@wu-wien.ac.at>
+
+	* DESCRIPTION (Version): New version is 0.2-21.
+
+	* R/mda.R ("kmeans.start"): If nrow(xx) < nc, wmj has less than nc
+	columns, and setting the colnames to something of length nc fails.
+
+	* man/bruto.Rd: Fix codoc default value problem.
+
 2003-10-10  Kurt Hornik  <Kurt.Hornik@wu-wien.ac.at>
 
 	* DESCRIPTION (Version): New version is 0.2-20.
 
-	* R/mda.R (pplot, predict.bruto": Hmm, the ChangeLog says that we
+	* R/mda.R (pplot, predict.bruto"): Hmm, the ChangeLog says that we
 	already got rid of all occurrences of code() but apparently we did
 	not.  Replace the remaining ones by calls to as.numeric().
 

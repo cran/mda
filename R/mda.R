@@ -397,7 +397,8 @@ function (x, g, subclasses)
             cx[which, ] <- TT$centers
             wmj <- diag(nc)[TT$cluster, ]
         }
-        dimnames(wmj) <- list(NULL, paste("s", seq(nc), sep = ""))
+        dimnames(wmj) <-
+            list(NULL, paste("s", seq(dim(wmj)[2]), sep = ""))
         weights[[j]] <- wmj
     }
     list(x = cx, cl = factor(cl, labels = cnames), weights = weights)

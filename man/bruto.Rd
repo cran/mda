@@ -8,7 +8,7 @@
 }
 \usage{
 bruto(x, y, w, wp, dfmax, cost, maxit.select, maxit.backfit, 
-      thresh = 0.0001, trace.bruto = TRUE, start.linear = TRUE,
+      thresh = 0.0001, trace.bruto = FALSE, start.linear = TRUE,
       fit.object, \dots)
 }
 \arguments{
