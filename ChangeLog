@@ -1,3 +1,26 @@
+2001-08-20  Kurt Hornik  <Kurt.Hornik@ci.tuwien.ac.at>
+
+	* DESCRIPTION (Version): New version is 0.2-12.
+
+	* R/mda.R:
+	* man/confusion.Rd:
+	* man/mda-internal.Rd:
+	* man/predict.bruto.Rd:
+	* man/predict.fda.Rd:
+	* man/predict.mars.Rd:
+	* man/predict.mda.Rd:
+	Fix generic/method inconsistencies.
+
+2001-08-19  Kurt Hornik  <Kurt.Hornik@ci.tuwien.ac.at>
+
+	* man/gen.ridge.Rd:
+	* man/mda.start.Rd:
+	* man/model.matrix.mars.Rd:
+	* man/polyreg.Rd:
+	Document undocumented `...' arguments.
+
+	* R/mda.R: TnF fixes.
+
 2001-07-22  Kurt Hornik  <Kurt.Hornik@ci.tuwien.ac.at>
 
 	* DESCRIPTION (Version): New version is 0.2-11.

@@ -5,7 +5,7 @@
   Classify observations in conjunction with \code{fda}.
 }
 \usage{
-predict.fda(object, x, type, prior, dimension)
+\method{predict}{fda}(object, x, type, prior, dimension, \dots)
 }
 \arguments{
   \item{object}{an object of class \code{"fda"}.}
@@ -21,6 +21,7 @@ predict.fda(object, x, type, prior, dimension)
     default is the training sample proportions.}
   \item{dimension}{the dimension of the space to be used, no larger
     than the dimension component  of \code{object}.}
+  \item{\dots}{further arguments to be passed to or from methods.}
 }
 \value{
   An appropriate object depending on \code{type}. \code{object} has a

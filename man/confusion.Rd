@@ -8,13 +8,12 @@
   mda object.
 }
 \usage{
-\method{confusion}{default}(predict, true, \dots)
+\method{confusion}{default}(object, true, \dots)
 \method{confusion}{fda}(object, data, \dots)
 }
 \arguments{
-  \item{predict}{the predicted factor.}
+  \item{object}{the predicted factor, or an fda or mda model object.}
   \item{true}{the true factor.}
-  \item{object}{an fda or mda model object.}
   \item{data}{a data frame (list) containing the test data.}
   \item{\dots}{further arguments to be passed to or from methods.}
 }
@@ -22,7 +21,7 @@
   This is a generic function.
 }
 \value{
-  For the default method essentially \code{table(predict, true)}, but
+  For the default method essentially \code{table(object, true)}, but
   with some useful attribute(s).
 }
 \seealso{

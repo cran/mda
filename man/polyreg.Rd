@@ -15,6 +15,7 @@ polyreg(x, y, w, degree = 1, monomial = FALSE, \dots)
   \item{degree}{total degree of polynomial basis (default is 1).}
   \item{monomial}{If \code{TRUE} a monomial basis is used (no cross
     terms).  Default is \code{FALSE}.}
+  \item{\dots}{currently not used.}
 }
 \value{
   A polynomial regression fit, containing the essential ingredients for

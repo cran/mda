@@ -6,11 +6,12 @@
   spline models.
 }
 \usage{
-predict.mars(object, x)
+\method{predict}{mars}(object, x, \dots)
 }
 \arguments{
   \item{object}{an object of class \code{"mars"}.}
   \item{x}{values at which predictions are to be made.}
+  \item{\dots}{further arguments to be passed to or from methods.}
 }
 \value{
   the fitted values.

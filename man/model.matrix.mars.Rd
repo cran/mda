@@ -14,6 +14,7 @@ model.matrix.mars(object, x, which, full = FALSE, \dots)
     \code{object}.}
   \item{full}{if \code{TRUE} the entire set of columns are selected,
     even redundant ones.  This is used for updating a mars fit.}
+  \item{\dots}{further arguments to be passed from or to methods.}
 }
 \value{
   A model matrix corresponding to the selected columns.

@@ -6,7 +6,7 @@
   by adaptive backfitting.
 }
 \usage{
-predict.bruto(object, x, type=c("fitted", "terms"))
+\method{predict}{bruto}(object, x, type=c("fitted", "terms"), \dots)
 }
 \arguments{
   \item{object}{a fitted bruto object}
@@ -15,6 +15,7 @@ predict.bruto(object, x, type=c("fitted", "terms"))
     returned.  If type is \code{"terms"}, a list of fitted terms is
     returned, each with an \code{x} and \code{y} component.  These can
     be used to show the fitted functions.}
+  \item{\dots}{further arguments to be passed to or from methods.}
 }
 \value{
   Either a fit matrix or a list of fitted terms.

@@ -1,6 +1,6 @@
 \name{mda.start}
 \alias{mda.start}
-\title{Initialization for Mixture Discriminant Analysis.}
+\title{Initialization for Mixture Discriminant Analysis}
 \description{Provide starting weights for the \code{mda} function which
   performs discriminant analysis by gaussian mixtures.}
 \usage{
@@ -19,6 +19,8 @@ mda.start(x, g, subclasses = 3, trace.mda.start = FALSE,
   \item{tries}{Number of random starts.}
   \item{criterion}{By default, classification errors on the training
     data.  Posterior deviance is also an option.}
+  \item{\dots}{arguments to be passed to the mda fitter when using
+    posterior deviance.}
 }
 \value{
   A list of weight matrices, one for each class.

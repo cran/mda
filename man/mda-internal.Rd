@@ -6,7 +6,7 @@
 \alias{llmult}
 \alias{lvq.start}
 \alias{make.dumpdata.mda}
-\alias{mean.penalty}
+\alias{meanPenalty}
 \alias{mda.fit}
 \alias{mda.means}
 \alias{polybasis}
@@ -14,7 +14,7 @@
 \alias{pplot4}
 \alias{shrink}
 \alias{shrink.mda}
-\alias{transform.penalty}
+\alias{transformPenalty}
 \title{Internal mda Functions}
 \description{Internal mda functions.}
 \details{

@@ -17,6 +17,7 @@ gen.ridge(x, y, weights, lambda=1, omega, df, \dots)
     standard ridge is used.}
   \item{df}{an alternative way to prescribe lambda, using the notion
     of equivalent degrees of freedom.}
+  \item{\dots}{currently not used.}
 }
 \value{
   A generalized ridge regression, where the coefficients are penalized

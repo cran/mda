@@ -1,7 +1,7 @@
 "bruto" <-
 function (x, y, w = rep(1, n), wp = rep(1/np, np), dfmax, cost = 2, 
-    maxit.select = 20, maxit.backfit = 20, thresh = 1e-04, trace.bruto = FALSE, 
-    start.linear = TRUE, fit.object, ...) 
+          maxit.select = 20, maxit.backfit = 20, thresh = 1e-04,
+          trace.bruto = FALSE, start.linear = TRUE, fit.object, ...)
 {
     this.call <- match.call()
     y <- as.matrix(y)
@@ -37,17 +37,18 @@ function (x, y, w = rep(1, n), wp = rep(1/np, np), dfmax, cost = 2,
         }
         check.range <- apply(x, 2, var)
         if (any(check.range < .Machine$double.eps)) 
-            stop("A column of x is constant; do not include an intercept column")
+            stop(paste("A column of x is constant;",
+                       "do not include an intercept column"))
         nkmax <- nknotl(n) - 4
         coef <- matrix(double(nkmax * np * nq), ncol = nq)
         ybar <- apply(y * w, 2, sum)/sum(w)
         if (start.linear && (nq * cost > n)) 
-            start.linear <- F
+            start.linear <- FALSE
         if (start.linear) {
             start.fit <- polyreg(x, y, w)
             eta <- fitted(start.fit)
-            coef[seq(from = 2, by = 2, length = np), ] <- t(start.fit$coef)[, 
-                -1]
+            coef[seq(from = 2, by = 2, length = np), ] <-
+                t(start.fit$coef)[, -1]
             type <- as.integer(rep(2, nq))
             df <- as.double(rep(1, nq))
         }
@@ -108,32 +109,57 @@ function (x, y, w = rep(1, n), wp = rep(1/np, np), dfmax, cost = 2,
         matrix(double(maxit.select * nq), nq, maxit.select)
     else double(1)
     names(lambda) <- xnames
-    fit <- .Fortran("bruto", x, as.integer(n), as.integer(nq), 
-        y, as.integer(np), w, knot = knot, nkmax = as.integer(nkmax), 
-        nk = nk, wp, Match = Match, nef = nef, dfmax = dfmax, 
-        cost = cost, lambda = lambda, df = df, coef = coef, type = type, 
-        xrange = xrange, gcv.select = gcv.select, gcv.backfit = gcv.backfit, 
-        df.select = df.select, maxit = maxit, nit = maxit, fitted.values = eta, 
-        residuals = y - eta, as.double(thresh), double((2 * np + 
-            2) * ((n + 1) + 1) + (2 * np + 16) * (n + 1) + 2 * 
-            (n + 1) + np), integer(n), trace.bruto, PACKAGE = "mda")[c("knot", 
-        "nkmax", "nk", "Match", "nef", "dfmax", "cost", "lambda", 
-        "df", "coef", "type", "xrange", "gcv.select", "gcv.backfit", 
-        "df.select", "maxit", "nit", "fitted.values", "residuals")]
+    fit <-
+        .Fortran("bruto",
+                 x,
+                 as.integer(n),
+                 as.integer(nq), 
+                 y,
+                 as.integer(np),
+                 w,
+                 knot = knot,
+                 nkmax = as.integer(nkmax), 
+                 nk = nk,
+                 wp,
+                 Match = Match,
+                 nef = nef,
+                 dfmax = dfmax, 
+                 cost = cost,
+                 lambda = lambda,
+                 df = df,
+                 coef = coef,
+                 type = type, 
+                 xrange = xrange,
+                 gcv.select = gcv.select,
+                 gcv.backfit = gcv.backfit, 
+                 df.select = df.select,
+                 maxit = maxit,
+                 nit = maxit,
+                 fitted.values = eta, 
+                 residuals = y - eta,
+                 as.double(thresh),
+                 double((2 * np + 2) * ((n + 1) + 1) + (2 * np + 16) *
+                        (n + 1) + 2 * (n + 1) + np),
+                 integer(n),
+                 trace.bruto,
+                 PACKAGE = "mda")[c("knot", "nkmax", "nk", "Match",
+                 "nef", "dfmax", "cost", "lambda", "df", "coef", "type",
+                 "xrange", "gcv.select", "gcv.backfit", "df.select",
+                 "maxit", "nit", "fitted.values", "residuals")]
     if (TN <- fit$nit[1]) {
-        TT <- fit$gcv.select[, seq(TN), drop = F]
+        TT <- fit$gcv.select[, seq(TN), drop = FALSE]
         dimnames(TT) <- list(xnames, NULL)
     }
     else TT <- NULL
     fit$gcv.select <- TT
     if (TN) {
-        TT <- fit$df.select[, seq(TN), drop = F]
+        TT <- fit$df.select[, seq(TN), drop = FALSE]
         dimnames(TT) <- list(xnames, NULL)
     }
     else TT <- NULL
     fit$df.select <- TT
     if (TN <- fit$nit[2]) {
-        TT <- fit$gcv.backfit[, seq(TN), drop = F]
+        TT <- fit$gcv.backfit[, seq(TN), drop = FALSE]
         dimnames(TT) <- list(xnames, NULL)
     }
     else TT <- NULL
@@ -155,11 +181,11 @@ function (object, type = c("canonical", "discriminant"), ...)
     if (is.null(Coefs)) 
         stop("No explicit coefficients in this formulation")
     dimension <- object$dimension
-    Coefs <- Coefs %*% object$theta[, seq(dimension), drop = F]
+    Coefs <- Coefs %*% object$theta[, seq(dimension), drop = FALSE]
     lambda <- object$values
     alpha <- sqrt(lambda[seq(dimension)])
     sqima <- sqrt(1 - lambda[seq(dimension)])
-    Coefs <- scale(Coefs, F, sqima * alpha)
+    Coefs <- scale(Coefs, FALSE, sqima * alpha)
     if (type == "discriminant") 
         Coefs <- Coefs %*% t(object$means)
     Coefs
@@ -168,19 +194,19 @@ function (object, type = c("canonical", "discriminant"), ...)
 function (object, ...) 
 UseMethod("confusion")
 "confusion.default" <-
-function (predict, true, ...) 
+function (object, true, ...) 
 {
-    if (inherits(predict, "data.frame")) 
-        confusion.list(predict, true)
+    if (inherits(object, "data.frame")) 
+        confusion.list(object, true)
     else {
-        jt <- table(predict, true)
+        jt <- table(object, true)
         jd <- dimnames(jt)
         jn <- unlist(jd)
         ju <- jn[duplicated(jn)]
         j1 <- jd[[1]][!match(jd[[1]], ju, 0)]
         j2 <- jd[[2]][!match(jd[[2]], ju, 0)]
-        jt <- jt[c(ju, j1), c(ju, j2), drop = F]
-        realjt <- jt[ju, ju, drop = F]
+        jt <- jt[c(ju, j1), c(ju, j2), drop = FALSE]
+        realjt <- jt[ju, ju, drop = FALSE]
         ntot <- sum(jt)
         mismatch <- (ntot - sum(realjt))/ntot
         structure(jt, error = (1 - sum(diag(realjt))/sum(realjt)), 
@@ -202,15 +228,15 @@ function (object, data, ...)
     confusion.default(predict(object, x, ...), g)
 }
 "confusion.list" <-
-function (pred, truth) 
+function (object, truth, ...)
 {
-    dd <- names(pred)
+    dd <- names(object)
     y <- seq(dd)
-    x <- attr(pred, "dimension")
+    x <- attr(object, "dimension")
     if (!length(x)) 
         x <- seq(dd)
     for (i in y) {
-        confi <- confusion(pred[, i], truth)
+        confi <- confusion(object[, i], truth)
         y[i] <- attr(confi, "error")
     }
     return(x, y)
@@ -233,7 +259,7 @@ function (formula = formula(data), data = sys.frame(sys.parent()),
     method = polyreg, keep.fitted = (n * dimension < 1000), ...) 
 {
     this.call <- match.call()
-    m <- match.call(expand = F)
+    m <- match.call(expand = FALSE)
     m[[1]] <- as.name("model.frame")
     m <- m[match(names(m), c("", "formula", "data", "weights"), 
         0)]
@@ -258,18 +284,18 @@ function (formula = formula(data), data = sys.frame(sys.parent()),
     cnames <- levels(fg)
     g <- as.numeric(fg)
     J <- length(cnames)
-    iswt <- F
+    iswt <- FALSE
     if (missing(weights)) 
         dp <- table(g)/n
     else {
         weights <- (n * weights)/sum(weights)
         dp <- tapply(weights, g, sum)/n
-        iswt <- T
+        iswt <- TRUE
     }
     if (missing(theta)) 
         theta <- contr.helmert(J)
     theta <- contr.fda(dp, theta)
-    Theta <- theta[g, , drop = F]
+    Theta <- theta[g, , drop = FALSE]
     fit <- method(x, Theta, weights, ...)
     if (iswt) 
         Theta <- Theta * weights
@@ -286,12 +312,12 @@ function (formula = formula(data), data = sys.frame(sys.parent()),
         return(structure(list(dimension = 0, fit = fit, call = this.call), 
             class = "fda"))
     }
-    thetan <- thetan[, seq(dimension), drop = F]
+    thetan <- thetan[, seq(dimension), drop = FALSE]
     pe <- pe[seq(dimension)]
     alpha <- sqrt(lambda[seq(dimension)])
     sqima <- sqrt(1 - lambda[seq(dimension)])
     vnames <- paste("v", seq(dimension), sep = "")
-    means <- scale(theta %*% thetan, F, sqima/alpha)
+    means <- scale(theta %*% thetan, FALSE, sqima/alpha)
     dimnames(means) <- list(cnames, vnames)
     names(lambda) <- c(vnames, rep("", length(lambda) - dimension))
     names(pe) <- vnames
@@ -308,8 +334,8 @@ function (formula = formula(data), data = sys.frame(sys.parent()),
 function (theta, Q) 
 {
     M <- t(theta) %*% Q %*% theta
-    eM <- eigen(M, sym = T)
-    scale(theta %*% eM$vectors, F, sqrt(eM$values))
+    eM <- eigen(M, sym = TRUE)
+    scale(theta %*% eM$vectors, FALSE, sqrt(eM$values))
 }
 "gen.ridge" <-
 function (x, y, weights, lambda = 1, omega, df, ...) 
@@ -318,16 +344,14 @@ function (x, y, weights, lambda = 1, omega, df, ...)
         return(polyreg(x, y))
     d <- dim(x)
     mm <- apply(x, 2, mean)
-    x <- scale(x, mm, F)
-    simple <- if (missing(omega)) 
-        T
-    else F
+    x <- scale(x, mm, FALSE)
+    simple <- if (missing(omega)) TRUE else FALSE
     if (!simple) {
         if (!all(match(c("values", "vectors"), names(omega), 
-            F))) 
+            FALSE))) 
             stop("You must supply an  eigen-decomposed version of omega")
         vals <- pmax(.Machine$double.eps, sqrt(omega$values))
-        basis <- scale(omega$vectors, F, vals)
+        basis <- scale(omega$vectors, FALSE, vals)
         x <- x %*% basis
     }
     svd.x <- svd(x)
@@ -359,16 +383,16 @@ function (x, g, subclasses)
     subclasses <- rep(subclasses, length = length(cnames))
     R <- sum(subclasses)
     cl <- rep(seq(J), subclasses)
-    cx <- x[seq(R), , drop = F]
+    cx <- x[seq(R), , drop = FALSE]
     for (j in seq(J)) {
         nc <- subclasses[j]
         which <- cl == j
         if (nc <= 1) {
-            cx[which, ] <- apply(x[g == j, , drop = F], 2, mean)
+            cx[which, ] <- apply(x[g == j, , drop = FALSE], 2, mean)
             wmj <- matrix(1, sum(g == j), 1)
         }
         else {
-            xx <- x[g == j, , drop = F]
+            xx <- x[g == j, , drop = FALSE]
             start <- xx[sample(1:nrow(xx), size = nc), ]
             TT <- kmeans(xx, start)
             cx[which, ] <- TT$centers
@@ -380,7 +404,7 @@ function (x, g, subclasses)
     list(x = cx, cl = factor(cl, labels = cnames), weights = weights)
 }
 "laplacian" <-
-function (size = 16, compose = F) 
+function (size = 16, compose = FALSE) 
 {
     gmat <- matrix(0, size, size)
     xx <- seq(size)
@@ -438,14 +462,14 @@ function (x, g, subclasses)
             rcl <- rep(0, number)
             rcl[needed] <- j
             cl[which] <- rcl
-            wmj <- diag(number)[jcluster, needed, drop = F]
+            wmj <- diag(number)[jcluster, needed, drop = FALSE]
             number <- length(needed)
         }
         dimnames(wmj) <- list(NULL, paste("s", seq(number), sep = ""))
         weights[[j]] <- wmj
     }
     TT <- cl > 0
-    list(x = cx[TT, , drop = F], cl = factor(cl[TT], labels = cnames), 
+    list(x = cx[TT, , drop = FALSE], cl = factor(cl[TT], labels = cnames), 
         weights = weights)
 }
 "make.dumpdata.mda" <-
@@ -457,12 +481,12 @@ dump(c("bruto", "coef.fda", "confusion", "contr.fda", "fda",
     "confusion.fda", "confusion.list", "fix.theta", "gen.ridge", 
     "predict.gen.ridge", "laplacian", "kmeans.start", "llmult", 
     "lvq.start", "mda", "mda.fit", "mda.means", "mda.start", 
-    "mean.penalty", "plot.fda", "pplot4", "predict.mda", "print.mda", 
-    "shrink", "shrink.mda", "transform.penalty"), "dumpdata.mda")
+    "meanPenalty", "plot.fda", "pplot4", "predict.mda", "print.mda", 
+    "shrink", "shrink.mda", "transformPenalty"), "dumpdata.mda")
 "mars" <-
 function (x, y, w = rep(1, nrow(x)), wp, degree = 1, nk = max(21, 
-    2 * ncol(x) + 1), penalty = 2, thresh = 0.001, prune = T, 
-    trace.mars = F, forward.step = T, prevfit = NULL, ...) 
+    2 * ncol(x) + 1), penalty = 2, thresh = 0.001, prune = TRUE, 
+    trace.mars = FALSE, forward.step = TRUE, prevfit = NULL, ...) 
 {
     this.call <- match.call()
     if ((nk%%2) != 1) 
@@ -487,7 +511,7 @@ function (x, y, w = rep(1, nrow(x)), wp, degree = 1, nk = max(21,
         factor <- NULL
     }
     else {
-        bx <- model.matrix.mars(prevfit, x, full = T)
+        bx <- model.matrix.mars(prevfit, x, full = TRUE)
         interms <- ncol(bx)
         lenb <- prevfit$lenb
         o <- prevfit$all.terms
@@ -552,7 +576,7 @@ function (x, y, w = rep(1, nrow(x)), wp, degree = 1, nk = max(21,
     lenb <- junk$lenb
     all.terms <- seq(lenb)[junk$fullin[1:lenb] == 1]
     selected.terms <- seq(lenb)[junk$bestin[1:lenb] == 1]
-    coefficients <- junk$beta[seq(selected.terms), , drop = F]
+    coefficients <- junk$beta[seq(selected.terms), , drop = FALSE]
     residuals <- junk$res
     fitted.values <- y - residuals
     if (!is.null(wp)) {
@@ -562,10 +586,10 @@ function (x, y, w = rep(1, nrow(x)), wp, degree = 1, nk = max(21,
         coefficients <- coefficients/outer(rep(1, length(selected.terms)), 
             wp)
     }
-    dir <- junk$dir[seq(lenb), , drop = F]
+    dir <- junk$dir[seq(lenb), , drop = FALSE]
     dimnames(dir) <- list(NULL, dimnames(x)[[2]])
-    cutss <- junk$cuts[seq(lenb), , drop = F]
-    x <- junk$bx[, selected.terms, drop = F]
+    cutss <- junk$cuts[seq(lenb), , drop = FALSE]
+    x <- junk$bx[, selected.terms, drop = FALSE]
     structure(list(call = this.call, all.terms = all.terms, selected.terms = selected.terms, 
         penalty = penalty, degree = degree, nk = nk, thresh = thresh, 
         gcv = junk$bestgcv, factor = dir, cuts = cutss, residuals = residuals, 
@@ -573,14 +597,15 @@ function (x, y, w = rep(1, nrow(x)), wp, degree = 1, nk = max(21,
         x = x), class = "mars")
 }
 "mda" <-
-function (formula = formula(data), data = sys.frame(sys.parent()), 
-    subclasses = 3, sub.df = NULL, tot.df = NULL, dimension = sum(subclasses) - 
-        1, eps = .Machine$double.eps, iter = 5, weights = mda.start(x, 
-        g, subclasses, trace, ...), method = polyreg, keep.fitted = (n * 
-        dimension < 1000), trace = F, ...) 
+function(formula = formula(data), data = sys.frame(sys.parent()), 
+         subclasses = 3, sub.df = NULL, tot.df = NULL, dimension =
+         sum(subclasses) - 1, eps = .Machine$double.eps, iter = 5,
+         weights = mda.start(x, g, subclasses, trace, ...), method =
+         polyreg, keep.fitted = (n * dimension < 1000), trace = FALSE,
+         ...) 
 {
     this.call <- match.call()
-    m <- match.call(expand = F)
+    m <- match.call(expand = FALSE)
     m[[1]] <- as.name("model.frame")
     m <- m[match(names(m), c("", "formula", "data"), 0)]
     m <- eval(m, sys.frame(sys.parent()))
@@ -640,7 +665,7 @@ function (formula = formula(data), data = sys.frame(sys.parent()),
         dmat <- predict.fda(fit, type = "distance")
         sub.prior <- fit$sub.prior
         for (j in seq(J)) {
-            TT <- dmat[g == j, Assign[[j]], drop = F]
+            TT <- dmat[g == j, Assign[[j]], drop = FALSE]
             TT <- exp(-0.5 * (TT - rowmin(TT)))
             TT <- TT * outer(rep(1, nrow(TT)), sub.prior[[j]])
             weights[[j]][] <- TT/drop(TT %*% rep(1, ncol(TT)))
@@ -650,7 +675,7 @@ function (formula = formula(data), data = sys.frame(sys.parent()),
         for (j in seq(J)) {
             priorj <- sub.prior[[j]]
             ass <- Assign[[j]]
-            TT <- dmat[, ass, drop = F] * outer(rep(1, n), priorj)
+            TT <- dmat[, ass, drop = FALSE] * outer(rep(1, n), priorj)
             TTot <- drop(TT %*% rep(1, length(ass)))
             pclass[, j] <- prior[j] * TTot
         }
@@ -692,7 +717,7 @@ function (x, g, weights, theta, assign.theta, Rj, sub.df, tot.df,
         theta <- contr.helmert(R)
     theta <- contr.fda(dp, theta)
     if (!(is.null(sub.df) & is.null(tot.df))) {
-        Q <- diag(dp) + transform.penalty(prior = dp, cl = rep(seq(J), 
+        Q <- diag(dp) + transformPenalty(prior = dp, cl = rep(seq(J), 
             Rj), df = sub.df, tot.df = tot.df)
         theta <- fix.theta(theta, Q)
     }
@@ -700,7 +725,7 @@ function (x, g, weights, theta, assign.theta, Rj, sub.df, tot.df,
     obs.weights <- double(n)
     for (j in seq(J)) {
         Theta[g == j, ] <- weights[[j]] %*% theta[assign.theta[[j]], 
-            , drop = F]
+            , drop = FALSE]
         obs.weights[g == j] <- weights[[j]] %*% rep(1, Rj[j])
     }
     fit <- method(x, Theta, obs.weights, ...)
@@ -718,12 +743,12 @@ function (x, g, weights, theta, assign.theta, Rj, sub.df, tot.df,
         return(structure(list(dimension = 0, fit = fit, call = this.call), 
             class = "fda"))
     }
-    thetan <- thetan[, seq(dimension), drop = F]
+    thetan <- thetan[, seq(dimension), drop = FALSE]
     pe <- pe[seq(dimension)]
     alpha <- sqrt(lambda[seq(dimension)])
     sqima <- sqrt(1 - lambda[seq(dimension)])
     vnames <- paste("v", seq(dimension), sep = "")
-    means <- scale(theta %*% thetan, F, sqima/alpha)
+    means <- scale(theta %*% thetan, FALSE, sqima/alpha)
     dimnames(means) <- list(subclass.names, vnames)
     names(lambda) <- c(vnames, rep("", length(lambda) - dimension))
     names(pe) <- vnames
@@ -792,10 +817,10 @@ function (x, g, subclasses = 3, trace.mda.start = FALSE, start.method = c("kmean
             for (j in seq(J)) {
                 priorj <- sub.prior[[j]]
                 ass <- Assign[[j]]
-                TT <- dmat[, ass, drop = F]
+                TT <- dmat[, ass, drop = FALSE]
                 TT <- TT * outer(rep(1, n), priorj)
                 TTot <- drop(TT %*% rep(1, length(ass)))
-                wmj <- TT[g == j, , drop = F]/TTot[g == j]
+                wmj <- TT[g == j, , drop = FALSE]/TTot[g == j]
                 pclass[, j] <- prior[j] * TTot
                 dimnames(wmj) <- list(NULL, paste("s", seq(along = ass), 
                   sep = ""))
@@ -814,7 +839,7 @@ function (x, g, subclasses = 3, trace.mda.start = FALSE, start.method = c("kmean
     }
     structure(keep.weights, criterion = best.ll, name.criterion = name.criterion)
 }
-"mean.penalty" <-
+"meanPenalty" <-
 function (prior, cl) 
 {
     n <- length(prior)
@@ -832,7 +857,7 @@ function (prior, cl)
     Q
 }
 "model.matrix.mars" <-
-function (object, x, which = object$selected.terms, full = F, 
+function (object, x, which = object$selected.terms, full = FALSE, 
     ...) 
 {
     if (missing(x)) 
@@ -869,10 +894,11 @@ function (object, x, which = object$selected.terms, full = F,
     bx
 }
 "plot.fda" <-
-function (object, data, g, coords = c(1, 2), group = c("true", 
+function (x, data, g, coords = c(1, 2), group = c("true", 
     "predicted"), colors, pch, mcolors = max(colors) + 1, mpch, 
     pcex = 0.5, mcex = 2.5, ...) 
 {
+    object <- x                         # generic/method
     group <- match.arg(group)
     if (missing(data)) {
         vars <- predict(object, type = "var")
@@ -921,18 +947,18 @@ function (object, data, g, coords = c(1, 2), group = c("true",
         for (i in np) {
             which <- cc == i
             if (any(which)) 
-                points(vars[which, coord.pair, drop = F], col = colors[i], 
+                points(vars[which, coord.pair, drop = FALSE], col = colors[i], 
                   pch = pch[i], cex = pcex)
-            points(means[assign[[i]], coord.pair, drop = F], 
+            points(means[assign[[i]], coord.pair, drop = FALSE], 
                 col = mcolors[i], pch = 1, cex = mcex)
-            points(means[assign[[i]], coord.pair, drop = F], 
+            points(means[assign[[i]], coord.pair, drop = FALSE], 
                 col = mcolors[i], pch = mpch[i], cex = mcex/2)
         }
     }
     invisible()
 }
 "polybasis" <-
-function (x, degree = 1, monomial = F) 
+function (x, degree = 1, monomial = FALSE) 
 {
     if (degree >= 3) 
         warning("This is not a smart polynomial routine. You may get numerical problems with a degree of 3 or more")
@@ -941,7 +967,7 @@ function (x, degree = 1, monomial = F)
     dd <- dim(x)
     np <- dd[2]
     if (np == 1) 
-        monomial <- T
+        monomial <- TRUE
     if (degree > 1) {
         if (monomial) {
             px <- x
@@ -973,8 +999,8 @@ function (x, degree = 1, monomial = F)
                 retain <- newad <= degree
                 mat0 <- matarray[, , ii]
                 if (any(retain)) 
-                  newmat <- mat0[, index0[retain], drop = F] * 
-                    x[, index[retain], drop = F]
+                  newmat <- mat0[, index0[retain], drop = FALSE] * 
+                    x[, index[retain], drop = FALSE]
                 else newmat <- NULL
                 ddn <- paste(d0[index0[retain]], cc[index[retain]], 
                   sep = "")
@@ -995,7 +1021,7 @@ function (x, degree = 1, monomial = F)
     cbind(Intercept = 1, x)
 }
 "polyreg" <-
-function (x, y, w, degree = 1, monomial = F, ...) 
+function (x, y, w, degree = 1, monomial = FALSE, ...) 
 {
     x <- polybasis(x, degree, monomial)
     if (iswt <- !missing(w)) {
@@ -1016,7 +1042,7 @@ function (x, y, w, degree = 1, monomial = F, ...)
         degree = degree, monomial = monomial, df = df), class = "polyreg")
 }
 "pplot" <-
-function (x, g, colors, pch, add = F, type = "p", ...) 
+function (x, g, colors, pch, add = FALSE, type = "p", ...) 
 {
     g <- as.factor(g)
     cc <- codes(g)
@@ -1029,7 +1055,7 @@ function (x, g, colors, pch, add = F, type = "p", ...)
     else pch <- rep(pch, length = length(np))
     if (!add) 
         plot(x, type = "n", ...)
-    for (i in unique(cc)) points(x[cc == i, , drop = F], col = colors[i], 
+    for (i in unique(cc)) points(x[cc == i, , drop = FALSE], col = colors[i], 
         pch = pch[i], type = type)
 }
 "pplot4" <-
@@ -1042,7 +1068,7 @@ function (x, ...)
     }
 }
 "predict.bruto" <-
-function (object, x, type = c("fitted", "terms")) 
+function (object, x, type = c("fitted", "terms"), ...)
 {
     if (missing(x)) {
         z <- fitted(object)
@@ -1055,7 +1081,8 @@ function (object, x, type = c("fitted", "terms"))
     nq <- d[2]
     n <- d[1]
     if (nq != length(object$df)) 
-        stop("x should have the same number of columns as the df component of object")
+        stop(paste("x should have the same number of columns",
+                   "as the df component of object"))
     ybar <- object$ybar
     np <- as.integer(length(ybar))
     eta <- matrix(double(n * np), n, np)
@@ -1089,10 +1116,10 @@ function (object, x, type = c("fitted", "terms"))
 }
 "predict.fda" <-
 function (object, x, type = c("class", "variates", "posterior", 
-    "hierarchical", "distances"), prior, dimension = J - 1) 
+    "hierarchical", "distances"), prior, dimension = J - 1, ...)
 {
     dist <- function(x, mean, m = ncol(mean)) (scale(x, mean, 
-        F)^2) %*% rep(1, m)
+        FALSE)^2) %*% rep(1, m)
     type <- match.arg(type)
     means <- object$means
     Jk <- dim(means)
@@ -1119,18 +1146,18 @@ function (object, x, type = c("class", "variates", "posterior",
         }
         y <- predict(object$fit, x)
     }
-    y <- y %*% object$theta[, seq(dimension), drop = F]
+    y <- y %*% object$theta[, seq(dimension), drop = FALSE]
     lambda <- object$values
     alpha <- sqrt(lambda[seq(dimension)])
     sqima <- sqrt(1 - lambda[seq(dimension)])
-    x <- scale(y, F, sqima * alpha)
+    x <- scale(y, FALSE, sqima * alpha)
     if (missing(prior)) 
         prior <- object$prior
     else {
         if (any(prior < 0) | round(sum(prior), 5) != 1) 
             stop("innappropriate prior")
     }
-    means <- means[, seq(dimension), drop = F]
+    means <- means[, seq(dimension), drop = FALSE]
     switch(type, variates = return(x), class = {
         n <- nrow(x)
         prior <- 2 * log(prior)
@@ -1156,12 +1183,12 @@ function (object, x, type = c("class", "variates", "posterior",
         for (ad in seq(along = dimension.set)) {
             d <- dimension.set[ad]
             dd <- seq(d)
-            mindist <- dist(x[, dd, drop = F], means[1, dd, drop = F], 
+            mindist <- dist(x[, dd, drop = FALSE], means[1, dd, drop = FALSE], 
                 d) - prior[1]
             pclass <- rep(1, nrow(x))
             for (i in seq(2, J)) {
-                ndist <- dist(x[, dd, drop = F], means[i, dd, 
-                  drop = F], d) - prior[i]
+                ndist <- dist(x[, dd, drop = FALSE], means[i, dd, 
+                  drop = FALSE], d) - prior[i]
                 l <- ndist < mindist
                 pclass[l] <- i
                 mindist[l] <- ndist[l]
@@ -1187,10 +1214,10 @@ function (object, x, ...)
 {
     if (missing(x)) 
         fitted(object)
-    else scale(x, object$xmeans, F) %*% object$coef
+    else scale(x, object$xmeans, FALSE) %*% object$coef
 }
 "predict.mars" <-
-function (object, x) 
+function (object, x, ...) 
 {
     if (missing(x)) {
         z <- fitted(object)
@@ -1270,7 +1297,7 @@ function (object, x, type = c("class", "variates", "posterior",
         g <- as.numeric(g)
         weights <- Assign
         for (j in seq(J)) {
-            TT <- dmat[g == j, Assign[[j]], drop = F]
+            TT <- dmat[g == j, Assign[[j]], drop = FALSE]
             TT <- exp(-0.5 * (TT - rowmin(TT)))
             TT <- TT * outer(rep(1, nrow(TT)), sub.prior[[j]])
             weights[[j]] <- TT/drop(TT %*% rep(1, ncol(TT)))
@@ -1280,7 +1307,7 @@ function (object, x, type = c("class", "variates", "posterior",
     pclass <- matrix(1, nrow(dmat), J)
     dmat <- exp(-0.5 * (dmat - rowmin(dmat)))
     for (j in seq(J)) {
-        TT <- dmat[, Assign[[j]], drop = F]
+        TT <- dmat[, Assign[[j]], drop = FALSE]
         TT <- TT * outer(rep(1, nrow(TT)), sub.prior[[j]])
         pclass[, j] <- prior[j] * drop(TT %*% rep(1, ncol(TT)))
     }
@@ -1351,13 +1378,13 @@ function (object, sub.df = NULL, tot.df = NULL, ...)
     theta <- object$means
     alpha <- sqrt(lambda)
     sqima <- sqrt(1 - lambda)
-    theta <- scale(theta, F, alpha/sqima)
+    theta <- scale(theta, FALSE, alpha/sqima)
     sub.prior <- unlist(object$sub.prior)
     prior <- object$prior
     Rj <- sapply(object$assign.theta, length)
     dp <- sub.prior * rep(prior, Rj)
     cl <- rep(seq(Rj), Rj)
-    P <- diag(dp) + transform.penalty(prior = dp, cl = cl, df = sub.df, 
+    P <- diag(dp) + transformPenalty(prior = dp, cl = cl, df = sub.df, 
         tot.df = tot.df)
     K <- t(theta) %*% P %*% theta
     TT <- chol((K + t(K))/2)
@@ -1374,13 +1401,13 @@ function (object, sub.df = NULL, tot.df = NULL, ...)
         return(structure(list(dimension = 0, fit = fit, call = this.call), 
             class = "fda"))
     }
-    thetan <- thetan[, seq(dimension), drop = F]
+    thetan <- thetan[, seq(dimension), drop = FALSE]
     pe <- pe[seq(dimension)]
     alpha <- sqrt(lambda[seq(dimension)])
     sqima <- sqrt(1 - lambda[seq(dimension)])
     dm <- dimnames(theta)
     vnames <- dm[[2]][seq(dimension)]
-    means <- scale(theta %*% Tinv %*% thetan, F, sqima/alpha)
+    means <- scale(theta %*% Tinv %*% thetan, FALSE, sqima/alpha)
     dimnames(means) <- list(dm[[1]], vnames)
     names(lambda) <- c(vnames, rep("", length(lambda) - dimension))
     names(pe) <- vnames
@@ -1398,7 +1425,7 @@ function (object, sub.df = NULL, tot.df = NULL, ...)
         ...)
 }
 "softmax" <-
-function (x, gap = F) 
+function (x, gap = FALSE) 
 {
     d <- dim(x)
     maxdist <- x[, 1]
@@ -1421,11 +1448,11 @@ function (x, gap = F)
         list(class = pclass, gaps = gaps)
     else pclass
 }
-"transform.penalty" <-
+"transformPenalty" <-
 function (Q, prior, cl, df = NULL, tot.df = NULL) 
 {
     if (missing(Q)) 
-        Q <- mean.penalty(prior, cl)
+        Q <- meanPenalty(prior, cl)
     if (missing(prior)) 
         prior <- attr(Q, "prior")
     if (missing(cl)) 
@@ -1464,7 +1491,7 @@ function (Q, prior, cl, df = NULL, tot.df = NULL)
         df <- rep(df, length = length(ncl))
         for (i in seq(along = ncl)) {
             which <- cl == ncl[i]
-            Q[which, which] <- Recall(Q[which, which, drop = F], 
+            Q[which, which] <- Recall(Q[which, which, drop = FALSE], 
                 prior[which], tot.df = df[i])
         }
         return(Q)

@@ -5,7 +5,7 @@
   Classify observations in conjunction with \code{mda}.
 }
 \usage{
-predict.mda(object, x, type, prior, dimension, g, \dots)
+\method{predict}{mda}(object, x, type, prior, dimension, g, \dots)
 }
 \arguments{
   \item{object}{a fitted mda object.}
