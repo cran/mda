@@ -1,0 +1,25 @@
+Fortran stuff
+-------------
+
+convert ratfor sources to fortran
+
+mspline.f:
+change
+	temp=dble(n-center) / cost - dfoff
+to
+	temp=dble(n-dble(center)) / cost - dfoff
+because center is logical
+
+remove unneeded symbols from *.f (warnings of f2c) 
+
+convert *.f to C
+
+
+In dumpdata.R:
+--------------
+
+remove checking if kmeans etc. are loaded (there is no find in R yet)
+
+remove all bruto stuff (can't get compiled code working)
+
+change all single to double
