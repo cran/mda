@@ -270,7 +270,6 @@ function (formula = formula(data), data = sys.frame(sys.parent()),
     x <- model.matrix(Terms, m)
     dd <- dim(x)
     n <- dd[1]
-    m <- dd[2]
     weights <- model.extract(m, weights)
     if (!length(weights)) 
         weights <- rep(1, n)

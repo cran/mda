@@ -1,3 +1,10 @@
+2003-03-14  Kurt Hornik  <Kurt.Hornik@wu-wien.ac.at>
+
+	* DESCRIPTION (Version): New version is 0.2-16.
+
+	* R/mda.R (fda): Remove 'm <- dd[2]' as subsequently m is still
+	needed as a model frame (Jim Rogers <jrogers@cantatapharm.com>).
+
 2002-01-10  Kurt Hornik  <Kurt.Hornik@wu-wien.ac.at>
 
 	* DESCRIPTION (Version): New version is 0.2-15.
