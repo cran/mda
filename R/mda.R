@@ -783,8 +783,6 @@ function (x, g, subclasses = 3, trace.mda.start = FALSE, start.method = c("kmean
     if (!require(class, quietly = TRUE)) 
         stop("mda() requires package `class'")
     start.method <- match.arg(start.method)
-    if (start.method == "kmeans") 
-        require(mva)
     criterion <- match.arg(criterion)
     name.criterion <- switch(criterion, misclassification = "Misclassification Error", 
         deviance = "Deviance(multinomial)")
@@ -1024,6 +1022,7 @@ function (x, degree = 1, monomial = FALSE)
 function (x, y, w, degree = 1, monomial = FALSE, ...) 
 {
     x <- polybasis(x, degree, monomial)
+    y <- as.matrix(y)                   # just making sure ...
     if (iswt <- !missing(w)) {
         if (any(w <= 0)) 
             stop("only positive weights")
@@ -1474,7 +1473,7 @@ function (Q, prior, cl, df = NULL, tot.df = NULL)
             current.df <- sum(1/(1 + d * lambda))
             if (abs((df - current.df)/df) < 1e-04 | iterations == 
                 1) 
-                return(lambda, df = current.df)
+                return(list(lambda = lambda, df = current.df))
             else {
                 lambda <- exp(log(lambda) - (current.df - df)/df.diriv(d, 
                   lambda))

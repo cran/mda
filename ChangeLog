@@ -1,3 +1,19 @@
+2004-09-15  Kurt Hornik  <Kurt.Hornik@wu-wien.ac.at>
+
+	* DESCRIPTION (Version): New version is 0.2-26.
+	(Depends): Depend on R >= 1.9.0 and stats.
+
+	* R/zzz.R (.First.lib): Require stats.
+
+	* R/df.inv.R (df.diriv):  Multi-argument return values are
+	deprecated in R.
+
+	* R/mda.R (df.diriv):  Multi-argument return values are deprecated
+	in R.
+	("mda.start"): Stop to require mva.
+	("polyreg"): Coerce y to matrix (e.g., in case it was subscripted
+	from a data frame)
+
 2004-08-12  Kurt Hornik  <Kurt.Hornik@wu-wien.ac.at>
 
 	* DESCRIPTION (Version): New version is 0.2-25.
