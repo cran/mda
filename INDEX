@@ -5,7 +5,6 @@ fda                     Flexible Discriminant Analysis
 gen.ridge               Penalized Regression
 glass                   Glass Identification Database
 mars                    Multivariate Additive Regression Splines
-mda-internal            Internal mda Functions
 mda                     Mixture Discriminant Analysis
 mda.start               Initialization for Mixture Discriminant
                         Analysis
