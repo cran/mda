@@ -59,7 +59,8 @@ mars(x, y, w, wp, degree, nk, penalty, thresh, prune, trace.mars,
   \item{fitted}{fitted values from fit.}
   \item{lenb}{length of full model.}
   \item{coefficients}{least squares coefficients for final model.}
-  \item{x}{the input x matrix.}
+  \item{x}{a matrix of basis functions obtained from the input x
+    matrix.}
 }
 \note{
   This function was coded from scratch, and did not use any of
