@@ -1,3 +1,10 @@
+2001-03-24  Kurt Hornik  <Kurt.Hornik@ci.tuwien.ac.at>
+
+	* DESCRIPTION (Version): New version is 0.2-7.
+
+	* R/mda.R: Add `PACKAGE' argument to FF calls.  Tidy up following
+	R-exts, and rename from `mda.q' to `mda.R'.
+
 2001-01-01  Kurt Hornik  <Kurt.Hornik@ci.tuwien.ac.at>
 
 	* DESCRIPTION (Version): New version is 0.2-6.
