@@ -1,31 +1,12 @@
 This is a first shot at porting the Hastie & Tibshirani mda package to
-R --- and only for cool people with a brave heart :-)
+R.  mda and fda with MARS seem to work fine, but bruto is still broken
+and segfaults.  Hopefully, this can be fixed soon.
 
+Kurt Hornik
+Friedrich Leisch
 
-All BRUTO stuff is missing because there are some unresolved symbols:
-  R.binary: can't resolve symbol 'sgram_'
-  R.binary: can't resolve symbol 'd_sign'
-  R.binary: can't resolve symbol 'pack_'
-  R.binary: can't resolve symbol 'unpack_'
-  R.binary: can't resolve symbol 'sknotl_'
-  R.binary: can't resolve symbol 'wmean_'
-which I didn't have time to search/imitate/...
+Actually, mda was not fine: it was doing the pruning incorrectly.
+bruto now works.
 
-Mda and fda with MARS seem to work fine, though.
-
-You'll need the e1071 and class packages from CRAN.
-
-It also seems only to work with the new dataframe code that is
-in the latest snapshot version (>= easter 1998).
-
-Good luck,
-
--------------------------------------------------------------------
-                        Friedrich  Leisch                             
-Institut für Statistik                      Tel: (+43 1) 58801 4541
-Technische Universität Wien                 Fax: (+43 1)  504 14 98
-Wiedner Hauptstraße 8-10/1071      Friedrich.Leisch@ci.tuwien.ac.at
-A-1040 Wien, Austria             http://www.ci.tuwien.ac.at/~leisch
-     PGP public key http://www.ci.tuwien.ac.at/~leisch/pgp.key
--------------------------------------------------------------------
+Brian Ripley 99/08/17
 

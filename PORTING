@@ -1,0 +1,74 @@
+* src (by BDR)
+
+Convert *.r by ratfor on Solaris. Use modreg versions of
+bsplvd.f bvalue.f bvalus.f qsbart.f sbart.f sgram.f sinerp.f sslvrg.f stxwx.f
+
+Change things like work(1) to work(*)
+
+As namat used a double workspace for integers, arrange for an iwork array.
+
+Change things like n-center, center logical (and dble(center) may not
+work on all platforms) 
+
+Change uses of bvalue, bsplvd to match those in the modreg code (which has
+an extra lent argument).
+
+Chase down a difference in usage of dbksl and replace it by direct calls
+to dtrsl.
+
+In dmarss.f, the var array was used without being calculated, so add
+additional call to qrreg to calculate it.
+
+* src:
+
+** Get additionally needed files from gamfit on Statlib/general.
+
+** mspline.r:
+change
+	temp=dble(n-center) / cost - dfoff
+to
+	temp=dble(n-dble(center)) / cost - dfoff
+because center is logical
+
+** remove unneeded symbols from *.r (warnings of f2c) as follows:
+
+bruto.r		    36	   ier ntype
+dcalcvar.r	    43	   dn wmean dwrss xbar xcov
+dmarss.r	    88	   tem
+		   176	   m v
+		   614	   flagtot
+		   621	   temm
+mspline.r	   457	   k
+		   537	   wmean
+		   584	   xbar
+		   737	   wmean
+splsm.r		   117	   scrat
+
+** replace real -> double in
+
+** convert *.r to FORTRAN using ratfor
+** convert *.f to C using f2c -A -a -P
+** beautify using MM's f2c-clean
+
+* Copy dumpdata.mda to R/mda.q.
+
+* mda.q:
+
+** change all single to double
+
+** change all sys.parent() to sys.frame(sys.parent())
+
+** delete code related to is.loaded() or {.bruto,.mars,.mda}.object.
+
+** in predict.fda(), replace
+	levels(pclass) <- dimnames(means)[[1]]
+	return(factor(pclass))
+by
+	return(factor(pclass, labels = dimnames(means)[[1]]))
+
+** in mda.fit(), remove unneeded final strcuture() wrapper.
+
+* Create zzz.R.
+
+* Use `Sd2Rd -x' to convert documentation sources to Rd format.  The
+examples need major attention.

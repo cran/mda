@@ -1,0 +1,5 @@
+By default, fda() and mda() remove the fitted values from the returned
+object in case this component is too large.  But then prediction fails
+if the data is not given explicitly.
+
+More documentation should be added, in particular on laplacian().

@@ -1,4 +1,6 @@
-confusion                compute the confusion matrix between two
+bruto                    Fit an additive spline model by adaptive
+                         backfitting
+confusion                Compute the confusion matrix between two
                          factors, or for an fda or mda object
 fda                      Flexible Discriminant Analysis
 gen.ridge                Perform a penalized regression, as used by pda()
@@ -7,6 +9,8 @@ mda                      Mixture Discriminant Analysis
 mda.start                Provide starting weights for the mda function
 model.matrix.mars        produce a model matrix from a `mars' object
 polyreg                  simple minded polynomial regression
+predict.bruto            a method for making predictions from a `bruto'
+                         object.
 predict.fda              make predictions from an fda object
 predict.mars             make predictions from a `mars' object
 predict.mda              make predictions from an mda object
