@@ -1,17 +1,18 @@
-bruto                    Fit an additive spline model by adaptive
-                         backfitting
-confusion                Compute the confusion matrix between two
-                         factors, or for an fda or mda object
+bruto                    Fit an Additive Spline Model by Adaptive
+                         Backfitting
+confusion                Confusion Matrices
 fda                      Flexible Discriminant Analysis
-gen.ridge                Perform a penalized regression, as used by pda()
+gen.ridge                Penalized Regression
+glass                    Glass Identification Database
 mars                     Multivariate Additive Regression Splines
+mda-internal             Internal mda Functions
 mda                      Mixture Discriminant Analysis
-mda.start                Provide starting weights for the mda function
-model.matrix.mars        produce a model matrix from a `mars' object
-polyreg                  simple minded polynomial regression
-predict.bruto            a method for making predictions from a `bruto'
-                         object.
-predict.fda              make predictions from an fda object
-predict.mars             make predictions from a `mars' object
-predict.mda              make predictions from an mda object
-softmax                  identify the maximum in each row of a matrix
+mda.start                Initialization for Mixture Discriminant
+                         Analysis.
+model.matrix.mars        Produce a Design Matrix from a `mars' Object.
+polyreg                  Polynomial Regression
+predict.bruto            Predict method for BRUTO Objects
+predict.fda              Classify by Flexible Discriminant Analysis
+predict.mars             Predict method for MARS Objects
+predict.mda              Classify by Mixture Discriminant Analysis
+softmax                  Find the Maximum in Each Row of a Matrix

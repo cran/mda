@@ -1,3 +1,29 @@
+2001-01-01  Kurt Hornik  <Kurt.Hornik@ci.tuwien.ac.at>
+
+	* DESCRIPTION (Version): New version is 0.2-6.
+
+	* man/mda-internal.Rd: New file.
+	
+	* man/*.Rd: Miscellaneous improvements (add missing \description
+	and \keyword entries; Rd improvements, and so on).
+
+2000-12-24  Kurt Hornik  <Kurt.Hornik@ci.tuwien.ac.at>
+
+	* DESCRIPTION (Version): New version is 0.2-5.
+	(Maintainer): New entry.
+
+2000-12-19  Kurt Hornik  <Kurt.Hornik@ci.tuwien.ac.at>
+
+	* DESCRIPTION (Version): New version is 0.2-4.
+	(Title): Added.
+
+	* TITLE: Removed.
+
+	* src/dqrreg.f (qrreg): Replace call to dqrdca (removed from
+	S_compat in R 1.2.0) with the equivalent call to dqrdc2.
+	
+	* man/glass.Rd: Rewritten, added \keyword.
+
 Sun Aug 22 16:01:55 1999  Kurt Hornik  <Kurt.Hornik@ci.tuwien.ac.at>
 
 	* DESCRIPTION (Version): New version is 0.2-3.

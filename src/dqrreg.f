@@ -21,7 +21,7 @@
       do 23006 i=1,p 
       qpivot(i)=i
 23006 continue
-      call dqrdca(xsc,n,n,nt,scr1,qpivot,work,qrank,temp3)
+      call dqrdc2(xsc,n,n,nt,temp3,qrank,scr1,qpivot,work)
       rss=0.0
       do 23008 k=1,nclass
       call dqrsl(xsc,n,n,qrank,scr1,y(1,k),work(1),work(1),beta(1,k),
