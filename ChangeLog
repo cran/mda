@@ -1,3 +1,9 @@
+2004-01-31  Kurt Hornik  <Kurt.Hornik@wu-wien.ac.at>
+
+	* DESCRIPTION (Version): New version is 0.2-23.
+
+	* INDEX: Removed.
+
 2003-12-18  Kurt Hornik  <Kurt.Hornik@wu-wien.ac.at>
 
 	* DESCRIPTION (Version): New version is 0.2-22.  
@@ -104,7 +110,7 @@
 	* man/mda.start.Rd:
 	* man/model.matrix.mars.Rd:
 	* man/polyreg.Rd:
-	Document undocumented `...' arguments.
+	Document undocumented '...' arguments.
 
 	* R/mda.R: TnF fixes.
 
@@ -127,7 +133,7 @@
 2001-06-18  Kurt Hornik  <Kurt.Hornik@ci.tuwien.ac.at>
 
 	* DESCRIPTION (Version): New version is 0.2-9.
-	(Depends): Rename from `Suggests'.
+	(Depends): Rename from 'Suggests'.
 
 2001-06-02  Kurt Hornik  <Kurt.Hornik@ci.tuwien.ac.at>
 
@@ -143,8 +149,8 @@
 
 	* DESCRIPTION (Version): New version is 0.2-7.
 
-	* R/mda.R: Add `PACKAGE' argument to FF calls.  Tidy up following
-	R-exts, and rename from `mda.q' to `mda.R'.
+	* R/mda.R: Add 'PACKAGE' argument to FF calls.  Tidy up following
+	R-exts, and rename from 'mda.q' to 'mda.R'.
 
 2001-01-01  Kurt Hornik  <Kurt.Hornik@ci.tuwien.ac.at>
 
