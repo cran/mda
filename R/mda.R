@@ -90,7 +90,7 @@ function (x, y, w = rep(1, n), wp = rep(1/np, np), dfmax, cost = 2,
         nef <- fit.object$nef
         lambda <- fit.object$lambda
         coef <- fit.object$coef
-        type <- codes(fit.object$type)
+        type <- unclass(fit.object$type)
         xrange <- fit.object$xrange
         maxit.select <- 0
         maxit.backfit <- fit.object$nit[2]

@@ -1,3 +1,10 @@
+2003-06-06  Kurt Hornik  <Kurt.Hornik@wu-wien.ac.at>
+
+	* DESCRIPTION (Version): New version is 0.2-18.
+
+	* R/mda.R (nknotl, pplot, predict.bruto): Replace 'codes' by
+	'unclass' as the former is deprecated in R 1.8.
+
 2003-04-23  Kurt Hornik  <Kurt.Hornik@wu-wien.ac.at>
 
 	* DESCRIPTION (Version): New version is 0.2-17.
