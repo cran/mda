@@ -1,5 +1,6 @@
 \name{mda-internal}
 \alias{contr.fda}
+\alias{df.inv}
 \alias{fix.theta}
 \alias{kmeans.start}
 \alias{laplacian}
