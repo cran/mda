@@ -1,3 +1,11 @@
+2003-10-10  Kurt Hornik  <Kurt.Hornik@wu-wien.ac.at>
+
+	* DESCRIPTION (Version): New version is 0.2-20.
+
+	* R/mda.R (pplot, predict.bruto": Hmm, the ChangeLog says that we
+	already got rid of all occurrences of code() but apparently we did
+	not.  Replace the remaining ones by calls to as.numeric().
+
 2003-08-06  Kurt Hornik  <Kurt.Hornik@wu-wien.ac.at>
 
 	* DESCRIPTION (Version): New version is 0.2-19.

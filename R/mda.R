@@ -1044,7 +1044,7 @@ function (x, y, w, degree = 1, monomial = FALSE, ...)
 function (x, g, colors, pch, add = FALSE, type = "p", ...) 
 {
     g <- as.factor(g)
-    cc <- codes(g)
+    cc <- as.numeric(g)
     np <- seq(levels(g))
     if (missing(colors)) 
         colors <- np + 1
@@ -1085,7 +1085,7 @@ function (object, x, type = c("fitted", "terms"), ...)
     ybar <- object$ybar
     np <- as.integer(length(ybar))
     eta <- matrix(double(n * np), n, np)
-    Type <- codes(object$type)
+    Type <- as.numeric(object$type)
     storage.mode(Type) <- "integer"
     storage.mode(x) <- "double"
     if (type == "fitted") {
