@@ -1,3 +1,12 @@
+2003-08-06  Kurt Hornik  <Kurt.Hornik@wu-wien.ac.at>
+
+	* DESCRIPTION (Version): New version is 0.2-19.
+
+	* man/gen.ridge.Rd: Rd markup.
+
+	* man/confusion.Rd: Move alias 'confusion.fda' over from 'fda.Rd'
+	as 'confusion.Rd' has explicit usage for it.
+
 2003-06-06  Kurt Hornik  <Kurt.Hornik@wu-wien.ac.at>
 
 	* DESCRIPTION (Version): New version is 0.2-18.

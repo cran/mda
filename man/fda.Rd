@@ -1,7 +1,6 @@
 \name{fda}
 \alias{fda}
 \alias{coef.fda}
-\alias{confusion.fda}
 \alias{plot.fda}
 \alias{print.fda}
 \title{Flexible Discriminant Analysis}

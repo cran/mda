@@ -2,6 +2,7 @@
 \alias{confusion}
 \alias{confusion.default}
 \alias{confusion.list}
+\alias{confusion.fda}
 \title{Confusion Matrices}
 \description{
   Compute the confusion matrix between two factors, or for an fda or

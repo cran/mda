@@ -10,7 +10,7 @@
 gen.ridge(x, y, weights, lambda=1, omega, df, \dots)
 }
 \arguments{
-  \item{x y weights}{the x and y matrix and possibly a weight vector.}
+  \item{x, y, weights}{the x and y matrix and possibly a weight vector.}
   \item{lambda}{the shrinkage penalty coefficient.}
   \item{omega}{a penalty object; omega is the eigendecomposition of
     the penalty matrix, and need not have full rank.  By default,
