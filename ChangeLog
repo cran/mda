@@ -1,3 +1,11 @@
+2001-10-27  Kurt Hornik  <Kurt.Hornik@ci.tuwien.ac.at>
+
+	* DESCRIPTION (Version): New version is 0.2-13.
+
+	* R/mda.R: predict.fda gave an error when the predicted classes
+	did not contain all possible classes.  Fix by Bj/orn-Helge Mevik
+	<bjorn-helge.mevik@matforsk.no>.
+
 2001-08-20  Kurt Hornik  <Kurt.Hornik@ci.tuwien.ac.at>
 
 	* DESCRIPTION (Version): New version is 0.2-12.

@@ -1169,7 +1169,12 @@ function (object, x, type = c("class", "variates", "posterior",
             pclass[l] <- i
             mindist[l] <- ndist[l]
         }
-        return(factor(pclass, labels = dimnames(means)[[1]]))
+        ## 2001-10-27: Need to provide levels or else if we get an error
+        ## if the predicted classes do no contain all possible classes.
+        ## Reported by Greg Jefferis <jefferis@stanford.edu>, fix by
+        ## Bj/orn-Helge Mevik <bjorn-helge.mevik@matforsk.no>.
+        return(factor(pclass, levels = seq(J),
+                      labels = dimnames(means)[[1]]))
     }, posterior = {
         pclass <- matrix(0, nrow(x), J)
         for (i in seq(J)) pclass[, i] <- exp(-0.5 * dist(x, means[i, 
