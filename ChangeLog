@@ -1,3 +1,7 @@
+2005-04-11  Kurt Hornik  <Kurt.Hornik@wu-wien.ac.at>
+
+	* src/dmarss.f (marsnew1): Correct double precision constants.
+
 2004-09-15  Kurt Hornik  <Kurt.Hornik@wu-wien.ac.at>
 
 	* DESCRIPTION (Version): New version is 0.2-26.
