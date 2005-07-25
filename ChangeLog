@@ -1,3 +1,15 @@
+2005-07-25  Kurt Hornik  <Kurt.Hornik@wu-wien.ac.at>
+
+	* DESCRIPTION (Version): New version is 0.2-28.
+
+	* R/mda.R:
+	man/predict.bruto.Rd:
+	man/predict.fda.Rd:
+	man/predict.mars.Rd:
+	man/predict.mda.Rd:
+	Rename second argument of predict methods to 'newdata'.
+	Patches kindly provided by Uwe Ligges.
+
 2005-04-11  Kurt Hornik  <Kurt.Hornik@wu-wien.ac.at>
 
 	* src/dmarss.f (marsnew1): Correct double precision constants.

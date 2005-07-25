@@ -5,11 +5,11 @@
   Classify observations in conjunction with \code{fda}.
 }
 \usage{
-\method{predict}{fda}(object, x, type, prior, dimension, \dots)
+\method{predict}{fda}(object, newdata, type, prior, dimension, \dots)
 }
 \arguments{
   \item{object}{an object of class \code{"fda"}.}
-  \item{x}{new data at which to make predictions.  If missing, the
+  \item{newdata}{new data at which to make predictions.  If missing, the
     training data is used.}
   \item{type}{kind of predictions: \code{type = "class"} (default)
     produces a fitted factor, \code{type = "variates"} produces a matrix
@@ -28,7 +28,7 @@
   component \code{fit} which is regression fit produced by the
   \code{method} argument to \code{fda}.  There should be a
   \code{predict} method for this object which is invoked.  This method
-  should itself take as input \code{object} and optionally \code{x}.
+  should itself take as input \code{object} and optionally \code{newdata}.
 }
 \seealso{
   \code{\link{fda}},

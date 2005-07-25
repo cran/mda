@@ -6,11 +6,11 @@
   by adaptive backfitting.
 }
 \usage{
-\method{predict}{bruto}(object, x, type=c("fitted", "terms"), \dots)
+\method{predict}{bruto}(object, newdata, type=c("fitted", "terms"), \dots)
 }
 \arguments{
   \item{object}{a fitted bruto object}
-  \item{x}{values at which predictions are to be made.}
+  \item{newdata}{values at which predictions are to be made.}
   \item{type}{if type is \code{"fitted"}, the fitted values are
     returned.  If type is \code{"terms"}, a list of fitted terms is
     returned, each with an \code{x} and \code{y} component.  These can

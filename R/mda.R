@@ -1067,54 +1067,54 @@ function (x, ...)
     }
 }
 "predict.bruto" <-
-function (object, x, type = c("fitted", "terms"), ...)
+function (object, newdata, type = c("fitted", "terms"), ...)
 {
-    if (missing(x)) {
+    if (missing(newdata)) {
         z <- fitted(object)
         if (is.null(z)) 
-            stop("need to supply x")
+            stop("need to supply newdata")
         else return(z)
     }
-    d <- as.integer(dim(x))
+    d <- as.integer(dim(newdata))
     type <- match.arg(type)
     nq <- d[2]
     n <- d[1]
     if (nq != length(object$df)) 
-        stop(paste("x should have the same number of columns",
+        stop(paste("newdata should have the same number of columns",
                    "as the df component of object"))
     ybar <- object$ybar
     np <- as.integer(length(ybar))
     eta <- matrix(double(n * np), n, np)
     Type <- as.numeric(object$type)
     storage.mode(Type) <- "integer"
-    storage.mode(x) <- "double"
+    storage.mode(newdata) <- "double"
     if (type == "fitted") {
-        .Fortran("pbruto", x, n, nq, ybar, np, object$knot, object$nkmax, 
+        .Fortran("pbruto", newdata, n, nq, ybar, np, object$knot, object$nkmax, 
             object$nk, object$coef, Type, object$xrange, eta = eta, 
             eta, PACKAGE = "mda")$eta
     }
     else {
         ob <- as.list(seq(nq))
-        names(ob) <- dimnames(x)[[2]]
+        names(ob) <- dimnames(newdata)[[2]]
         knot <- object$knot
         nk <- object$nk
         xrange <- object$xrange
         coef <- object$coef
         fitm <- matrix(double(n * np), n, np)
-        dimnames(fitm) <- list(dimnames(x)[[1]], names(ybar))
+        dimnames(fitm) <- list(dimnames(newdata)[[1]], names(ybar))
         for (i in seq(nq)) {
             if (Type[i] > 1) 
-                fit <- .Fortran("psspl2", x[, i], n, np, knot[, 
+                fit <- .Fortran("psspl2", newdata[, i], n, np, knot[, 
                   i], nk[i], xrange[, i], coef[, i], coef[, i], 
                   fit = fitm, as.integer(0), Type[i], PACKAGE = "mda")$fit
             else fit <- fitm
-            ob[[i]] <- list(x = x[, i], y = fit)
+            ob[[i]] <- list(x = newdata[, i], y = fit)
         }
         ob
     }
 }
 "predict.fda" <-
-function (object, x, type = c("class", "variates", "posterior", 
+function (object, newdata, type = c("class", "variates", "posterior", 
     "hierarchical", "distances"), prior, dimension = J - 1, ...)
 {
     dist <- function(x, mean, m = ncol(mean)) (scale(x, mean, 
@@ -1135,21 +1135,21 @@ function (object, x, type = c("class", "variates", "posterior",
         }
     }
     else dimension <- min(max(dimension), k)
-    if (missing(x)) 
+    if (missing(newdata)) 
         y <- predict(object$fit)
     else {
-        if (inherits(x, "data.frame") || is.list(x)) {
+        if (inherits(newdata, "data.frame") || is.list(newdata)) {
             Terms <- delete.response(terms(object))
             attr(Terms, "intercept") <- 0
-            x <- model.matrix(Terms, x)
+            newdata <- model.matrix(Terms, newdata)
         }
-        y <- predict(object$fit, x)
+        y <- predict(object$fit, newdata)
     }
     y <- y %*% object$theta[, seq(dimension), drop = FALSE]
     lambda <- object$values
     alpha <- sqrt(lambda[seq(dimension)])
     sqima <- sqrt(1 - lambda[seq(dimension)])
-    x <- scale(y, FALSE, sqima * alpha)
+    newdata <- scale(y, FALSE, sqima * alpha)
     if (missing(prior)) 
         prior <- object$prior
     else {
@@ -1157,13 +1157,13 @@ function (object, x, type = c("class", "variates", "posterior",
             stop("innappropriate prior")
     }
     means <- means[, seq(dimension), drop = FALSE]
-    switch(type, variates = return(x), class = {
-        n <- nrow(x)
+    switch(type, variates = return(newdata), class = {
+        n <- nrow(newdata)
         prior <- 2 * log(prior)
-        mindist <- dist(x, means[1, ], dimension) - prior[1]
+        mindist <- dist(newdata, means[1, ], dimension) - prior[1]
         pclass <- rep(1, n)
         for (i in seq(2, J)) {
-            ndist <- dist(x, means[i, ], dimension) - prior[i]
+            ndist <- dist(newdata, means[i, ], dimension) - prior[i]
             l <- ndist < mindist
             pclass[l] <- i
             mindist[l] <- ndist[l]
@@ -1175,10 +1175,10 @@ function (object, x, type = c("class", "variates", "posterior",
         return(factor(pclass, levels = seq(J),
                       labels = dimnames(means)[[1]]))
     }, posterior = {
-        pclass <- matrix(0, nrow(x), J)
-        for (i in seq(J)) pclass[, i] <- exp(-0.5 * dist(x, means[i, 
+        pclass <- matrix(0, nrow(newdata), J)
+        for (i in seq(J)) pclass[, i] <- exp(-0.5 * dist(newdata, means[i, 
             ], dimension)) * prior[i]
-        dimnames(pclass) <- list(dimnames(x)[[1]], dimnames(means)[[1]])
+        dimnames(pclass) <- list(dimnames(newdata)[[1]], dimnames(means)[[1]])
         return(pclass/drop(pclass %*% rep(1, J)))
     }, hierarchical = {
         prior <- 2 * log(prior)
@@ -1187,11 +1187,11 @@ function (object, x, type = c("class", "variates", "posterior",
         for (ad in seq(along = dimension.set)) {
             d <- dimension.set[ad]
             dd <- seq(d)
-            mindist <- dist(x[, dd, drop = FALSE], means[1, dd, drop = FALSE], 
+            mindist <- dist(newdata[, dd, drop = FALSE], means[1, dd, drop = FALSE], 
                 d) - prior[1]
-            pclass <- rep(1, nrow(x))
+            pclass <- rep(1, nrow(newdata))
             for (i in seq(2, J)) {
-                ndist <- dist(x[, dd, drop = FALSE], means[i, dd, 
+                ndist <- dist(newdata[, dd, drop = FALSE], means[i, dd, 
                   drop = FALSE], d) - prior[i]
                 l <- ndist < mindist
                 pclass[l] <- i
@@ -1200,39 +1200,39 @@ function (object, x, type = c("class", "variates", "posterior",
             levels(pclass) <- dimnames(means)[[1]]
             Pclass[[ad]] <- pclass
         }
-        rownames <- dimnames(x)[[1]]
+        rownames <- dimnames(newdata)[[1]]
         if (is.null(rownames)) 
-            rownames <- paste(seq(nrow(x)))
+            rownames <- paste(seq(nrow(newdata)))
         return(structure(Pclass, class = "data.frame", row.names = rownames, 
             dimensions = dimension.set))
     }, distances = {
-        dclass <- matrix(0, nrow(x), J)
-        for (i in seq(J)) dclass[, i] <- dist(x, means[i, ], 
+        dclass <- matrix(0, nrow(newdata), J)
+        for (i in seq(J)) dclass[, i] <- dist(newdata, means[i, ], 
             dimension)
-        dimnames(dclass) <- list(dimnames(x)[[1]], dimnames(means)[[1]])
+        dimnames(dclass) <- list(dimnames(newdata)[[1]], dimnames(means)[[1]])
         return(dclass)
     })
 }
 "predict.gen.ridge" <-
-function (object, x, ...) 
+function (object, newdata, ...) 
 {
-    if (missing(x)) 
+    if (missing(newdata)) 
         fitted(object)
-    else scale(x, object$xmeans, FALSE) %*% object$coef
+    else scale(newdata, object$xmeans, FALSE) %*% object$coef
 }
 "predict.mars" <-
-function (object, x, ...) 
+function (object, newdata, ...) 
 {
-    if (missing(x)) {
+    if (missing(newdata)) {
         z <- fitted(object)
         if (is.null(z)) 
-            stop("need to supply x")
+            stop("need to supply newdata")
         else return(z)
     }
-    model.matrix.mars(object, x) %*% object$coefficients
+    model.matrix.mars(object, newdata) %*% object$coefficients
 }
 "predict.mda" <-
-function (object, x, type = c("class", "variates", "posterior", 
+function (object, newdata, type = c("class", "variates", "posterior", 
     "hierarchical", "weights"), prior = NULL, dimension = R - 
     1, g, ...) 
 {
@@ -1253,10 +1253,10 @@ function (object, x, type = c("class", "variates", "posterior",
         names(Pclass) <- paste("D", dimension.set, sep = "")
         for (ad in seq(along = dimension.set)) {
             d <- dimension.set[ad]
-            Pclass[[ad]] <- if (missing(x)) 
+            Pclass[[ad]] <- if (missing(newdata)) 
                 Recall(object, prior = prior, dimension = d, 
                   ...)
-            else Recall(object, x, prior = prior, dimension = d, 
+            else Recall(object, newdata, prior = prior, dimension = d, 
                 ...)
         }
         rownames <- names(Pclass[[1]])
@@ -1287,16 +1287,16 @@ function (object, x, type = c("class", "variates", "posterior",
         }
         rowm
     }
-    dmat <- if (missing(x)) 
+    dmat <- if (missing(newdata)) 
         predict.fda(object, type = "distances", dimension = dimension, 
             ...)
-    else predict.fda(object, x, type = "distances", dimension = dimension, 
+    else predict.fda(object, newdata, type = "distances", dimension = dimension, 
         ...)
     Assign <- object$assign
     sub.prior <- object$sub.prior
     J <- length(Assign)
     if (type == "weights") {
-        if (missing(x)) 
+        if (missing(newdata)) 
             return(object$weights)
         g <- as.numeric(g)
         weights <- Assign
@@ -1320,17 +1320,17 @@ function (object, x, type = c("class", "variates", "posterior",
         rep(1, J)))
 }
 "predict.polyreg" <-
-function (object, x, ...) 
+function (object, newdata, ...) 
 {
-    if (missing(x)) {
+    if (missing(newdata)) {
         z <- fitted(object)
         if (is.null(z)) 
-            stop("need to supply x")
+            stop("need to supply newdata")
         else return(z)
     }
     degree <- object$degree
     monomial <- object$monomial
-    polybasis(x, degree, monomial) %*% object$coef
+    polybasis(newdata, degree, monomial) %*% object$coef
 }
 "print.fda" <-
 function (x, ...) 
