@@ -224,7 +224,7 @@ function (object, data, ...)
     attr(Terms, "intercept") <- 0
     m <- model.frame(Terms, data)
     x <- model.matrix(Terms, m)
-    g <- model.extract(m, response)
+    g <- model.extract(m, "response")
     confusion.default(predict(object, x, ...), g)
 }
 "confusion.list" <-
@@ -265,7 +265,7 @@ function (formula = formula(data), data = sys.frame(sys.parent()),
         0)]
     m <- eval(m, sys.frame(sys.parent()))
     Terms <- attr(m, "terms")
-    g <- model.extract(m, response)
+    g <- model.extract(m, "response")
     attr(Terms, "intercept") <- 0
     x <- model.matrix(Terms, m)
     dd <- dim(x)
@@ -309,7 +309,7 @@ function (formula = formula(data), data = sys.frame(sys.parent()),
     if (dimension == 0) {
         warning("degenerate problem; no discrimination")
         return(structure(list(dimension = 0, fit = fit, call = this.call), 
-            class = "fda"))
+                         class = "fda"))
     }
     thetan <- thetan[, seq(dimension), drop = FALSE]
     pe <- pe[seq(dimension)]
@@ -610,7 +610,7 @@ function(formula = formula(data), data = sys.frame(sys.parent()),
     m <- m[match(names(m), c("", "formula", "data"), 0)]
     m <- eval(m, sys.frame(sys.parent()))
     Terms <- attr(m, "terms")
-    g <- model.extract(m, response)
+    g <- model.extract(m, "response")
     attr(Terms, "intercept") <- 0
     x <- model.matrix(Terms, m)
     dd <- dim(x)
@@ -910,7 +910,7 @@ function (x, data, g, coords = c(1, 2), group = c("true",
         x <- model.matrix(ff, m)
         vars <- predict(object, x, type = "var")
         if (group == "true") 
-            g <- model.extract(m, response)
+            g <- model.extract(m, "response")
         else g <- predict(object, x)
     }
     means <- object$means
@@ -1402,8 +1402,9 @@ function (object, sub.df = NULL, tot.df = NULL, ...)
     dimension <- min(dimension, sum(lambda > .Machine$double.eps))
     if (dimension == 0) {
         warning("degenerate problem; no discrimination")
-        return(structure(list(dimension = 0, fit = fit, call = this.call), 
-            class = "fda"))
+        return(structure(list(dimension = 0, fit = object$fit,
+                              call = object$call), 
+                         class = "fda"))
     }
     thetan <- thetan[, seq(dimension), drop = FALSE]
     pe <- pe[seq(dimension)]
