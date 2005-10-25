@@ -1,0 +1,24 @@
+useDynLib("mda")
+
+export("bruto",
+       "confusion",
+       "fda",
+       "gen.ridge",
+       "mars", "mda", "mda.start",
+       "polyreg",
+       "softmax")
+
+S3method("coef", "fda")
+S3method("confusion", "default")
+S3method("confusion", "fda")
+S3method("confusion", "list")
+S3method("model.matrix", "mars")
+S3method("plot", "fda")
+S3method("predict", "bruto")
+S3method("predict", "fda")
+S3method("predict", "gen.ridge")
+S3method("predict", "mars")
+S3method("predict", "mda")
+S3method("predict", "polyreg")
+S3method("print", "fda")
+S3method("print", "mda")
