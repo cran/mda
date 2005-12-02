@@ -1,3 +1,10 @@
+2005-12-02  Kurt Hornik  <Kurt.Hornik@wu-wien.ac.at>
+
+	* DESCRIPTION (Version): New version is 0.3-1.
+
+	* man/mars.Rd: Additive => Adaptive (spotted by Gregory Dalhoff
+	<gkdalhoff@compuserve.com>).
+
 2005-10-24  Kurt Hornik  <Kurt.Hornik@wu-wien.ac.at>
 
 	* DESCRIPTION (Version): New version is 0.3-0.

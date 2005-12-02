@@ -1,8 +1,8 @@
 \name{mars}
 \alias{mars}
-\title{Multivariate Additive Regression Splines}
+\title{Multivariate Adaptive Regression Splines}
 \description{
-  Multivariate additive regression splines.
+  Multivariate adaptive regression splines.
 }
 \usage{
 mars(x, y, w, wp, degree, nk, penalty, thresh, prune, trace.mars,
@@ -74,8 +74,9 @@ mars(x, y, w, wp, degree, nk, penalty, thresh, prune, trace.mars,
   Trevor Hastie and Robert Tibshirani
 }
 \references{
-  J. Friedman, ``Multivariate Additive Regression Splines''.
-  \emph{Annals of Statistics}, 1991.
+  J. Friedman, ``Multivariate Adaptive Regression Splines'' (with
+  discussion) (1991). 
+  \emph{Annals of Statistics}, \bold{19}/1, 1--141.
 }
 \seealso{
   \code{\link{predict.mars}},
