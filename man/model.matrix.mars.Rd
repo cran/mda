@@ -3,7 +3,7 @@
 \title{Produce a Design Matrix from a `mars' Object}
 \description{Produce a design matrix from a `mars' object.}
 \usage{
-model.matrix.mars(object, x, which, full = FALSE, \dots)
+\method{model.matrix}{mars}(object, x, which, full = FALSE, \dots)
 }
 \arguments{
   \item{object}{a mars object.}
@@ -23,5 +23,4 @@ model.matrix.mars(object, x, which, full = FALSE, \dots)
   \code{\link{mars}},
   \code{\link{predict.mars}}
 }
-% Converted by Sd2Rd version 0.3-3.
 \keyword{models}
