@@ -1,3 +1,10 @@
+2009-01-04  Kurt Hornik  <Kurt.Hornik@wu-wien.ac.at>
+
+	* DESCRIPTION (Version): New version is 0.3-4.
+
+	* man/mars.Rd: Documentation enhancements suggested by Stephen
+	Milborrow <milbo@sonic.net>.
+
 2008-12-19  Kurt Hornik  <Kurt.Hornik@wu-wien.ac.at>
 
 	* DESCRIPTION (Version): New version is 0.3-3.

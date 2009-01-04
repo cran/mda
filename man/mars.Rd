@@ -13,7 +13,7 @@ mars(x, y, w, wp, degree, nk, penalty, thresh, prune, trace.mars,
   \item{y}{a vector containing the response variable, or in the case of
     multiple responses, a matrix whose columns are the response values
     for each variable.}
-  \item{w}{an optional vector of observation weights.}
+  \item{w}{an optional vector of observation weights (currently ignored).}
   \item{wp}{an optional vector of response weights.}
   \item{degree}{an optional integer specifying maximum interaction
     degree (default is 1).}
@@ -80,7 +80,11 @@ mars(x, y, w, wp, degree, nk, penalty, thresh, prune, trace.mars,
 }
 \seealso{
   \code{\link{predict.mars}},
-  \code{\link{model.matrix.mars}}
+  \code{\link{model.matrix.mars}}.
+
+  Package \pkg{earth} also provides multivariate adaptive regression
+  spline models based on the Hastie/Tibshirani mars code in package
+  \pkg{mda}, adding some extra features.
 }
 \examples{
 data(trees)
