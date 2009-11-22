@@ -17,7 +17,7 @@
     matrix of posterior probabilities (based on a gaussian assumption),
     and \code{type = "hierarchical"} produces the predicted class in
     sequence for models of all dimensions.}
-  \item{prior}{the prior probabability vector for each class; the
+  \item{prior}{the prior probability vector for each class; the
     default is the training sample proportions.}
   \item{dimension}{the dimension of the space to be used, no larger
     than the dimension component  of \code{object}.}

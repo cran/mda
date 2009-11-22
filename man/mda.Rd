@@ -70,7 +70,7 @@ mda(formula, data, subclasses, sub.df, tot.df, dimension, eps,
   The object has the following components:
   \item{percent.explained}{the percent between-group variance explained
     by each dimension (relative to the total explained.)}
-  \item{values}{optimal scaling regresssion sum-of-squares for each
+  \item{values}{optimal scaling regression sum-of-squares for each
     dimension (see reference).}
   \item{means}{subclass means in the discriminant space.  These are also
     scaled versions of the final theta's or class scores, and can be
@@ -81,7 +81,7 @@ mda(formula, data, subclasses, sub.df, tot.df, dimension, eps,
   \item{dimension}{dimension of discriminant space.}
   \item{sub.prior}{subclass membership priors, computed in the fit.  No
     effort is currently spent in trying to keep these above a threshold.}
-  \item{prior}{class proprotions for the training data.}
+  \item{prior}{class proportions for the training data.}
   \item{fit}{fit object returned by \code{method}.}
   \item{call}{the call that created this object (allowing it to be
     \code{update}-able).}
@@ -90,7 +90,7 @@ mda(formula, data, subclasses, sub.df, tot.df, dimension, eps,
     each member of the training set; see the weights argument.}
   \item{assign.theta}{a pointer list which identifies which elements of
     certain lists belong to individual classes.}
-  \item{deviance}{The multinomial log-liklihood of the fit.  Even though
+  \item{deviance}{The multinomial log-likelihood of the fit.  Even though
     the full log-likelihood drives the iterations, we cannot in general
     compute it because of the flexibility of the \code{method} used.
     The deviance can increase with the iterations, but generally does not.}

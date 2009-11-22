@@ -47,7 +47,7 @@ fda(formula, data, weights, theta, dimension, eps, method,
   The object has the following components:
   \item{percent.explained}{the percent between-group variance explained
     by each dimension (relative to the total explained.)}
-  \item{values}{optimal scaling regresssion sum-of-squares for each
+  \item{values}{optimal scaling regression sum-of-squares for each
     dimension (see reference).  The usual discriminant analysis
     eigenvalues are given by \code{values / (1-values)}, which are used
     to define \code{percent.explained}.}
@@ -58,7 +58,7 @@ fda(formula, data, weights, theta, dimension, eps, method,
   \item{theta.mod}{(internal) a class scoring matrix which allows
     \code{predict} to work properly.}
   \item{dimension}{dimension of discriminant space.}
-  \item{prior}{class proprotions for the training data.}
+  \item{prior}{class proportions for the training data.}
   \item{fit}{fit object returned by \code{method}.}
   \item{call}{the call that created this object (allowing it to be
     \code{update}-able)}

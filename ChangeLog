@@ -1,3 +1,17 @@
+2009-11-22  Kurt Hornik  <Kurt.Hornik@wu.ac.at>
+
+	* DESCRIPTION (Version): New version is 0.3-5.
+
+	* man/bruto.Rd:
+	* man/mars.Rd:
+	* man/mda.Rd:
+	* man/predict.fda.Rd:
+	* man/predict.mda.Rd:
+	Improve spelling.
+
+	* R/mda.R ("mda.start"):
+	Remove unnecessary run-time loading.
+
 2009-01-04  Kurt Hornik  <Kurt.Hornik@wu-wien.ac.at>
 
 	* DESCRIPTION (Version): New version is 0.3-4.

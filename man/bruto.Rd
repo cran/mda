@@ -32,7 +32,7 @@ bruto(x, y, w, wp, dfmax, cost, maxit.select, maxit.backfit,
   \item{start.linear}{logical flag.  If \code{TRUE} (default), the model
     starts with the linear fit.}
   \item{fit.object}{This the object returned by \code{bruto()}; if
-    supplied, the same model is fit to the presumeably new \code{y}.}
+    supplied, the same model is fit to the presumably new \code{y}.}
   \item{\dots}{further arguments to be passed to or from methods.}
 }
 \value{

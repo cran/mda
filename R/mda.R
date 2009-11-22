@@ -780,8 +780,6 @@ function (x, g, subclasses = 3, trace.mda.start = FALSE, start.method = c("kmean
     "lvq"), tries = 5, criterion = c("misclassification", "deviance"), 
     ...) 
 {
-    if (!require(class, quietly = TRUE)) 
-        stop("mda() requires package `class'")
     start.method <- match.arg(start.method)
     criterion <- match.arg(criterion)
     name.criterion <- switch(criterion, misclassification = "Misclassification Error", 

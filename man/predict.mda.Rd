@@ -19,7 +19,7 @@
     assumption), \code{type = "hierarchical"} produces the predicted
     class in sequence for models of dimensions specified by
     \code{dimension} argument.}
-  \item{prior}{the prior probabability vector for each class; the
+  \item{prior}{the prior probability vector for each class; the
     default is the training sample proportions.}
   \item{dimension}{the dimension of the space to be used, no larger
     than the dimension component of \code{object}, and in general less
