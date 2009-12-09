@@ -24,12 +24,8 @@ gen.ridge(x, y, weights, lambda=1, omega, df, \dots)
   according to omega.  See the function definition for further details.
   No functions are provided for producing one dimensional penalty
   objects (omega).
-  %%FIXME
-  %% \code{\link{laplacian}()} creates a two dimensional penalty
-  %% object, suitable for (small) images.
+  \code{\link{laplacian}()} creates a two-dimensional penalty
+  object, suitable for (small) images.
 }
-%% \seealso{
-%%   \code{\link{laplacian}}
-%% }
-% Converted by Sd2Rd version 0.3-3.
+\seealso{\code{\link{laplacian}}}
 \keyword{regression}

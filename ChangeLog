@@ -1,3 +1,29 @@
+2009-12-09 Trevor Hastie <hastie@stanford.edu>
+	* DESCRIPTION (Version): New version is 0.4-1.
+
+	* R/plot.fda
+	* R/fda
+	* R/mda
+
+	Small changes in behavior
+	
+	* R/df.gold
+	* R/gen.ridge
+	* R/laplacian
+
+	* data/ESL.mixture
+	* man/ESL.mixture
+
+	New data object added
+
+	Major changes and new functions, to make df work all the time, and laplacian
+
+	* man/plot.fda
+	* man/laplacian
+
+	added
+	
+	
 2009-11-22  Kurt Hornik  <Kurt.Hornik@wu.ac.at>
 
 	* DESCRIPTION (Version): New version is 0.3-5.

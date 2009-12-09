@@ -67,7 +67,7 @@ bruto(x, y, w, wp, dfmax, cost, maxit.select, maxit.backfit,
 
   Trevor Hastie, Rob Tibshirani and Andreas Buja
   ``Flexible Discriminant Analysis by Optimal Scoring''
-  AT&T Bell Laboratories Technical Memorandum, February 1993.
+  JASA 1994, 89, 1255-1270.
 }
 \seealso{
   \code{\link{predict.bruto}}

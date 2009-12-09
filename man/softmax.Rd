@@ -20,6 +20,7 @@ softmax(x, gap = FALSE)
   \code{\link{predict.fda}},
   \code{\link{confusion}},
   \code{\link{fda}} 
+  \code{\link{mda}} 
 }
 \examples{
 data(iris)

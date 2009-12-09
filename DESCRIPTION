@@ -1,14 +1,14 @@
 Package: mda
-Version: 0.3-5
-Date: 2009-11-22
-Author: S original by Trevor Hastie & Robert Tibshirani.  R port by
-        Friedrich Leisch, Kurt Hornik and Brian D. Ripley.
-Maintainer: Kurt Hornik <Kurt.Hornik@R-project.org>
+Version: 0.4-1
+Date: 2009-12-09
+Author: S original by Trevor Hastie & Robert Tibshirani. Original R
+        port by Friedrich Leisch, Kurt Hornik and Brian D. Ripley.
+Maintainer: Trevor Hastie <hastie@stanford.edu>
 Description: Mixture and flexible discriminant analysis, multivariate
-        additive regression splines (MARS), BRUTO, ...
+        adaptive regression splines (MARS), BRUTO, ...
 Title: Mixture and flexible discriminant analysis
 Depends: R (>= 1.9.0), stats, class
 License: GPL-2
-Packaged: 2009-11-22 18:02:11 UTC; hornik
 Repository: CRAN
-Date/Publication: 2009-11-22 19:06:47
+Date/Publication: 2009-12-10 19:56:38
+Packaged: 2009-12-09 14:21:47 UTC; hastie

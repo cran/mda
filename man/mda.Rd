@@ -53,7 +53,7 @@ mda(formula, data, subclasses, sub.df, tot.df, dimension, eps,
   \item{keep.fitted}{a logical variable, which determines whether the
     (sometimes large) component \code{"fitted.values"} of the \code{fit}
     component of the returned \code{mda} object should be kept.  The
-    default is \code{TRUE} if \code{n * dimension < 1000}.} 
+    default is \code{TRUE} if \code{n * dimension < 5000}.} 
   \item{trace}{if \code{TRUE}, iteration information is printed.  Note
     that the deviance reported is for the posterior class likelihood,
     and not the full likelihood, which is used to drive the EM algorithm
@@ -109,10 +109,6 @@ mda(formula, data, subclasses, sub.df, tot.df, dimension, eps,
   additional arguments which can be passed in via the \code{\dots}
   argument to \code{mda}.  See the documentation for \code{mda.start}.
 }
-\note{
-  This software it is not well-tested, we would like to hear of any
-  bugs.
-}
 \author{
   Trevor Hastie and Robert Tibshirani
 }
@@ -131,11 +127,11 @@ mda(formula, data, subclasses, sub.df, tot.df, dimension, eps,
   ``Flexible Disriminant Analysis by Optimal Scoring'' by Hastie,
   Tibshirani and Buja, 1994, JASA, 1255-1270.
 
-  ``Penalized Discriminant Analysis'' by Hastie, Buja and Tibshirani,
-  Annals of Statistics, 1995 (in press).
+  ``Penalized Discriminant Analysis'' by Hastie, Buja and Tibshirani, 1995,
+  Annals of Statistics, 73-102
     
   ``Discriminant Analysis by Gaussian Mixtures'' by Hastie and
-  Tibshirani, 1994, JRSS-B (in press).
+  Tibshirani, 1996, JRSS-B, 155-176.
 }
 \examples{
 data(iris)

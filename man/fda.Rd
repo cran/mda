@@ -1,7 +1,6 @@
 \name{fda}
 \alias{fda}
 \alias{coef.fda}
-\alias{plot.fda}
 \alias{print.fda}
 \title{Flexible Discriminant Analysis}
 \description{
@@ -35,7 +34,7 @@ fda(formula, data, weights, theta, dimension, eps, method,
   \item{keep.fitted}{a logical variable, which determines whether the
     (sometimes large) component \code{"fitted.values"} of the \code{fit}
     component of the returned fda object should be kept.  The default is
-    \code{TRUE} if \code{n * dimension < 1000}.}
+    \code{TRUE} if \code{n * dimension < 5000}.}
   \item{\dots}{additional arguments to \code{method}.}
 }
 \value{
@@ -75,14 +74,12 @@ fda(formula, data, weights, theta, dimension, eps, method,
   documentation for \code{\link{predict.fda}} for further requirements
   of \code{method}.
 }
-\note{
-  This software it is not well-tested, we would like to hear of any
-  bugs.}
 \author{
   Trevor Hastie and Robert Tibshirani
 }
 \seealso{
   \code{\link{predict.fda}},
+  \code{\link{plot.fda}},
   \code{\link{mars}},
   \code{\link{bruto}},
   \code{\link{polyreg}},
@@ -94,8 +91,8 @@ fda(formula, data, weights, theta, dimension, eps, method,
   ``Flexible Disriminant Analysis by Optimal Scoring''  by Hastie,
   Tibshirani and Buja, 1994, JASA, 1255-1270.
 
-  ``Penalized Discriminant Analysis'' by Hastie, Buja and Tibshirani,
-  Annals of Statistics, 1995 (in press).
+  ``Penalized Discriminant Analysis'' by Hastie, Buja and Tibshirani, 1995,
+  Annals of Statistics, 73-102.
 }
 \examples{
 data(iris)

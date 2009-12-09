@@ -3,7 +3,7 @@ useDynLib("mda")
 export("bruto",
        "confusion",
        "fda",
-       "gen.ridge",
+       "gen.ridge", "laplacian",
        "mars", "mda", "mda.start",
        "polyreg",
        "softmax")
