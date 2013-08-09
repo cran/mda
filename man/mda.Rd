@@ -132,6 +132,10 @@ mda(formula, data, subclasses, sub.df, tot.df, dimension, eps,
     
   ``Discriminant Analysis by Gaussian Mixtures'' by Hastie and
   Tibshirani, 1996, JRSS-B, 155-176.
+  
+  ``Elements of Statisical Learning - Data Mining, Inference and
+  Prediction'' (2nd edition, Chapter 12) by Hastie, Tibshirani and
+  Friedman, 2009, Springer
 }
 \examples{
 data(iris)

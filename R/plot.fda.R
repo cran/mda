@@ -49,8 +49,8 @@ plot.fda <-
   for (ii in seq(nrow(coords))) {
     coord.pair <- coords[ii, ]
     plot(rbind(vars[, coord.pair], means[, coord.pair]), 
-         ..., type = "n", xlab = paste("Discriminant Var", 
-                            coord.pair[1]), ylab = paste("Discriminant Var", 
+         ..., type = "n", xlab = paste("Canonical Var", 
+                            coord.pair[1]), ylab = paste("Canonical Var", 
                                               coord.pair[2]), main = paste("Discriminant Plot for", 
                                                                 group, "classes"))
     for (i in np) {

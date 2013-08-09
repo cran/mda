@@ -434,9 +434,9 @@ c Need var calculated to do drop-one calculations from t values.
       nm=nm+1
 23154 continue
 23152 continue
-      tem=-(1d0/(n*nm))*dlog(1d0 - 5d-2)
+      tem=-(1d0/(p*nm))*dlog(1d0 - 5d-2)
       minspan= -1d0*(dlog(tem)/dlog(2d0))/2.5
-      tem=(5d-2)/n
+      tem=(5d-2)/p
       iendspan=3d0-dlog(tem)/dlog(2d0)
       if(.not.(termlen(m).lt. maxorder))goto 23156
       do 23158 v=1,p 

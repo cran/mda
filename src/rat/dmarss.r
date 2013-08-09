@@ -645,11 +645,13 @@ do m=1,nterms {
   if(bx(jjj,m).gt.0) {nm=nm+1}
  }
 
- tem=-(1d0/(n*nm))*dlog(1d0 - 5d-2)
+# tem=-(1d0/(n*nm))*dlog(1d0 - 5d-2)  n should be p thanks to  Gints Jekabsons/Stephen Milborrow
+ tem=-(1d0/(p*nm))*dlog(1d0 - 5d-2)
 
  minspan= -1d0*(dlog(tem)/dlog(2d0))/2.5
 
- tem=(5d-2)/n
+# tem=(5d-2)/n   n should be p thanks to  Gints Jekabsons/Stephen Milborrow
+ tem=(5d-2)/p
  iendspan=3d0-dlog(tem)/dlog(2d0)
 
 # # write(6,*) "minspan,iendspan",minspan,iendspan

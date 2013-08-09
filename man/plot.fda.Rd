@@ -1,7 +1,7 @@
 \name{plot.fda}
 \alias{plot.fda}
 \title{Plot for Flexible Discriminant Analysis}
-\description{Plot in discriminant coordinates a \code{fda} or (by inheritance) a \code{mda} object.
+\description{Plot in discriminant (canonical) coordinates a \code{fda} or (by inheritance) a \code{mda} object.
 }
 \usage{
 \method{plot}{fda}(x, data, coords, group, colors, pch, mcolors, mpch, pcex, mcex, \dots)

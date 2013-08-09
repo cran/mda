@@ -25,9 +25,10 @@ function (object, newdata, type = c("class", "variates", "posterior",
     else {
         if (inherits(newdata, "data.frame") || is.list(newdata)) {
             Terms <- delete.response(terms(object))
-            attr(Terms, "intercept") <- 0
+#            attr(Terms, "intercept") <- 0
             newdata <- model.matrix(Terms, newdata)
-        }
+            if(attr(Terms,"intercept"))newdata=newdata[,-1]
+          }
         y <- predict(object$fit, newdata)
     }
     y <- y %*% object$theta[, seq(dimension), drop = FALSE]

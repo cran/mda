@@ -13,7 +13,7 @@
     training data is used.}
   \item{type}{kind of predictions: \code{type = "class"} (default)
     produces a fitted factor, \code{type = "variates"} produces a matrix
-    of discriminant variables, \code{type = "posterior"} produces a
+    of discriminant (canonical) variables, \code{type = "posterior"} produces a
     matrix of posterior probabilities (based on a gaussian assumption),
     and \code{type = "hierarchical"} produces the predicted class in
     sequence for models of all dimensions.}

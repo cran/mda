@@ -7,7 +7,7 @@ function(formula = formula(data), data = sys.frame(sys.parent()),
          ...) 
 {
     this.call <- match.call()
-    m <- match.call(expand = FALSE)
+    m <- match.call(expand.dots = FALSE)
     m[[1]] <- as.name("model.frame")
     m <- m[match(names(m), c("", "formula", "data"), 0)]
     m <- eval(m, sys.frame(sys.parent()))

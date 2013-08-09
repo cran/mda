@@ -1,6 +1,7 @@
 useDynLib("mda")
 
-export("bruto",
+importFrom(utils,head,tail,packageDescription)
+export("bruto", "coef.fda",
        "confusion",
        "fda",
        "gen.ridge", "laplacian",

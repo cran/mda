@@ -1,6 +1,5 @@
 \name{fda}
 \alias{fda}
-\alias{coef.fda}
 \alias{print.fda}
 \title{Flexible Discriminant Analysis}
 \description{
@@ -93,6 +92,10 @@ fda(formula, data, weights, theta, dimension, eps, method,
 
   ``Penalized Discriminant Analysis'' by Hastie, Buja and Tibshirani, 1995,
   Annals of Statistics, 73-102.
+
+  ``Elements of Statisical Learning - Data Mining, Inference and
+  Prediction'' (2nd edition, Chapter 12) by Hastie, Tibshirani and
+  Friedman, 2009, Springer
 }
 \examples{
 data(iris)

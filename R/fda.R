@@ -4,15 +4,16 @@ function (formula = formula(data), data = sys.frame(sys.parent()),
     method = polyreg, keep.fitted = (n * dimension < 5000), ...) 
 {
     this.call <- match.call()
-    m <- match.call(expand = FALSE)
+    m <- match.call(expand.dots = FALSE)
     m[[1]] <- as.name("model.frame")
     m <- m[match(names(m), c("", "formula", "data", "weights"), 
         0)]
-    m <- eval(m, sys.frame(sys.parent()))
+    m <- eval(m, parent.frame())
     Terms <- attr(m, "terms")
     g <- model.extract(m, "response")
-    attr(Terms, "intercept") <- 0
+#    attr(Terms, "intercept") <- 0 This fails if a factor is in the model formula
     x <- model.matrix(Terms, m)
+    if(attr(Terms, "intercept"))x=x[,-1]
     dd <- dim(x)
     n <- dd[1]
     weights <- model.extract(m, weights)
