@@ -13,7 +13,7 @@ function (formula = formula(data), data = sys.frame(sys.parent()),
     g <- model.extract(m, "response")
 #    attr(Terms, "intercept") <- 0 This fails if a factor is in the model formula
     x <- model.matrix(Terms, m)
-    if(attr(Terms, "intercept"))x=x[,-1]
+    if(attr(Terms, "intercept"))x=x[,-1,drop=FALSE]
     dd <- dim(x)
     n <- dd[1]
     weights <- model.extract(m, weights)

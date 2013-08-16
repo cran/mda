@@ -13,8 +13,8 @@ function(formula = formula(data), data = sys.frame(sys.parent()),
     m <- eval(m, sys.frame(sys.parent()))
     Terms <- attr(m, "terms")
     g <- model.extract(m, "response")
-    attr(Terms, "intercept") <- 0
     x <- model.matrix(Terms, m)
+    if(attr(Terms, "intercept"))x=x[,-1,drop=FALSE]
     dd <- dim(x)
     n <- dd[1]
     m <- dd[2]

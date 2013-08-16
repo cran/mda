@@ -104,7 +104,10 @@ mda(formula, data, subclasses, sub.df, tot.df, dimension, eps,
   \code{polyreg} has a \code{degree} argument which allows polynomial
   regression of the required total degree.  See the documentation for
   \code{\link{predict.fda}} for further requirements of \code{method}.
-
+  The package \code{earth} is suggested for this package as well;
+  \code{earth} is a more detailed implementation of the mars model, and
+  works as a \code{method} argument.
+  
   The function \code{mda.start} creates the starting weights; it takes
   additional arguments which can be passed in via the \code{\dots}
   argument to \code{mda}.  See the documentation for \code{mda.start}.

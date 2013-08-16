@@ -68,8 +68,7 @@ mars(x, y, w, wp, degree, nk, penalty, thresh, prune, trace.mars,
   program in our tests, but not exactly the same results.  We have not 
   implemented Friedman's anova decomposition nor are categorical
   predictors handled properly yet.  Our version does handle multiple
-  response variables, however.  As it is not well-tested, we would like
-  to hear of any bugs.}
+  response variables, however.  }
 \author{
   Trevor Hastie and Robert Tibshirani
 }
@@ -84,7 +83,9 @@ mars(x, y, w, wp, degree, nk, penalty, thresh, prune, trace.mars,
 
   Package \pkg{earth} also provides multivariate adaptive regression
   spline models based on the Hastie/Tibshirani mars code in package
-  \pkg{mda}, adding some extra features.
+  \pkg{mda}, adding some extra features. It can be used in the
+  \code{method}
+  argument of \code{fda} or \code{mda}.
 }
 \examples{
 data(trees)

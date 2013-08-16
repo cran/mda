@@ -1,5 +1,5 @@
 b8dfd31c9448c73f2c5cc5613535f24d *ChangeLog
-8587bcee3af1d22ef8b00484023defdf *DESCRIPTION
+7b593d0b9052ad64a4a20832c0805c19 *DESCRIPTION
 bee55acc70fdbe03b0adb405bc4beeb1 *NAMESPACE
 dbda29d4a4fc085f54d9bbc87ca32948 *PORTING
 75d429da090946861b9d52c89b15a015 *R/bruto.R
@@ -10,7 +10,7 @@ eb342ef026b25dfe5368c8627eccaccf *R/confusion.default.R
 d9588148d4e90340320ba4d79cdacce1 *R/confusion.list.R
 38fac132d0ccb9366555012b5846cffd *R/contr.fda.R
 f10594f4fc02a5d313997236a8f00bff *R/df.gold.R
-8f6aa722093dea7fdaec9f10d20444f2 *R/fda.R
+071c047ee15e7fba05b0194f1f5c3b0a *R/fda.R
 eea377f9b91972cdf511cf9a849c5715 *R/fix.theta.R
 e362fbd33da836142c5cb5d83cbf241f *R/gen.ridge.R
 d5309c36cf95a117ff4b5c4da4615e13 *R/kmeans.start.R
@@ -18,7 +18,7 @@ d5309c36cf95a117ff4b5c4da4615e13 *R/kmeans.start.R
 066dc9c4d8297360899c75f3e2f0d103 *R/llmult.R
 3c6d47cb90deb7d649383e97302189d5 *R/lvq.start.R
 0f2ffda8a209759351f5a25f5b84bafd *R/mars.R
-fb619350a4561695a482442f9ce46cab *R/mda.R
+d208262120083f8a2c84d7540432241b *R/mda.R
 c3fc4fbacf9102beb1b9709d1f7e1469 *R/mda.fit.R
 a449cdc559c403675acc853c13c4ea26 *R/mda.means.R
 2b3b9a1a3321ae08e6980c6c0881ce27 *R/mda.start.R
@@ -31,7 +31,7 @@ bd65297ec7d49edd130c1bcb4f632f36 *R/polyreg.R
 dd9b3e7ab6c1b45dbfef554f0d40956f *R/pplot.R
 d77ea875335c2cbba7d283cdaa73fe0c *R/pplot4.R
 1f3e5799dea687b86b1500049faa2195 *R/predict.bruto.R
-f065ebc7890ece5d9152936fb6399957 *R/predict.fda.R
+976c4c72edbcf14dce25f9db11450ab6 *R/predict.fda.R
 60b36ef1f52d35944a4be11c113a5aca *R/predict.gen.ridge.R
 871bffe94856308e83d389984750fb0e *R/predict.mars.R
 27d9c23df22366d5abe62df4956c6c73 *R/predict.mda.R
@@ -50,12 +50,12 @@ c1a16ceed988dd098a32f16316e291fb *man/ESL.mixture.Rd
 22ec7dd0558248f38d61e78323a879bd *man/bruto.Rd
 facea9384d4b7b1b6d44475a2426f4f2 *man/coef.fda.Rd
 12a307bd41d7002ad3953f430a12cccc *man/confusion.Rd
-97921b946921ab51eafe0133bb0e3651 *man/fda.Rd
+18e6a2ac85e97cff55d0c63712f28322 *man/fda.Rd
 99db2a448546ca2645da88ce6c22c560 *man/gen.ridge.Rd
 e9729a95a1f5650dd92eeb6c69ced547 *man/glass.Rd
 3c7ef2c4bce68f5c0d08b6b9f0bf19d2 *man/laplacian.Rd
-5c2f7983bb7657fdf831669f5443018c *man/mars.Rd
-69abfd9c26cf78b2b4fab2f9f8c41888 *man/mda.Rd
+89f4b34c766cecb927fc84e9509141e6 *man/mars.Rd
+bc8e8ba9f9954f5aef14b40740bb9328 *man/mda.Rd
 bb8929ec7d2e2f28ceabbff0badc21d9 *man/mda.start.Rd
 d78bfa708f22d6f3a65bff7b7a7c9331 *man/model.matrix.mars.Rd
 4d4382bf4772f0d1ba1e2c40db61589d *man/plot.fda.Rd

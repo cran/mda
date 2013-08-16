@@ -71,7 +71,9 @@ fda(formula, data, weights, theta, dimension, eps, method,
   \code{\link{polyreg}} has a \code{degree} argument which allows
   polynomial regression of the required total degree.  See the
   documentation for \code{\link{predict.fda}} for further requirements
-  of \code{method}.
+  of \code{method}. The package \code{earth} is suggested for this
+  package as well; \code{earth} is a more detailed implementation of
+  the mars model, and works as a \code{method} argument.
 }
 \author{
   Trevor Hastie and Robert Tibshirani

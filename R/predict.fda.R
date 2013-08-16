@@ -27,7 +27,7 @@ function (object, newdata, type = c("class", "variates", "posterior",
             Terms <- delete.response(terms(object))
 #            attr(Terms, "intercept") <- 0
             newdata <- model.matrix(Terms, newdata)
-            if(attr(Terms,"intercept"))newdata=newdata[,-1]
+            if(attr(Terms,"intercept"))newdata=newdata[,-1,drop=FALSE]
           }
         y <- predict(object$fit, newdata)
     }
