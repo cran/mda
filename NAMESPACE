@@ -1,5 +1,5 @@
 useDynLib("mda")
-
+importFrom(class,lvqinit, olvq1, lvq3, lvqtest)
 importFrom(utils,head,tail,packageDescription)
 export("bruto", "coef.fda",
        "confusion",

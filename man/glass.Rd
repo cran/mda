@@ -35,6 +35,6 @@
 \source{
   P. M. Murphy and D. W. Aha (1999),
   UCI Repository of Machine Learning Databases,
-  \url{ftp://ics.uci.edu/pub/machine-learning-databases}
+  \url{http://ftp.ics.uci.edu/pub/machine-learning-databases}
 }
 \keyword{datasets}

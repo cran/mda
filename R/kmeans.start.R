@@ -19,8 +19,9 @@ function (x, g, subclasses)
             wmj <- matrix(1, sum(g == j), 1)
         }
         else {
-            start <- xx[sample(1:nrow(xx), size = nc), ]
-            TT <- kmeans(xx, start)
+###            start <- xx[sample(1:nrow(xx), size = nc), ]
+          start=nc
+          TT <- kmeans(xx, start)
             cx[which, ] <- TT$centers
             wmj <- diag(nc)[TT$cluster, ]
         }

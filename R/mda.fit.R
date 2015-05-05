@@ -1,5 +1,5 @@
 mda.fit <-
-function (x, g, weights, theta, assign.theta, Rj, sub.df, tot.df, 
+function (x, g, weights, theta, assign.theta, Rj, sub.df=NULL, tot.df=NULL, 
     dimension = R - 1, eps = .Machine$double.eps, method = polyreg, 
     ...) 
 {
