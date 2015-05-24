@@ -472,7 +472,8 @@ do i=1,nterms{
 
 if(trace)call intpr("aft forw step",13,nterms,1)
 
-
+##added by Trevor 5/24/2015
+cvar=.false.
 call  qrreg(nx,n,mmax,lenb,nclass,bx,bxsc,bestin,y,qpivot,qrank,beta,res,rss,cvar,var,varsc,scr1, work) 
 
 

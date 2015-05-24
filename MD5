@@ -1,5 +1,5 @@
 b8dfd31c9448c73f2c5cc5613535f24d *ChangeLog
-d218265c6bc7095c3d77f68529b973cc *DESCRIPTION
+73b8ec6af15af0e7557e89cf64f1420e *DESCRIPTION
 bbae2cc226519ae1506790550a17465c *NAMESPACE
 dbda29d4a4fc085f54d9bbc87ca32948 *PORTING
 75d429da090946861b9d52c89b15a015 *R/bruto.R
@@ -69,13 +69,13 @@ aa03a53ba829d47ee9fbdaf82a6d01f9 *src/bruto.f
 f6e5b3dcd134cb325c0a13df98f3f923 *src/bsplvd.f
 2cf888d1f6a6ca37a7211c7c6ab86c0e *src/bvalue.f
 da892c26dc2fcbf6cbc9fe5be433f782 *src/dcalcvar.f
-4a84d038eeef9a77607ba9f72c68fd49 *src/dmarss.f
+fdf64b0efb318190ac12e29401bdaa06 *src/dmarss.f
 32fe427e7dbab87d36aa2715712d0a1c *src/dorthreg.f
 f4943e001de3a645d7b8d75cbbe20378 *src/dqrreg.f
 6cd985dff2afcc5f4d4f35a1c6ea261b *src/mspline.f
 9d426796ce32cc0ce5f33f975ae7aa7a *src/rat/bruto.r
 d47f2a92367dcb5d9717670ebe3b771e *src/rat/dcalcvar.r
-9c841aa8a7fb487c438452c5b34a7aa9 *src/rat/dmarss.r
+d97875af5137bacc8c48607f92d38985 *src/rat/dmarss.r
 5468af4a41b4e3653bb8732e00eeeb1a *src/rat/dorthreg.r
 87e00acb8f53e360d0e7b19403cc0360 *src/rat/dqrreg.r
 03a701e8cf11c5ac116cb33ae77c16fc *src/rat/mspline.r

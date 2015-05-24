@@ -327,6 +327,7 @@
       if(.not.(trace))goto 23116
       call intpr("aft forw step",13,nterms,1)
 23116 continue
+      cvar=.false.
       call qrreg(nx,n,mmax,lenb,nclass,bx,bxsc,bestin,y,qpivot,qrank,
      &     beta,res,rss,cvar,var,varsc,scr1, work)
       nt=dofit+1
