@@ -1,6 +1,6 @@
 b8dfd31c9448c73f2c5cc5613535f24d *ChangeLog
-73b8ec6af15af0e7557e89cf64f1420e *DESCRIPTION
-bbae2cc226519ae1506790550a17465c *NAMESPACE
+d1762b2191997c034285e3ee5d37e8d4 *DESCRIPTION
+e65908d87dba436555e5c1d18c03fb23 *NAMESPACE
 dbda29d4a4fc085f54d9bbc87ca32948 *PORTING
 75d429da090946861b9d52c89b15a015 *R/bruto.R
 df9f5ffd1b3f05c90de51c4d3650b5ef *R/coef.fda.R
@@ -45,7 +45,7 @@ b3237a9365f1a11398b6ea798a5953ac *R/transformPenalty.R
 78a0c8ccea18c92729c6cdf44bf023e5 *README
 e47fcc9b9d35ea4673424369f0db27b4 *TODO
 c637b4768a3b0f29a6b5e71e4203c1a3 *data/ESL.mixture.RData
-5533207732db74a76214f9329de44763 *data/glass.rda
+6e93a0ff071578e0a464ae91a1ef0670 *data/glass.rda
 c1a16ceed988dd098a32f16316e291fb *man/ESL.mixture.Rd
 22ec7dd0558248f38d61e78323a879bd *man/bruto.Rd
 facea9384d4b7b1b6d44475a2426f4f2 *man/coef.fda.Rd
@@ -72,7 +72,8 @@ da892c26dc2fcbf6cbc9fe5be433f782 *src/dcalcvar.f
 fdf64b0efb318190ac12e29401bdaa06 *src/dmarss.f
 32fe427e7dbab87d36aa2715712d0a1c *src/dorthreg.f
 f4943e001de3a645d7b8d75cbbe20378 *src/dqrreg.f
-6cd985dff2afcc5f4d4f35a1c6ea261b *src/mspline.f
+21219b7526c9cb48785dca67bda03d5d *src/mspline.f
+f52bf4488781837d7c255f16280149a9 *src/rat/README
 9d426796ce32cc0ce5f33f975ae7aa7a *src/rat/bruto.r
 d47f2a92367dcb5d9717670ebe3b771e *src/rat/dcalcvar.r
 d97875af5137bacc8c48607f92d38985 *src/rat/dmarss.r
@@ -81,6 +82,7 @@ d97875af5137bacc8c48607f92d38985 *src/rat/dmarss.r
 03a701e8cf11c5ac116cb33ae77c16fc *src/rat/mspline.r
 ec0f1cafcca3df67b1d4383893ce43e2 *src/rat/sknotl.r
 946c8b4115b39c6d3bfb4b8ce340b359 *src/rat/splsm.r
+968397cf73895f9a4b10e227b2c8ab8d *src/rat/sspl00.r
 d154fc7c93c425affd4bd6b796134139 *src/rat/tmatch.r
 81b3b3142bd911c0d320cdb0d4f1cac9 *src/sbart.f
 82da999d24034505301e31c78d1e58cc *src/sgram.f
@@ -89,5 +91,6 @@ e353cbbcc757aef8d1c97eec614f51c2 *src/sinerp.f
 26225b56823662b310db30460205567b *src/sortdi.f
 dfe91e04c159b744c2aa57ccbe32251c *src/splsm.f
 27ffc403bda6e3ea8f60d8e8e978624d *src/sslvrg.f
+3ea67e8456b3f7c8001f9c97fc099630 *src/sspl00.f90
 621a4459f50179ef88916a91e20804fb *src/stxwx.f
 e9e3c986f45da4125c3105d14b8de76e *src/tmatch.f

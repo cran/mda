@@ -538,7 +538,8 @@ C	Coded by Finbarr O'Sullivan
      *     wjm3(3),wjm2(2),wjm1(1),c0,c1,c2,c3
       wjm3(1)=0d0
       wjm3(2)=0d0
-      wjm3(1)=0d0
+C     wjm3(1)=0d0   spotted by Brian Ripley 10/8/2015 (earlier actually)
+      wjm3(3)=0d0
       wjm2(1)=0d0
       wjm2(2)=0d0
       wjm1(1)=0d0
@@ -683,6 +684,7 @@ C Memory management subroutine
 
       call suff2(n,nef,p,match,y,w,yin,win,ssy,work)
       if(center)then
+         tdfoff=dfoff
          if(cost.gt.0)then
             tdfoff=dfoff-1/cost
          endif
