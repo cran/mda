@@ -9,7 +9,7 @@ importFrom("stats", "contr.helmert", "delete.response", "fitted",
 export("bruto", "coef.fda",
        "confusion",
        "fda",
-       "gen.ridge", "laplacian",
+       "gen.ridge", "laplacian","mspline",
        "mars", "mda", "mda.start",
        "polyreg",
        "softmax")

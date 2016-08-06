@@ -1,6 +1,6 @@
-b8dfd31c9448c73f2c5cc5613535f24d *ChangeLog
-d1762b2191997c034285e3ee5d37e8d4 *DESCRIPTION
-e65908d87dba436555e5c1d18c03fb23 *NAMESPACE
+f6614a2c5f31a1370c73f7aaf30a512d *ChangeLog
+fbcff33e87281dddc902a7a7b31bf041 *DESCRIPTION
+4ee5c8bbb3fc6c56d92a541a88a17514 *NAMESPACE
 dbda29d4a4fc085f54d9bbc87ca32948 *PORTING
 75d429da090946861b9d52c89b15a015 *R/bruto.R
 df9f5ffd1b3f05c90de51c4d3650b5ef *R/coef.fda.R
@@ -24,6 +24,7 @@ a449cdc559c403675acc853c13c4ea26 *R/mda.means.R
 2b3b9a1a3321ae08e6980c6c0881ce27 *R/mda.start.R
 379870b2aa1f5e6384bdb33f4c150285 *R/meanPenalty.R
 984915c3b88457fa6b678f5fd8868607 *R/model.matrix.mars.R
+7877db54e9a6d15683ab029de8273bbf *R/mspline.R
 abc01219b9f154f43ff90af9238ade31 *R/onAttach.R
 9f93cc1bd1780222b18eb1f0b1c15b9f *R/plot.fda.R
 f529a5159c4f4689ceaf15c24be5a8ff *R/polybasis.R
@@ -45,7 +46,7 @@ b3237a9365f1a11398b6ea798a5953ac *R/transformPenalty.R
 78a0c8ccea18c92729c6cdf44bf023e5 *README
 e47fcc9b9d35ea4673424369f0db27b4 *TODO
 c637b4768a3b0f29a6b5e71e4203c1a3 *data/ESL.mixture.RData
-6e93a0ff071578e0a464ae91a1ef0670 *data/glass.rda
+ec5042ac7e827f6fa807e4766a6d5777 *data/glass.rda
 c1a16ceed988dd098a32f16316e291fb *man/ESL.mixture.Rd
 22ec7dd0558248f38d61e78323a879bd *man/bruto.Rd
 facea9384d4b7b1b6d44475a2426f4f2 *man/coef.fda.Rd
@@ -58,6 +59,7 @@ bed4b81a673740a9942a167df50ebcc2 *man/glass.Rd
 bc8e8ba9f9954f5aef14b40740bb9328 *man/mda.Rd
 bb8929ec7d2e2f28ceabbff0badc21d9 *man/mda.start.Rd
 d78bfa708f22d6f3a65bff7b7a7c9331 *man/model.matrix.mars.Rd
+980b8172f151e41ba7662f3ec7229b6e *man/mspline.Rd
 4d4382bf4772f0d1ba1e2c40db61589d *man/plot.fda.Rd
 d666df1df4b23ae705c7f3a1a17c5d08 *man/polyreg.Rd
 035e45c1004a059a6c8331a5589ee924 *man/predict.bruto.Rd
