@@ -740,6 +740,8 @@ c        while() :
             match(iwork(i))=index
             i=i+1
             if(i.gt.n) goto 10
+c      this next line was missing; added by TH in Nov/2017!            
+            goto 75
          endif
          xstart= x(iwork(i))
          index=index+1

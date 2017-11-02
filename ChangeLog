@@ -1,3 +1,6 @@
+2017-11-02 Trevor Hastie <hastie@stanford.edu>
+	* src/mspline.f: subtle bug in subroutine namat; missing branch
+	* added foreign function registration code
 2016-08-05 Trevor Hastie <hastie@stanford.edu>
 	* R/mspline: added a function to compute vector smoothing spline
 	* man/mspline: helpfile

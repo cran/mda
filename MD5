@@ -1,8 +1,8 @@
-f6614a2c5f31a1370c73f7aaf30a512d *ChangeLog
-fbcff33e87281dddc902a7a7b31bf041 *DESCRIPTION
+60fc574fbb70fc519de60564d4f70dd6 *ChangeLog
+819d2b97c3cfeb90a7664a3d3f0a6820 *DESCRIPTION
 4ee5c8bbb3fc6c56d92a541a88a17514 *NAMESPACE
 dbda29d4a4fc085f54d9bbc87ca32948 *PORTING
-75d429da090946861b9d52c89b15a015 *R/bruto.R
+4893cbb3d6281aa19e2c9ecfb6cd1dec *R/bruto.R
 df9f5ffd1b3f05c90de51c4d3650b5ef *R/coef.fda.R
 c013510f47418f5a2321a4647cf08d22 *R/confusion.R
 b6ed1082eee5a7007b8ade9e960a2706 *R/confusion.default.R
@@ -17,7 +17,7 @@ e362fbd33da836142c5cb5d83cbf241f *R/gen.ridge.R
 81c98507d4e440b0a042b3dc2997b021 *R/laplacian.R
 066dc9c4d8297360899c75f3e2f0d103 *R/llmult.R
 3c6d47cb90deb7d649383e97302189d5 *R/lvq.start.R
-0f2ffda8a209759351f5a25f5b84bafd *R/mars.R
+6a0d18dd5c47833123be72e3cbf42c57 *R/mars.R
 d208262120083f8a2c84d7540432241b *R/mda.R
 24fdad5bb03177583c462ffb0f674d89 *R/mda.fit.R
 a449cdc559c403675acc853c13c4ea26 *R/mda.means.R
@@ -45,9 +45,9 @@ edd4caac8a56625c57d1a3ce614bae58 *R/softmax.R
 b3237a9365f1a11398b6ea798a5953ac *R/transformPenalty.R
 78a0c8ccea18c92729c6cdf44bf023e5 *README
 e47fcc9b9d35ea4673424369f0db27b4 *TODO
-c637b4768a3b0f29a6b5e71e4203c1a3 *data/ESL.mixture.RData
-ec5042ac7e827f6fa807e4766a6d5777 *data/glass.rda
-c1a16ceed988dd098a32f16316e291fb *man/ESL.mixture.Rd
+c637b4768a3b0f29a6b5e71e4203c1a3 *data/ESL.mixture.rda
+62dadfb8e34061e475fe9445750e6094 *data/glass.rda
+2844cd9ad850947ca14c8c89d1a65036 *man/ESL.mixture.Rd
 22ec7dd0558248f38d61e78323a879bd *man/bruto.Rd
 facea9384d4b7b1b6d44475a2426f4f2 *man/coef.fda.Rd
 12a307bd41d7002ad3953f430a12cccc *man/confusion.Rd
@@ -74,7 +74,8 @@ da892c26dc2fcbf6cbc9fe5be433f782 *src/dcalcvar.f
 fdf64b0efb318190ac12e29401bdaa06 *src/dmarss.f
 32fe427e7dbab87d36aa2715712d0a1c *src/dorthreg.f
 f4943e001de3a645d7b8d75cbbe20378 *src/dqrreg.f
-21219b7526c9cb48785dca67bda03d5d *src/mspline.f
+22f6b21d08f265b9b92300e44dd5b119 *src/mda_init.c
+7cb23ffe9bbee7df5e58e581d95688f8 *src/mspline.f
 f52bf4488781837d7c255f16280149a9 *src/rat/README
 9d426796ce32cc0ce5f33f975ae7aa7a *src/rat/bruto.r
 d47f2a92367dcb5d9717670ebe3b771e *src/rat/dcalcvar.r

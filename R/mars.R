@@ -1,10 +1,10 @@
 mars <-
-function (x, y, w = rep(1, nrow(x)), wp, degree = 1, nk = max(21, 
-    2 * ncol(x) + 1), penalty = 2, thresh = 0.001, prune = TRUE, 
-    trace.mars = FALSE, forward.step = TRUE, prevfit = NULL, ...) 
+function (x, y, w = rep(1, nrow(x)), wp, degree = 1, nk = max(21,
+    2 * ncol(x) + 1), penalty = 2, thresh = 0.001, prune = TRUE,
+    trace.mars = FALSE, forward.step = TRUE, prevfit = NULL, ...)
 {
     this.call <- match.call()
-    if ((nk%%2) != 1) 
+    if ((nk%%2) != 1)
         nk <- nk - 1
     x <- as.matrix(x)
     np <- dim(x)
@@ -35,16 +35,16 @@ function (x, y, w = rep(1, nrow(x)), wp, degree = 1, nk = max(21,
         res <- prevfit$res
         factor <- prevfit$factor
         cuts <- prevfit$cuts
-        if (missing(penalty)) 
+        if (missing(penalty))
             penalty <- prevfit$penalty
         degree <- prevfit$degree
         nk <- lenb
         thresh <- prevfit$thresh
     }
-    if (missing(penalty) & (degree > 1)) 
+    if (missing(penalty) & (degree > 1))
         penalty <- 3
     if (!missing(wp)) {
-        if (any(wp <= 0)) 
+        if (any(wp <= 0))
             stop("wp should all be positive")
         wp <- sqrt(wp/sum(wp))
         y <- y * outer(rep(1, n), wp)
@@ -57,7 +57,7 @@ function (x, y, w = rep(1, nrow(x)), wp, degree = 1, nk = max(21,
     }
     bestin <- rep(0, nk)
     flag <- matrix(rep(0, nk * p), nrow = nk, ncol = p)
-    if (is.null(cuts)) 
+    if (is.null(cuts))
         cuts <- matrix(rep(0, nk * p), nrow = nk, ncol = p)
     if (is.null(factor)) {
         dir <- matrix(rep(0, nk * p), nrow = nk, ncol = p)
@@ -76,18 +76,20 @@ function (x, y, w = rep(1, nrow(x)), wp, degree = 1, nk = max(21,
     storage.mode(dir) <- "double"
     storage.mode(res) <- "double"
     storage.mode(beta) <- "double"
-    lenscrat <- 1 + n + 2 * n * nk + 4 * nk * nk + 3 * nk + 3 * 
+    lenscrat <- 1 + n + 2 * n * nk + 4 * nk * nk + 3 * nk + 3 *
         nk * nclass + 3 * nclass + 28 * n + 51
-    junk <- .Fortran("marss", as.integer(n), as.integer(n), as.integer(p), 
-        as.integer(nclass), as.matrix(y), as.matrix(x), as.double(w), 
-        as.matrix(tagx), as.integer(degree), as.integer(nk), 
-        as.double(penalty), as.double(thresh), as.logical(forward.step), 
-        as.integer(interms), as.logical(prune), bx = as.matrix(bx), 
-        fullin = as.integer(fullin), lenb = as.integer(lenb), 
-        bestgcv = as.double(bestgcv), bestin = as.integer(bestin), 
-        flag = as.matrix(flag), cuts = as.matrix(cuts), dir = as.matrix(dir), 
-        res = as.matrix(res), alpha = as.double(alpha), beta = as.matrix(beta), 
-        double(lenscrat), integer(4 * nk), trace.mars, PACKAGE = "mda")
+    junk <- .Fortran("marss", as.integer(n), as.integer(n), as.integer(p),
+        as.integer(nclass), as.matrix(y), as.matrix(x), as.double(w),
+        as.matrix(tagx), as.integer(degree), as.integer(nk),
+#        as.double(penalty), as.double(thresh), as.logical(forward.step),
+        as.double(penalty), as.double(thresh), as.integer(forward.step),
+#        as.integer(interms), as.logical(prune), bx = as.matrix(bx),
+        as.integer(interms), as.integer(prune), bx = as.matrix(bx),
+        fullin = as.integer(fullin), lenb = as.integer(lenb),
+        bestgcv = as.double(bestgcv), bestin = as.integer(bestin),
+        flag = as.matrix(flag), cuts = as.matrix(cuts), dir = as.matrix(dir),
+        res = as.matrix(res), alpha = as.double(alpha), beta = as.matrix(beta),
+        double(lenscrat), integer(4 * nk), as.integer(trace.mars), PACKAGE = "mda")
     lenb <- junk$lenb
     all.terms <- seq(lenb)[junk$fullin[1:lenb] == 1]
     selected.terms <- seq(lenb)[junk$bestin[1:lenb] == 1]
@@ -98,17 +100,17 @@ function (x, y, w = rep(1, nrow(x)), wp, degree = 1, nk = max(21,
         TT <- outer(rep(1, n), wp)
         residuals <- residuals/TT
         fitted.values <- fitted.values/TT
-        coefficients <- coefficients/outer(rep(1, length(selected.terms)), 
+        coefficients <- coefficients/outer(rep(1, length(selected.terms)),
             wp)
     }
     dir <- junk$dir[seq(lenb), , drop = FALSE]
     dimnames(dir) <- list(NULL, dimnames(x)[[2]])
     cutss <- junk$cuts[seq(lenb), , drop = FALSE]
     x <- junk$bx[, selected.terms, drop = FALSE]
-    structure(list(call = this.call, all.terms = all.terms, selected.terms = selected.terms, 
-        penalty = penalty, degree = degree, nk = nk, thresh = thresh, 
-        gcv = junk$bestgcv, factor = dir, cuts = cutss, residuals = residuals, 
-        fitted.values = fitted.values, lenb = junk$lenb, coefficients = coefficients, 
+    structure(list(call = this.call, all.terms = all.terms, selected.terms = selected.terms,
+        penalty = penalty, degree = degree, nk = nk, thresh = thresh,
+        gcv = junk$bestgcv, factor = dir, cuts = cutss, residuals = residuals,
+        fitted.values = fitted.values, lenb = junk$lenb, coefficients = coefficients,
         x = x), class = "mars")
 }
 

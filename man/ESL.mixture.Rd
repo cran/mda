@@ -24,6 +24,6 @@
 \source{
   "Elements of Statistical Learning (second edition)", Hastie, T., Tibshirani, R. and
   Friedman, J. (2009), Springer, New York.
-  \url{http://www-stat.stanford.edu/ElemStatLearn}
+  \url{http://www.stanford.edu/~hastie/ElemStatLearn}
 }
 \keyword{datasets}
