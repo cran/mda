@@ -62,7 +62,8 @@ c     higher order on top of it.
          jp1mid = 1
          do 11 j=ideriv,k
             dbiatx(j,ideriv) = dbiatx(jp1mid,1)
-   11       jp1mid = jp1mid + 1
+            jp1mid = jp1mid + 1
+ 11      continue
          ideriv = ideriv - 1
          call bsplvb(t,lent,kp1-ideriv,2,x,left,dbiatx)
    15    continue
@@ -76,13 +77,15 @@ c
       jlow = 1
       do 20 i=1,k
          do 19 j=jlow,k
-   19       a(j,i) = 0e0
+            a(j,i) = 0e0
+ 19      continue
          jlow = i
-   20    a(i,i) = 1e0
+         a(i,i) = 1e0
+ 20   continue
 c     at this point, a(.,j) contains the b-coeffs for the j-th of the
 c     k  b-splines of interest here.
 c
-      do 40 m=2,mhigh
+      do 41 m=2,mhigh
          kp1mm = kp1 - m
          fkp1mm = dble(kp1mm)
          il = left
@@ -97,9 +100,11 @@ c        i .lt. j  is used.sed.
 c           the assumption that t(left).lt.t(left+1) makes denominator
 c           in  factor  nonzero.
             do 24 j=1,i
-   24          a(i,j) = (a(i,j) - a(i-1,j))*factor
+               a(i,j) = (a(i,j) - a(i-1,j))*factor
+ 24         continue
             il = il - 1
-   25       i = i - 1
+            i = i - 1
+ 25      continue
 c
 c        for i=1,...,k, combine b-coeffs a(.,i) with b-spline values
 c        stored in dbiatx(.,m) to get value of  (m-1)st  derivative of
@@ -108,13 +113,16 @@ c        dbiatx(i,m). storage of this value over the value of a b-spline
 c        of order m there is safe since the remaining b-spline derivat-
 c        ive of the same order do not use this value due to the fact
 c        that  a(j,i) = 0  for j .lt. i .
-   30    do 40 i=1,k
+         do 40 i=1,k
             sum = 0.
             jlow = max0(i,m)
             do 35 j=jlow,k
-   35          sum = a(j,i)*dbiatx(j,m) + sum
-   40       dbiatx(i,m) = sum
-   99 return
+               sum = a(j,i)*dbiatx(j,m) + sum
+ 35         continue
+            dbiatx(i,m) = sum
+ 40      continue
+ 41   continue
+ 99   return
       end
 
       subroutine bsplvb ( t, lent,jhigh, index, x, left, biatx )
@@ -212,7 +220,8 @@ c
          do 26 i=1,j
             term = biatx(i)/(deltar(i) + deltal(jp1-i))
             biatx(i) = saved + deltar(i)*term
-   26       saved = deltal(jp1-i)*term
+            saved = deltal(jp1-i)*term
+ 26      continue
          biatx(jp1) = saved
          j = jp1
          if (j .lt. jhigh)              go to 20

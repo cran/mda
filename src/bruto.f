@@ -17,11 +17,20 @@
  01   continue
 
       select=.true.
-      call bakssp(select,x,n,q,y,p,w,knot,nkmax,nk,wp,match,nef,dfmax,
+c$$$ Naras fix
+c$$$      call bakssp(select,x,n,q,y,p,w,knot,nkmax,nk,wp,match,nef,dfmax,
+c$$$     *cost,lambda,df,coef,type,xrange,gcvsel,dfit,maxit(1),nit(1),eta,
+c$$$     *resid,thresh*10d0,work,iwork,trace)
+c$$$      select=.false.
+c$$$      call bakssp(select,x,n,q,y,p,w,knot,nkmax,nk,wp,match,nef,dfmax,
+c$$$     *cost,lambda,df,coef,type,xrange,gcvbak,dfit,maxit(2),nit(2),eta,
+c$$$     *resid,thresh,work,iwork,trace)
+
+      call bakssp(select,x,n,q,p,w,knot,nkmax,nk,wp,match,nef,dfmax,
      *cost,lambda,df,coef,type,xrange,gcvsel,dfit,maxit(1),nit(1),eta,
      *resid,thresh*10d0,work,iwork,trace)
       select=.false.
-      call bakssp(select,x,n,q,y,p,w,knot,nkmax,nk,wp,match,nef,dfmax,
+      call bakssp(select,x,n,q,p,w,knot,nkmax,nk,wp,match,nef,dfmax,
      *cost,lambda,df,coef,type,xrange,gcvbak,dfit,maxit(2),nit(2),eta,
      *resid,thresh,work,iwork,trace)
       do 04 j=1,p
@@ -32,13 +41,24 @@
       return
       end
 
-      subroutine bakssp(select,x,n,q,y,p,w,knot,nkmax,nk,wp,match,nef,
+c$$$ Naras fix      
+c$$$      subroutine bakssp(select,x,n,q,y,p,w,knot,nkmax,nk,wp,match,nef,
+c$$$     *     dfmax,cost,lambda,df,coef,type,xrange,gcv,dfit,maxit,nit,s,
+c$$$     *     resid,thresh,work,iwork,trace)
+c$$$      implicit double precision(a-h,o-z)
+c$$$      integer n,q,p,nkmax,nk(q),match(n,q),nef(q),type(q),maxit,nit,ier,
+c$$$     *     ntype,iwork(n)
+c$$$      double precision x(n,q),y(n,p),w(n),knot(nkmax+4,q),wp(p),dfmax(q)
+c$$$     *     ,cost,lambda(q),df(q),coef(nkmax*p,q),xrange(2,q),
+c$$$     *     gcv(q,maxit),dfit(q,maxit),s(n,p),resid(n,p),thresh,work(*)
+c$$$
+      subroutine bakssp(select,x,n,q,p,w,knot,nkmax,nk,wp,match,nef,
      *     dfmax,cost,lambda,df,coef,type,xrange,gcv,dfit,maxit,nit,s,
      *     resid,thresh,work,iwork,trace)
       implicit double precision(a-h,o-z)
       integer n,q,p,nkmax,nk(q),match(n,q),nef(q),type(q),maxit,nit,ier,
      *     ntype,iwork(n)
-      double precision x(n,q),y(n,p),w(n),knot(nkmax+4,q),wp(p),dfmax(q)
+      double precision x(n,q),w(n),knot(nkmax+4,q),wp(p),dfmax(q)
      *     ,cost,lambda(q),df(q),coef(nkmax*p,q),xrange(2,q),
      *     gcv(q,maxit),dfit(q,maxit),s(n,p),resid(n,p),thresh,work(*)
       double precision dfoff, gcv0, ndf,gcv1,gcvrat,ndfoff,wmean,sbar,
@@ -114,7 +134,7 @@
          call dblepr("gcv  ",5,gcv1,1)
          call dblepr("ratio",5,gcvrat,1)
       endif
- 36   continue
+      continue
       goto 14
  15   continue
       return

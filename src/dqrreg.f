@@ -32,7 +32,9 @@
 23010 continue
 23008 continue
       if(.not.(cvar))goto 23012
-      call calcvar(nx,n,px,xsc,qrank,qpivot,var,varsc,work)
+c$$$ Naras fix
+c$$$      call calcvar(nx,n,px,xsc,qrank,qpivot,var,varsc,work)
+      call calcvar(nx,px,xsc,qrank,var,varsc)
 23012 continue
       return
       end

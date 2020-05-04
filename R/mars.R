@@ -88,7 +88,9 @@ function (x, y, w = rep(1, nrow(x)), wp, degree = 1, nk = max(21,
         fullin = as.integer(fullin), lenb = as.integer(lenb),
         bestgcv = as.double(bestgcv), bestin = as.integer(bestin),
         flag = as.matrix(flag), cuts = as.matrix(cuts), dir = as.matrix(dir),
-        res = as.matrix(res), alpha = as.double(alpha), beta = as.matrix(beta),
+## Naras fixes
+##         res = as.matrix(res), alpha = as.double(alpha), beta = as.matrix(beta),
+        res = as.matrix(res), beta = as.matrix(beta),
         double(lenscrat), integer(4 * nk), as.integer(trace.mars), PACKAGE = "mda")
     lenb <- junk$lenb
     all.terms <- seq(lenb)[junk$fullin[1:lenb] == 1]

@@ -11,19 +11,27 @@
       goto 23001
 23000 continue
       if(.not.(n.ge.50 .and. n.lt.200))goto 23002
-      ndk = 2.**(a1+(a2-a1)*(n-50.)/150.) 
+c$$$ Naras fix
+c$$$      ndk = 2.**(a1+(a2-a1)*(n-50.)/150.) 
+      ndk = int(2.**(a1+(a2-a1)*(n-50.)/150.))
       goto 23003
 23002 continue
       if(.not.(n.ge.200 .and. n.lt.800))goto 23004
-      ndk = 2.**(a2+(a3-a2)*(n-200.)/600.) 
+c$$$ Naras fix
+c$$$      ndk = 2.**(a2+(a3-a2)*(n-200.)/600.) 
+      ndk = int(2.**(a2+(a3-a2)*(n-200.)/600.))
       goto 23005
 23004 continue
       if(.not.(n.ge.800 .and. n.lt.3200))goto 23006
-      ndk = 2.**(a3+(a4-a3)*(n-800.)/2400.) 
+c$$$ Naras fix
+c$$$      ndk = 2.**(a3+(a4-a3)*(n-800.)/2400.) 
+      ndk = int(2.**(a3+(a4-a3)*(n-800.)/2400.))
       goto 23007
 23006 continue
       if(.not.(n.ge.3200))goto 23008
-      ndk = 200. + (n-3200)**.2 
+c$$$ Naras fix
+c$$$      ndk = 200. + (n-3200)**.2 
+      ndk = int(200. + (n-3200)**.2)
 23008 continue
 23007 continue
 23005 continue

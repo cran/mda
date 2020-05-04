@@ -1,22 +1,39 @@
-      subroutine splsm(x,y,w,n,match,nef,spar,dof,smo,s0,cov,ifcov,work,
+c$$$ Naras fix
+c$$$      subroutine splsm(x,y,w,n,match,nef,spar,dof,smo,s0,cov,ifcov,work,
+c$$$     &      lenw)
+c$$$      implicit double precision(a-h,o-z)
+c$$$      integer n,match(n),nef,lenw
+c$$$      double precision x(n),y(n),w(n),spar,dof,smo(n),s0,cov(n),work(
+c$$$     &      lenw)
+c$$$      logical ifcov
+c$$$      call splsm1(x, y, w, n, match, nef, spar, dof, smo, s0, cov, 
+c$$$     &      ifcov, work(1), work(nef+2), work(2*nef+3), work(3*nef+4), 
+c$$$     &      work(3*nef+n+10), lenw)
+      subroutine splsm(x,y,w,n,match,nef,spar,dof,smo,s0,cov,work,
      &      lenw)
       implicit double precision(a-h,o-z)
       integer n,match(n),nef,lenw
       double precision x(n),y(n),w(n),spar,dof,smo(n),s0,cov(n),work(
      &      lenw)
-      logical ifcov
       call splsm1(x, y, w, n, match, nef, spar, dof, smo, s0, cov, 
-     &      ifcov, work(1), work(nef+2), work(2*nef+3), work(3*nef+4), 
+     &      work(1), work(nef+2), work(2*nef+3), work(3*nef+4), 
      &      work(3*nef+n+10), lenw)
       return
       end
-      subroutine splsm1(x,y,w,n,match,nef,spar,dof,smo,s0,lev,ifcov,xin,
+c$$$ Naras fix
+c$$$      subroutine splsm1(x,y,w,n,match,nef,spar,dof,smo,s0,lev,ifcov,xin,
+c$$$     &      yin,win,knot,work,lenw)
+c$$$      implicit double precision(a-h,o-z)
+c$$$      integer n,match(n),nef,lenw
+c$$$      double precision x(n),y(n),w(n),spar,dof,smo(n),s0,lev(n),work(
+c$$$     &      lenw)
+c$$$      logical ifcov
+      subroutine splsm1(x,y,w,n,match,nef,spar,dof,smo,s0,lev,xin,
      &      yin,win,knot,work,lenw)
       implicit double precision(a-h,o-z)
       integer n,match(n),nef,lenw
       double precision x(n),y(n),w(n),spar,dof,smo(n),s0,lev(n),work(
      &      lenw)
-      logical ifcov
       double precision xin(nef+1),yin(nef+1),win(nef+1),knot(nef+4)
       integer nk,ldnk,ld4,k
       double precision xmin,xrange
@@ -30,8 +47,17 @@
       nk=k-4
       ld4=4
       ldnk=1
-      call splsm2(x, y, w, n, match, nef, spar, dof, smo, s0, lev, 
-     &    ifcov, xin, yin,  win, knot, work(1),  work(nk+1),  
+c$$$ Naras fix
+c$$$      call splsm2(x, y, w, n, match, nef, spar, dof, smo, s0, lev, 
+c$$$     &    ifcov, xin, yin,  win, knot, work(1),  work(nk+1),  
+c$$$     &    work(nk+nef+2), work(nk+2*nef+3),  work(2*nk+2*nef+3), 
+c$$$     &    work(3*nk+2*nef+3), work(4*nk+2*nef+3), work(5* nk+2*nef+3), 
+c$$$     &    work(6*nk+2*nef+3), work(7*nk+2*nef+3), work(8*nk+2*nef+ 3), 
+c$$$     &    work(9*nk+2*nef+3), work(10*nk+2*nef+3), 
+c$$$     &    work((10+ld4)*nk+2*nef+ 3), work((10+2*ld4)*nk+2*nef+3), 
+c$$$     &    ld4, ldnk, nk)
+      call splsm2(y, w, n, match, nef, spar, dof, smo, s0, lev, 
+     &    xin, yin,  win, knot, work(1),  work(nk+1),  
      &    work(nk+nef+2), work(nk+2*nef+3),  work(2*nk+2*nef+3), 
      &    work(3*nk+2*nef+3), work(4*nk+2*nef+3), work(5* nk+2*nef+3), 
      &    work(6*nk+2*nef+3), work(7*nk+2*nef+3), work(8*nk+2*nef+ 3), 
@@ -40,15 +66,24 @@
      &    ld4, ldnk, nk)
       return
       end
-      subroutine splsm2(x, y, w, n, match, nef, spar, dof, smo, s0, 
-     &    lev, ifcov, xin, yin, win, knot, coef, sout, levout, xwy, 
+c$$$ Naras fix
+c$$$      subroutine splsm2(x, y, w, n, match, nef, spar, dof, smo, s0, 
+c$$$     &    lev, ifcov, xin, yin, win, knot, coef, sout, levout, xwy, 
+c$$$     &    hs0, hs1, hs2, hs3, sg0, sg1, sg2, sg3, abd, p1ip, p2ip, 
+c$$$     &    ld4, ldnk, nk)
+c$$$      implicit double precision(a-h,o-z)
+c$$$      integer n,match(n),nef
+c$$$      double precision x(n),y(n),w(n),spar,dof,smo(n),s0,lev(n)
+c$$$      integer nk,ldnk,ld4
+c$$$      logical ifcov
+      subroutine splsm2(y, w, n, match, nef, spar, dof, smo, s0, 
+     &    lev, xin, yin, win, knot, coef, sout, levout, xwy, 
      &    hs0, hs1, hs2, hs3, sg0, sg1, sg2, sg3, abd, p1ip, p2ip, 
      &    ld4, ldnk, nk)
       implicit double precision(a-h,o-z)
       integer n,match(n),nef
-      double precision x(n),y(n),w(n),spar,dof,smo(n),s0,lev(n)
+      double precision y(n),w(n),spar,dof,smo(n),s0,lev(n)
       integer nk,ldnk,ld4
-      logical ifcov
       double precision xin(nef+1),yin(nef+1),win(nef+1),knot(nk+4)
       double precision coef(nk), sout(nef+1), levout(nef+1), xwy(nk), 
      &   hs0(nk), hs1(nk), hs2(nk), hs3(nk), sg0(nk), sg1(nk), 

@@ -2,56 +2,65 @@
      1     dfmax,cost,lambda,df,cv,gcv,coef,s,lev,xwy,hs,sg,abd,p1ip,
      2     ier)
       implicit double precision(a-h,o-z)
-C A Cubic B-spline Smoothing routine.
+C     A Cubic B-spline Smoothing routine.
+C     
+C     The algorithm minimises:
+C     
+C     (1/n) * sum w(i)* (y(i)-s(i))**2 + lambda* int ( s"(x) )**2 dx
+C     
+C     for each of p response variables in y
 C
-C          The algorithm minimises:
+C     Input:
+C      
+C     x(n)        vector containing the ordinates of the observations
+C     y(ldy,p)    matrix (n x p) of responses (ldy can be greater than n)
+C     w(n)        vector containing the weights given to each data point
+C     n           number of data points
+C     ldy         leading dimension of y
+C     p           number of columns in y
+C     knot(nk+4)  vector of knot points defining the cubic b-spline basis.
+C     nk          number of b-spline coefficients to be estimated
+C     nk <= n+2
+C     method      method for selecting amount of smoothing, lambda
+C          1 = fixed lambda
+C          2 = fixed df
+C          3 = gcv
+C          4 = cv
+C     tol         used in Golden Search routine
+C     wp(p)       weights, length p,  used to combine cv or gcv in 3 or 4 above
+C     ssy(p)      offsets for weighted sum of squares for y; can be all zero,
+C                   else should be the variability lost due to collapsing
+C                   onto unique values
+C     dfoff       offset df used in gcv calculations (0 is good default)
+C     dfmax       maximum value for df allowed when gcv or cv are used
+C                   routine simply returns the value at dfmax if it was exceeded
+C     cost        cost per df (1 is good default)
 C
-C      (1/n) * sum w(i)* (y(i)-s(i))**2 + lambda* int ( s"(x) )**2 dx
+C     Input/Output:
 C
-C	for each of p response variables in y
-C Input
-C  x(n)		vector containing the ordinates of the observations
-C  y(ldy,p)	matrix (n x p) of responses (ldy can be greater than n)
-C  w(n)		vector containing the weights given to each data point
-C  n    	number of data points
-C  ldy		leading dimension of y
-C  p		number of columns in y
-C  knot(nk+4)	vector of knot points defining the cubic b-spline basis.
-C  nk		number of b-spline coefficients to be estimated
-C			nk <= n+2
-C  method 	method for selecting amount of smoothing, lambda
-C		1 = fixed lambda
-C		2 = fixed df
-C		3 = gcv
-C		4 = cv
-C  tol		used in Golden Search routine
-C  wp(p)	weights, length p,  used to combine cv or gcv in 3 or 4 above
-C  ssy(p)	offsets for weighted sum of squares for y; can be all zero,
-C			else should be the variability lost due to collapsing
-C			onto unique values
-C  dfoff	offset df used in gcv calculations (0 is good default)
-C  dfmax	maximum value for df allowed when gcv or cv are used
-C  		routine simply returns the value at dfmax if it was exceeded
-C  cost		cost per df (1 is good default)
-C Input/Output
-C  lambda	penalised likelihood smoothing parameter
-C  df		trace(S)
-C Output
-C  cv		omnibus cv criterion
-C  gcv		omnibus gcv criterion (including penalty and offset)
-C  coef(nk,p)	vector of spline coefficients
-C  s(ldy,p)	matrix of smoothed y-values
-C  lev(n)	vector of leverages
-C Working arrays/matrix
-C  xwy(nk,p)	X'Wy
-C  hs(nk,4)	the diagonals of the X'WX matrix
-C  sg(nk,4)   	the diagonals of the Gram matrix
-C  abd(4,nk)	[ X'WX+lambda*SIGMA] in diagonal form
-C  p1ip(4,nk)	inner products between columns of L inverse
-C  ier          error indicator
-C                  ier = 0 ___  everything fine
-C                  ier = 1 ___  spar too small or too big
-C                               problem in cholesky decomposition
+C     lambda      penalised likelihood smoothing parameter
+C     df          trace(S)
+C
+C     Output:
+C
+C     cv          omnibus cv criterion
+C     gcv         omnibus gcv criterion (including penalty and offset)
+C     coef(nk,p)  vector of spline coefficients
+C     s(ldy,p)    matrix of smoothed y-values
+C     lev(n)      vector of leverages
+C
+C     Working arrays/matrix:
+C
+C     xwy(nk,p)   X'Wy
+C     hs(nk,4)    the diagonals of the X'WX matrix
+C     sg(nk,4)    the diagonals of the Gram matrix
+C     abd(4,nk)   [ X'WX+lambda*SIGMA] in diagonal form
+C     p1ip(4,nk)  inner products between columns of L inverse
+C     ier          error indicator
+C        ier = 0 ___  everything fine
+C        ier = 1 ___  spar too small or too big
+C                     problem in cholesky decomposition
+C
       integer n,p,ldy,nk,method,ier
       double precision x(n),y(ldy,p),w(n),knot(nk+4),tol,wp(p),ssy(p),
      *     dfoff,dfmax,cost,lambda,df,cv,gcv,coef(nk,p),s(ldy,p),
@@ -67,7 +76,9 @@ C X'WY -> xwy[]
 C Compute estimate
       if(method.eq.1)then
 C     Value of lambda supplied
-         call sslvr2(x,y,w,n,ldy,p,knot,nk,method,tol,wp,ssy,dfoff,cost,
+c$$$Naras fix
+c$$$         call sslvr2(x,y,w,n,ldy,p,knot,nk,method,tol,wp,ssy,dfoff,cost,
+         call sslvr2(x,y,w,n,ldy,p,knot,nk,method,wp,ssy,dfoff,cost,
      1        lambda,df,cv,gcv,coef,s,lev,xwy,
      2        hs(1,1),hs(1,2),hs(1,3),hs(1,4),
      3        sg(1,1),sg(1,2),sg(1,3),sg(1,4),abd,p1ip,ier)
@@ -117,36 +128,36 @@ C
 C
 C  input..
 C
-C  ax	 left endpoint of initial interval
-C  bx	 right endpoint of initial interval
-C  f	 function subprogram which evaluates  f(x)  for any  x
-C	 in the interval  (ax,bx)
-C  tol	 desired length of the interval of uncertainty of the final
-C	 result ( .ge. 0.0)
+C  ax         left endpoint of initial interval
+C  bx         right endpoint of initial interval
+C  f         function subprogram which evaluates  f(x)  for any  x
+C         in the interval  (ax,bx)
+C  tol         desired length of the interval of uncertainty of the final
+C         result ( .ge. 0.0)
 C
 C
 C  output..
 C
-C  fmin  abcissa approximating the point where	f  attains a minimum
+C  fmin  abcissa approximating the point where        f  attains a minimum
 C
 C
 C      the method used is a combination of  golden  section  search  and
-C  successive parabolic interpolation.	convergence is never much slower
+C  successive parabolic interpolation.        convergence is never much slower
 C  than  that  for  a  fibonacci search.  if  f  has a continuous second
 C  derivative which is positive at the minimum (which is not  at  ax  or
-C  bx),  then  convergence  is	superlinear, and usually of the order of
+C  bx),  then  convergence  is        superlinear, and usually of the order of
 C  about  1.324....
-C      the function  f	is never evaluated at two points closer together
-C  than  eps*dabs(fmin) + (tol/3), where eps is	approximately the square
+C      the function  f        is never evaluated at two points closer together
+C  than  eps*dabs(fmin) + (tol/3), where eps is        approximately the square
 C  root  of  the  relative  machine  precision.   if   f   is a unimodal
-C  function and the computed values of	 f   are  always  unimodal  when
+C  function and the computed values of         f   are  always  unimodal  when
 C  separated by at least  eps*dabs(x) + (tol/3), then  fmin  approximates
 C  the abcissa of the global minimum of  f  on the interval  ax,bx  with
-C  an error less than  3*eps*dabs(fmin) + tol.  if   f	is not unimodal,
+C  an error less than  3*eps*dabs(fmin) + tol.  if   f        is not unimodal,
 C  then fmin may approximate a local, but perhaps non-global, minimum to
 C  the same accuracy.
-C      this function subprogram is a slightly modified	version  of  the
-C  algol  60 procedure	localmin  given in richard brent, algorithms for
+C      this function subprogram is a slightly modified        version  of  the
+C  algol  60 procedure        localmin  given in richard brent, algorithms for
 C  minimization without derivatives, prentice - hall, inc. (1973).
 C
 C
@@ -176,8 +187,15 @@ C
       w = v
       x = v
       e = 0.0
+c$$$      Naras fix: This also seems to be copied from Numerical Recipes
+c$$$      So same fix, i.e. setting d=0 seems reasonable afaik. Same for fx,fu!
+      d = 0.0
+      fx = 0.0
+      fu = 0.0
       lambda = ratio*16.**(-2. + x*(6.))
-      call sslvr2(xs,ys,ws,n,ldy,nvar,knot,nk,method,tol,wp,ssy,dfoff,
+c$$$Naras fix
+c$$$      call sslvr2(xs,ys,ws,n,ldy,nvar,knot,nk,method,tol,wp,ssy,dfoff,
+      call sslvr2(xs,ys,ws,n,ldy,nvar,knot,nk,method,wp,ssy,dfoff,
      1     cost,lambda,df,cv,gcv,coef,s,lev,xwy,
      2     hs(1,1),hs(1,2),hs(1,3),hs(1,4),
      3     sg(1,1),sg(1,2),sg(1,3),sg(1,4),abd,p1ip,ier)
@@ -230,7 +248,7 @@ C
 C
 C is parabola acceptable
 C
-30    if(dabs(p) .ge. dabs(0.5*q*r))then
+      if(dabs(p) .ge. dabs(0.5*q*r))then
          go to 40
       endif
       if(p .le. q*(a - x))then
@@ -274,7 +292,9 @@ C
       u = x + dsign(tol1, d)
       endif
       lambda = ratio*16.**(-2. + u*(6.))
-      call sslvr2(xs,ys,ws,n,ldy,nvar,knot,nk,method,tol,wp,ssy,dfoff,
+c$$$Naras fix
+c$$$      call sslvr2(xs,ys,ws,n,ldy,nvar,knot,nk,method,tol,wp,ssy,dfoff,
+      call sslvr2(xs,ys,ws,n,ldy,nvar,knot,nk,method,wp,ssy,dfoff,
      *cost,lambda,df,cv,gcv,coef,s,lev,xwy,hs(1,1),hs(1,2),hs(1,3),hs(1,
      *4),sg(1,1),sg(1,2),sg(1,3),sg(1,4),abd,p1ip,ier)
       I23038 = (method)
@@ -344,7 +364,9 @@ C  end of main loop
 C
 90    continue
       if(method.eq.2)then
-      call sslvr2(xs,ys,ws,n,ldy,nvar,knot,nk,1,tol,wp,ssy,dfoff,cost,
+c$$$Naras fix
+c$$$      call sslvr2(xs,ys,ws,n,ldy,nvar,knot,nk,1,tol,wp,ssy,dfoff,cost,
+      call sslvr2(xs,ys,ws,n,ldy,nvar,knot,nk,1,wp,ssy,dfoff,cost,
      1        lambda,df,cv,gcv,coef,s,lev,xwy,
      2        hs(1,1),hs(1,2),hs(1,3),hs(1,4),
      3        sg(1,1),sg(1,2),sg(1,3),sg(1,4),abd,p1ip,ier)
@@ -410,16 +432,23 @@ C Compute X'WX -> hs0,hs1,hs2,hs3  and X'WZ -> y
       return
       end
 
-      subroutine sslvr2(x,y,w,n,ldy,p,knot,nk,method,tol,wp,ssy,dfoff,
+c$$$ Naras fix
+c$$$      subroutine sslvr2(x,y,w,n,ldy,p,knot,nk,method,tol,wp,ssy,dfoff,
+      subroutine sslvr2(x,y,w,n,ldy,p,knot,nk,method,wp,ssy,dfoff,
      *     cost,lambda,df,cv,gcv,coef,sz,lev,xwy,hs0,hs1,hs2,hs3,
      *     sg0,sg1,sg2,sg3,abd,p1ip,info)
       implicit double precision(a-h,o-z)
       integer n,p,ldy,nk,method,info
-      double precision x(n),y(ldy,p),w(n),knot(nk+4),tol,wp(p),ssy(p),
+c$$$Naras fix
+c$$$      double precision x(n),y(ldy,p),w(n),knot(nk+4),tol,wp(p),ssy(p),
+      double precision x(n),y(ldy,p),w(n),knot(nk+4),wp(p),ssy(p),
      *     dfoff,cost,lambda,df,cv,gcv,coef(nk,p),sz(ldy,p),lev(n),
      $     xwy(nk,p), hs0(nk),hs1(nk),hs2(nk),hs3(nk),
      $     sg0(nk),sg1(nk),sg2(nk),sg3(nk), abd(4,nk),p1ip(4,nk)
-C local storage
+C     local storage
+c$$$  Naras fix, external routine not declared, added line below
+      EXTERNAL bvalue
+
       double precision b0,b1,b2,b3,eps,vnikx(4,1),work(16),xv,bvalue,
      *     rss,tssy
       integer ld4,i,icoef,ileft,j,mflag
@@ -463,10 +492,12 @@ C     Value of smooths at the data points
          do 23102 i=1,n
             xv = x(i)
             do 23104 j=1,p
-               sz(i,j) = bvalue(knot,nk+8,coef(1,j),nk,4,xv,0)
+c$$$ Naras Fix
+c$$$               sz(i,j) = bvalue(knot,nk+8,coef(1,j),nk,4,xv,0)
+               sz(i,j) = bvalue(knot,coef(1,j),nk,4,xv,0)
 23104       continue
 23102    continue
-23098    continue
+         continue
       endif
 C     Compute the criterion functions
 C     Get Leverages First
@@ -528,9 +559,9 @@ C     tied x values, since the data are already collapsed here
 
       subroutine sinrp2(abd,ld4,nk,p1ip)
 C Purpose :  Computes Inner Products between columns of L(-1)
-C	     where L = abd is a Banded Matrix with 3 subdiagonals
-C		A refinement of Elden's trick is used.
-C	Coded by Finbarr O'Sullivan
+C             where L = abd is a Banded Matrix with 3 subdiagonals
+C                A refinement of Elden's trick is used.
+C        Coded by Finbarr O'Sullivan
 
       implicit double precision(a-h,o-z)
       integer ld4,nk,i,j
@@ -558,7 +589,12 @@ C     wjm3(1)=0d0   spotted by Brian Ripley 10/8/2015 (earlier actually)
             c1 = 0d0
             c2 = 0d0
             c3 = abd(3,j+1)*c0
-         else if(j.eq.nk)then
+c$$$ Naras fix: the condition (j.eq.nk) is superfluous even if nk = 1
+c$$$         else if(j.eq.nk)then
+c$$$            c1 = 0d0
+c$$$            c2 = 0d0
+c$$$            c3 = 0d0
+         else 
             c1 = 0d0
             c2 = 0d0
             c3 = 0d0
@@ -657,7 +693,9 @@ C     match has not been initialized
       endif
       nefp1=nef+1
       n2=nefp1*(2*p+2)+1
-      call sspl1(x,y,w,n,p,knot,nk,method,tol,wp,match,nef,nefp1,center,
+c$$$ Naras fix
+c$$$      call sspl1(x,y,w,n,p,knot,nk,method,tol,wp,match,nef,nefp1,center,
+      call sspl1(y,w,n,p,knot,nk,method,tol,wp,match,nef,nefp1,center,
      *     dfoff,dfmax,cost,lambda,df,cv,gcv,coef,s,lev,
      *     work(1),work(nefp1+1),
 c          xin,    yin
@@ -671,11 +709,17 @@ c          xwy,     hs,           sg
       end
 
 C Memory management subroutine
-      subroutine sspl1(x,y,w,n,p,knot,nk,method,tol,wp,match,nef,nefp1,
+c$$$ Naras fix
+c$$$      subroutine sspl1(x,y,w,n,p,knot,nk,method,tol,wp,match,nef,nefp1,
+c$$$     *center,dfoff,dfmax,cost,lambda,df,cv,gcv,coef,s,lev,xin,yin,win,
+c$$$     *sout,xwy,hs,sg,abd,p1ip,ssy,work,ier)
+c$$$      integer n,p,nefp1,nk,method,ier,match(n),nef
+c$$$      double precision x(n),y(n,p),w(n),knot(nk+4),tol,wp(p),dfoff,
+      subroutine sspl1(y,w,n,p,knot,nk,method,tol,wp,match,nef,nefp1,
      *center,dfoff,dfmax,cost,lambda,df,cv,gcv,coef,s,lev,xin,yin,win,
      *sout,xwy,hs,sg,abd,p1ip,ssy,work,ier)
       integer n,p,nefp1,nk,method,ier,match(n),nef
-      double precision x(n),y(n,p),w(n),knot(nk+4),tol,wp(p),dfoff,
+      double precision y(n,p),w(n),knot(nk+4),tol,wp(p),dfoff,
      *dfmax,cost,lambda,df,cv,gcv,coef(nk,p),s(n,p),lev(nef),xin(nefp1),
      *yin(nefp1,p),win(nefp1),sout(nefp1,p),xwy(nk,p),hs(nk,4),sg(nk,4),
      *abd(4,nk),p1ip(4,nk),ssy(p),work(n)
@@ -772,6 +816,8 @@ C
       double precision sx,sy,sumw, dcent,sxx,syy,sxy
 C center is F for no centering, else T
 C Note: if type enters 1 or 2, no selection is made
+c$$$Naras fix: xbar is uninitialized; zero seems reasonable
+      xbar = 0d0
       if(center) then
          icenter = 1
       else
@@ -864,6 +910,8 @@ C if type>0 then no selection is performed; the fit is simply computed.
       double precision x(n),y(n,p),w(n),knot(nk+4),wp(p),dfoff,dfmax,
      *     cost,lambda,df,gcv,coef(*),s(n,p),xrange(2),work(*),tol
       double precision coef1,coef2,cv
+c$$$ Naras fix: gcv1 was not declared to be double precision!
+      double precision gcv1
       logical center
 Ccenter is F for no centering, else T
       if(type.eq.3)then
@@ -979,9 +1027,14 @@ C     make predictions from a fitted smoothing spline, linear or constant
       integer n,p,nk,order
       double precision x(n),knot(nk+4),xrange(2),coef(nk,p),s(n,p)
       double precision xcs,xmin,xdif, endv(2),ends(2),xends(2),stemp
+c$$$  Naras fix, external routine not declared, added line below
+      EXTERNAL bvalue
       double precision bvalue
       integer where
 
+c$$$  Naras fix: In what follows, it appears that stemp is always set
+c$$$  becasue order is one of 0,1,2. So initializing to zero should be ok
+      stemp = 0d0
       if(order.gt.2.or.order.lt.0)  return
 
       xdif=xrange(2)-xrange(1)
@@ -990,12 +1043,18 @@ C     make predictions from a fitted smoothing spline, linear or constant
       xends(2)=1d0
       do 23253 j=1,p
          if(order.eq.0)then
-            endv(1)=bvalue(knot,nk+8,coef(1,j),nk,4,0d0,0)
-            endv(2)=bvalue(knot,nk+8,coef(1,j),nk,4,1d0,0)
+c$$$ Naras fix
+c$$$            endv(1)=bvalue(knot,nk+8,coef(1,j),nk,4,0d0,0)
+c$$$            endv(2)=bvalue(knot,nk+8,coef(1,j),nk,4,1d0,0)
+            endv(1)=bvalue(knot,coef(1,j),nk,4,0d0,0)
+            endv(2)=bvalue(knot,coef(1,j),nk,4,1d0,0)
          endif
          if(order.le.1)then
-            ends(1)=bvalue(knot,nk+8,coef(1,j),nk,4,0d0,1)
-            ends(2)=bvalue(knot,nk+8,coef(1,j),nk,4,1d0,1)
+c$$$ Naras fix
+c$$$            ends(1)=bvalue(knot,nk+8,coef(1,j),nk,4,0d0,1)
+c$$$            ends(2)=bvalue(knot,nk+8,coef(1,j),nk,4,1d0,1)
+            ends(1)=bvalue(knot,coef(1,j),nk,4,0d0,1)
+            ends(2)=bvalue(knot,coef(1,j),nk,4,1d0,1)
          endif
          do 23259 i=1,n
             xcs=(x(i)-xmin)/xdif
@@ -1009,7 +1068,7 @@ C     make predictions from a fitted smoothing spline, linear or constant
 
             if(where.gt.0)then
 C     beyond extreme knots
-c 	switch(order){ case 0: / 1 / 2  }  :
+c     switch(order){ case 0: / 1 / 2  }  :
                if(order .eq. 0) then
                   stemp=endv(where)+(xcs-xends(where))*ends(where)
                else if(order .eq. 1) then
@@ -1018,7 +1077,9 @@ c 	switch(order){ case 0: / 1 / 2  }  :
                   stemp=0d0
                endif
             else
-               stemp=bvalue(knot,nk+8,coef(1,j),nk,4,xcs,order)
+c$$$ Naras fix
+c$$$               stemp=bvalue(knot,nk+8,coef(1,j),nk,4,xcs,order)
+               stemp=bvalue(knot,coef(1,j),nk,4,xcs,order)
             endif
 
             if(order.gt.0)then

@@ -1,7 +1,12 @@
-      subroutine calcvar(nx,n,px,qr,qrank,qpivot,cov,tmpcov,work)
+c$$$ Naras fix
+c$$$      subroutine calcvar(nx,n,px,qr,qrank,qpivot,cov,tmpcov,work)
+      subroutine calcvar(nx,px,qr,qrank,cov,tmpcov)
       implicit double precision (a-h,o-z)
-      integer n,px,qrank,qpivot(px)
-      double precision qr(nx,px),cov(px,px), tmpcov(px,px),work(1)
+c$$$ Naras fix
+c$$$      integer n,px,qrank,qpivot(px)
+c$$$      double precision qr(nx,px),cov(px,px), tmpcov(px,px),work(1)
+      integer px,qrank
+      double precision qr(nx,px),cov(px,px), tmpcov(px,px)
       double precision dsum
       integer i,j,km
       do 23000 i=1,qrank
@@ -15,7 +20,8 @@
 c R version has different args
 c      call dbksl(cov,px,qrank,tmpcov,px,info)
       do 20 j = 1, qrank
- 20      call dtrsl(cov, px, qrank, tmpcov(1,j), 01, info)
+         call dtrsl(cov, px, qrank, tmpcov(1,j), 01, info)
+ 20   continue
       do 23004 i=1,qrank
       do 23006 j=i,qrank
       dsum=0e0
