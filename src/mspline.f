@@ -645,18 +645,23 @@ c$$$            c3 = 0d0
       return
       end
 
-      subroutine sspl0(x,y,w,n,p,knot,nk,method,tol,wp,match,nef,center,
-     *     dfoff,dfmax,cost,lambda,df,cv,gcv,coef,s,lev,xrange,
-     $     work,iwork, ier)
+      subroutine sspl0(x,y,w,n,p,knot,nk,method,tol,wp,match,nef,
+     *     icenter,dfoff,dfmax,cost,lambda,df,cv,gcv,coef,s,lev,
+     $     xrange,work,iwork, ier)
       integer n,p,nk,method,ier,nef, nefp1, n2,match(*),iwork(n)
       double precision x(n),y(n,p),w(n),knot(nk+4),tol,wp(p),dfoff,
      *     dfmax,cost,lambda,df,cv,gcv,coef(*),s(n,p),lev(nef),
      *     xrange(2), work(*)
 C     workspace must be (2*p+2)*nefp1 + (p+16)*nk + n +p
-
+      integer icenter
       logical center
       double precision xmiss,sigtol,xdiff,temp
 
+      if(icenter.eq.0)then
+         center=.false.
+      else
+         center=.true.
+      endif
       if(nef.eq.0)then
 C     match has not been initialized
          xmiss=1d20
@@ -681,11 +686,12 @@ C     match has not been initialized
          dfmax=dble(nk)
       endif
       if(cost.gt.0)then
-         if(center) then
-            icenter = 1
-         else
-            icenter = 0
-         endif
+c$$$ Naras fix
+c$$$  if(center) then
+c$$$            icenter = 1
+c$$$         else
+c$$$            icenter = 0
+c$$$         endif
          temp=dble(n-icenter)/cost - dfoff
          if(dfmax.gt.temp)then
             dfmax=temp
@@ -913,10 +919,18 @@ C if type>0 then no selection is performed; the fit is simply computed.
 c$$$ Naras fix: gcv1 was not declared to be double precision!
       double precision gcv1
       logical center
-Ccenter is F for no centering, else T
+c$$$ Naras fix: added icenter
+      integer icenter
+C     center is F for no centering, else T
+c$$$ Naras fix: added icenter logic below
+      if(center) then
+         icenter = 1
+      else
+         icenter = 0
+      endif
       if(type.eq.3)then
          method=1
-         call sspl0(x,y,w,n,p,knot,nk,method,tol,wp,match,nef,center,
+         call sspl0(x,y,w,n,p,knot,nk,method,tol,wp,match,nef,icenter,
      $        dfoff, dfmax,cost,lambda,df,cv,gcv,coef,s,work(1),
      $        xrange,work(n+1),iwork, ier)
          return
@@ -925,19 +939,20 @@ Ccenter is F for no centering, else T
       if(type.gt.0)then
          call simfit(x,y,w,n,p,dfoff,cost,wp,gcv,coef,s,type,center,
      $        work)
-         if(center) then
-            icenter = 1
-         else
-            icenter = 0
-         endif
+c$$$ Naras fix: commented out
+c$$$         if(center) then
+c$$$            icenter = 1
+c$$$         else
+c$$$            icenter = 0
+c$$$         endif
          df=dble(type) - dble(icenter)
          return
       endif
 
       method=3
-      call sspl0(x,y,w,n,p,knot,nk,method,tol,wp,match,nef,center,dfoff,
-     *     dfmax,cost,lambda,df,cv,gcv,coef,s,work(1),xrange,work(n+1),
-     $     iwork, ier)
+      call sspl0(x,y,w,n,p,knot,nk,method,tol,wp,match,nef,icenter,
+     *     dfoff,dfmax,cost,lambda,df,cv,gcv,coef,s,work(1),xrange,
+     $     work(n+1),iwork, ier)
       gcv1=gcv
       call simfit(x,y,w,n,p,dfoff,cost,wp,gcv,work,work(2*p+1),type,
      *     center,work((n+2)*p+1))

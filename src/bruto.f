@@ -1,14 +1,19 @@
       subroutine bruto(x,n,q,y,p,w,knot,nkmax,nk,wp,match,nef,dfmax,
      *     cost,lambda,df,coef,type,xrange,gcvsel,gcvbak,dfit,maxit,nit,
-     *     eta,resid,thresh,work,iwork,trace)
+     *     eta,resid,thresh,work,iwork,itrace)
       implicit double precision(a-h,o-z)
       integer n,q,p,nkmax,nk(q),match(n,q),nef(q),type(q),maxit(2),
-     *     nit(2),iwork(n)
+     *     nit(2),iwork(n),itrace
       double precision x(n,q),y(n,p),w(n),knot(nkmax+4,q),wp(p),
      *     dfmax(q),cost,lambda(q),df(q),coef(nkmax*p,q),xrange(2,q),
      *     gcvsel(q,*),gcvbak(q,*),dfit(q,*),eta(n,p),resid(n,p),
      *     thresh,work(*)
       logical trace, select
+      if(itrace.eq.0)then
+         trace=.false.
+      else
+         trace=.true.
+      endif
 
       do 01 j=1,p
          do 02 i=1,n

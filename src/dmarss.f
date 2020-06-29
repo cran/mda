@@ -3,8 +3,8 @@ c$$$      subroutine marss(nx,n,p,nclass,y,x,w,tagx,maxorder,mmax,penalty,
 c$$$     &   thresh,forwstep,interms,prune,bx,fullin,lenb, bestgcv, bestin, 
 c$$$     &   flag,cut,dir,res,alpha,beta,scrat,iscrat,trace)
       subroutine marss(nx,n,p,nclass,y,x,w,tagx,maxorder,mmax,penalty,
-     &   thresh,forwstep,interms,prune,bx,fullin,lenb, bestgcv, bestin, 
-     &   flag,cut,dir,res,beta,scrat,iscrat,trace)
+     &   thresh,iforwstep,interms,iprune,bx,fullin,lenb,bestgcv,bestin,
+     &   flag,cut,dir,res,beta,scrat,iscrat,itrace)
       implicit double precision (a-h,o-z)
       integer nx, n,p,nclass,tagx(nx,p),maxorder,mmax,bestin(mmax),
      &     flag(mmax,p),fullin(mmax)
@@ -16,9 +16,24 @@ c$$$     &      beta(mmax,nclass)
      &      cut(mmax,p),dir(mmax,p),res(nx,nclass),
      &      beta(mmax,nclass)
       double precision scrat(*)
-      integer iscrat(*)
+      integer iscrat(*),itrace,iforwstep,iprune
       logical forwstep, prune, trace, tracec
       common tracec
+      if(iforwstep.eq.0)then
+         forwstep=.false.
+      else
+         forwstep=.true.
+      endif
+      if(iprune.eq.0)then
+         prune=.false.
+      else
+         prune=.true.
+      endif
+      if(itrace.eq.0)then
+         trace=.false.
+      else
+         trace=.true.
+      endif
       tracec=trace
       len1=n*mmax
       len2=mmax
