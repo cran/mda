@@ -1,4 +1,4 @@
-190ef17944e2cdb1d18f9e279d327343 *DESCRIPTION
+aed0c1e008ccf81582dda45d230b618a *DESCRIPTION
 4ee5c8bbb3fc6c56d92a541a88a17514 *NAMESPACE
 dbda29d4a4fc085f54d9bbc87ca32948 *PORTING
 4893cbb3d6281aa19e2c9ecfb6cd1dec *R/bruto.R
@@ -17,8 +17,8 @@ e362fbd33da836142c5cb5d83cbf241f *R/gen.ridge.R
 066dc9c4d8297360899c75f3e2f0d103 *R/llmult.R
 3c6d47cb90deb7d649383e97302189d5 *R/lvq.start.R
 c86a84efaa4d9ade84745653d76f37ba *R/mars.R
-d208262120083f8a2c84d7540432241b *R/mda.R
-24fdad5bb03177583c462ffb0f674d89 *R/mda.fit.R
+5815739d978b138fc6868421bbe4980b *R/mda.R
+3fff9a1f59f3a394c117cf275cb8fc0a *R/mda.fit.R
 a449cdc559c403675acc853c13c4ea26 *R/mda.means.R
 2b3b9a1a3321ae08e6980c6c0881ce27 *R/mda.start.R
 379870b2aa1f5e6384bdb33f4c150285 *R/meanPenalty.R
@@ -57,8 +57,8 @@ d97875af5137bacc8c48607f92d38985 *inst/ratfor/dmarss.r
 03a701e8cf11c5ac116cb33ae77c16fc *inst/ratfor/mspline.r
 ec0f1cafcca3df67b1d4383893ce43e2 *inst/ratfor/sknotl.r
 d154fc7c93c425affd4bd6b796134139 *inst/ratfor/tmatch.r
-2844cd9ad850947ca14c8c89d1a65036 *man/ESL.mixture.Rd
-22ec7dd0558248f38d61e78323a879bd *man/bruto.Rd
+3cf54c1ccddac638b177fa399c716747 *man/ESL.mixture.Rd
+f4835ebeb119a00af4bfca787c3e501c *man/bruto.Rd
 facea9384d4b7b1b6d44475a2426f4f2 *man/coef.fda.Rd
 12a307bd41d7002ad3953f430a12cccc *man/confusion.Rd
 18e6a2ac85e97cff55d0c63712f28322 *man/fda.Rd

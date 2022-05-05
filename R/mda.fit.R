@@ -1,7 +1,7 @@
 mda.fit <-
-function (x, g, weights, theta, assign.theta, Rj, sub.df=NULL, tot.df=NULL, 
-    dimension = R - 1, eps = .Machine$double.eps, method = polyreg, 
-    ...) 
+function (x, g, weights, theta, assign.theta, Rj, sub.df=NULL, tot.df=NULL,
+    dimension = R - 1, eps = 100 * .Machine$double.eps, method = polyreg,
+    ...)
 {
     this.call <- match.call()
     n <- nrow(x)
@@ -13,18 +13,18 @@ function (x, g, weights, theta, assign.theta, Rj, sub.df=NULL, tot.df=NULL,
     dp <- unlist(wtots)
     subclass.names <- names(dp)
     dp <- dp/sum(dp)
-    if (missing(theta)) 
+    if (missing(theta))
         theta <- contr.helmert(R)
     theta <- contr.fda(dp, theta)
     if (!(is.null(sub.df) & is.null(tot.df))) {
-        Q <- diag(dp) + transformPenalty(prior = dp, cl = rep(seq(J), 
+        Q <- diag(dp) + transformPenalty(prior = dp, cl = rep(seq(J),
             Rj), df = sub.df, tot.df = tot.df)
         theta <- fix.theta(theta, Q)
     }
     Theta <- matrix(0, n, R - 1)
     obs.weights <- double(n)
     for (j in seq(J)) {
-        Theta[g == j, ] <- weights[[j]] %*% theta[assign.theta[[j]], 
+        Theta[g == j, ] <- weights[[j]] %*% theta[assign.theta[[j]],
             , drop = FALSE]
         obs.weights[g == j] <- weights[[j]] %*% rep(1, Rj[j])
     }
@@ -40,7 +40,7 @@ function (x, g, weights, theta, assign.theta, Rj, sub.df=NULL, tot.df=NULL,
     dimension <- min(dimension, sum(lambda > eps))
     if (dimension == 0) {
         warning("degenerate problem; no discrimination")
-        return(structure(list(dimension = 0, fit = fit, call = this.call), 
+        return(structure(list(dimension = 0, fit = fit, call = this.call),
             class = "fda"))
     }
     thetan <- thetan[, seq(dimension), drop = FALSE]
@@ -52,8 +52,8 @@ function (x, g, weights, theta, assign.theta, Rj, sub.df=NULL, tot.df=NULL,
     dimnames(means) <- list(subclass.names, vnames)
     names(lambda) <- c(vnames, rep("", length(lambda) - dimension))
     names(pe) <- vnames
-    list(percent.explained = pe, values = lambda, means = means, 
-        theta.mod = thetan, dimension = dimension, sub.prior = sub.prior, 
+    list(percent.explained = pe, values = lambda, means = means,
+        theta.mod = thetan, dimension = dimension, sub.prior = sub.prior,
         fit = fit, call = this.call)
 }
 

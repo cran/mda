@@ -70,7 +70,7 @@ bruto(x, y, w, wp, dfmax, cost, maxit.select, maxit.backfit,
   JASA 1994, 89, 1255-1270.
 }
 \seealso{
-  \code{\link{predict.bruto}}
+  \code{predict.bruto}
 }
 \examples{
 data(trees)
