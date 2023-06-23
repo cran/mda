@@ -1,6 +1,6 @@
 Package: mda
-Version: 0.5-3
-Date: 2022-05-03
+Version: 0.5-4
+Date: 2023-06-22
 Author: S original by Trevor Hastie & Robert Tibshirani. Original R port by Friedrich Leisch, Kurt Hornik and Brian D. Ripley. Balasubramanian Narasimhan has contributed to the upgrading of the code.
 Maintainer: Trevor Hastie <hastie@stanford.edu>
 Description: Mixture and flexible discriminant analysis, multivariate
@@ -10,7 +10,7 @@ Title: Mixture and Flexible Discriminant Analysis
 Depends: R (>= 3.5.0), stats, class
 Suggests: earth, testthat
 License: GPL-2
-Packaged: 2022-05-03 23:11:08 UTC; hastie
+Packaged: 2023-06-23 00:29:08 UTC; hastie
 Repository: CRAN
-Date/Publication: 2022-05-05 07:10:05 UTC
+Date/Publication: 2023-06-23 04:00:02 UTC
 NeedsCompilation: yes

@@ -1,4 +1,4 @@
-aed0c1e008ccf81582dda45d230b618a *DESCRIPTION
+d39647c86c1a981eed06d160c057b8bb *DESCRIPTION
 4ee5c8bbb3fc6c56d92a541a88a17514 *NAMESPACE
 dbda29d4a4fc085f54d9bbc87ca32948 *PORTING
 4893cbb3d6281aa19e2c9ecfb6cd1dec *R/bruto.R
@@ -47,6 +47,8 @@ b3237a9365f1a11398b6ea798a5953ac *R/transformPenalty.R
 e47fcc9b9d35ea4673424369f0db27b4 *TODO
 c637b4768a3b0f29a6b5e71e4203c1a3 *data/ESL.mixture.rda
 62dadfb8e34061e475fe9445750e6094 *data/glass.rda
+e8fda982249539f0947306e47bfbf541 *inst/FortranFixup2023/Readme.txt
+b67284cf4bf02a656b4848ec331c513b *inst/FortranFixup2023/dmarss.f
 31c517da33e55efdefdf6526db143102 *inst/mda-source.zip
 f52bf4488781837d7c255f16280149a9 *inst/ratfor/README
 9d426796ce32cc0ce5f33f975ae7aa7a *inst/ratfor/bruto.r
@@ -63,7 +65,7 @@ facea9384d4b7b1b6d44475a2426f4f2 *man/coef.fda.Rd
 12a307bd41d7002ad3953f430a12cccc *man/confusion.Rd
 18e6a2ac85e97cff55d0c63712f28322 *man/fda.Rd
 99db2a448546ca2645da88ce6c22c560 *man/gen.ridge.Rd
-b20a7de78f5732b6675712264e475b7d *man/glass.Rd
+55fadfc574263384551c59f3c3e86d78 *man/glass.Rd
 3c7ef2c4bce68f5c0d08b6b9f0bf19d2 *man/laplacian.Rd
 89f4b34c766cecb927fc84e9509141e6 *man/mars.Rd
 bc8e8ba9f9954f5aef14b40740bb9328 *man/mda.Rd
@@ -81,7 +83,7 @@ d666df1df4b23ae705c7f3a1a17c5d08 *man/polyreg.Rd
 c63f7b9defc80adc2c34b51d6a0dce9e *src/bsplvd.f
 729cf1c2836a66160513d98f850ebaaf *src/bvalue.f
 a3547453dc05ec5e5efab2cf7b8e4129 *src/dcalcvar.f
-b67284cf4bf02a656b4848ec331c513b *src/dmarss.f
+28a943dbd950dc56669093e54c90536b *src/dmarss.f
 32fe427e7dbab87d36aa2715712d0a1c *src/dorthreg.f
 d3e9beaa7f1a2265267afe1ffa3d2964 *src/dqrreg.f
 66f499752dc8f9fd6219a82b85c5515a *src/mda_init.c

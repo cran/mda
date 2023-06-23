@@ -165,9 +165,9 @@ c$$$     &    var(mmax,mmax), stopfac, work(*)
       nterms2=2
       do 23014 i=1,n 
       bx(i,1)=1
-      bxorth(i,1)=1.0/dsqrt(dble(n))
+      bxorth(i,1)=1.0/dsqrt(dfloat(n))
 23014 continue
-      bxorthm(1)=1/dsqrt(dble(n))
+      bxorthm(1)=1/dsqrt(dfloat(n))
       do 23016 i=1,n 
       do 23018 j=1, mmax
       bx(i,j)=0.0

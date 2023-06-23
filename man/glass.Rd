@@ -20,10 +20,10 @@
     \item{Fe}{weight percent in corresponding oxide}
     \item{Type}{Type of glass:
       \describe{
-	\item{1}{building\_windows\_float\_processed,}
-	\item{2}{building\_windows\_non\_float\_processed,}
-	\item{3}{vehicle\_windows\_float\_processed,}
-	\item{4}{vehicle\_windows\_non\_float\_processed (none in this
+	\item{1}{building_windows_float_processed,}
+	\item{2}{building_windows_non_float_processed,}
+	\item{3}{vehicle_windows_float_processed,}
+	\item{4}{vehicle_windows_non_float_processed (none in this
 	  database),}
 	\item{5}{containers,}
 	\item{6}{tableware,}
