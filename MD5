@@ -1,4 +1,4 @@
-d39647c86c1a981eed06d160c057b8bb *DESCRIPTION
+4a4f7b80865f28661cd2e55815ddf4bb *DESCRIPTION
 4ee5c8bbb3fc6c56d92a541a88a17514 *NAMESPACE
 dbda29d4a4fc085f54d9bbc87ca32948 *PORTING
 4893cbb3d6281aa19e2c9ecfb6cd1dec *R/bruto.R
@@ -80,7 +80,7 @@ d666df1df4b23ae705c7f3a1a17c5d08 *man/polyreg.Rd
 7579ef056ae46b8ffe701f776e12b01e *man/predict.mda.Rd
 85cc9d91e20e7b3ae007506c911c62e0 *man/softmax.Rd
 92b8527157eb7f1ed47af8c577bb6863 *src/bruto.f
-c63f7b9defc80adc2c34b51d6a0dce9e *src/bsplvd.f
+b2fafe15e7e7e37c0d8d945d6a4bfd7e *src/bsplvd.f
 729cf1c2836a66160513d98f850ebaaf *src/bvalue.f
 a3547453dc05ec5e5efab2cf7b8e4129 *src/dcalcvar.f
 28a943dbd950dc56669093e54c90536b *src/dmarss.f

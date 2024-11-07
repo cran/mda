@@ -208,8 +208,11 @@ C Local Variables
       data j/1/
       save j,deltal,deltar !(valid in fortran 77)
 c
-                                        go to (10,20), index
-   10 j = 1
+c     Trevor changes computed go to  on nov 5, 2024
+      if(index .eq. 2)                  go to 20
+c                                        go to (10,20), index
+c   10 j = 1
+      j = 1
       biatx(1) = 1e0
       if (j .ge. jhigh)                 go to 99
 c
